@@ -153,17 +153,15 @@ public class ManageToursController {
 
     @FXML
     public void onEditTourClick() {
-        //TODO later editTour
-/*        var selectedCarrier = tableviewCarriers.getSelectionModel().getSelectedItem();
-
-        if (selectedCarrier == null)
+        var selectedTourIndex = tableviewTours.getSelectionModel().getSelectedIndex();
+        if (selectedTourIndex == -1)
             return;
 
-        Carrier plainCarrier = transformToPlainCarrier(selectedCarrier);
-        Main.setCarrier(plainCarrier);
+        Tour selectedTour = allTours.get(selectedTourIndex);
+        Main.setActiveTour(selectedTour);
 
         Pane root;
-        String fullPath = "fxml-files/EditCarrierScene.fxml";
+        String fullPath = "fxml-files/EditTourScene.fxml";
 
         try {
             Stage newStage = new Stage();
@@ -173,10 +171,10 @@ public class ManageToursController {
             newStage.setScene(new Scene(root));
             newStage.showAndWait();
 
-            fetchAllCarriers();
+            fetchAllTours();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     @FXML

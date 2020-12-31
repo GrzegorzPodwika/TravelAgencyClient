@@ -21,6 +21,8 @@ public class Reservation {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate reservationDate;
 
+    private Tour tour;
+
     private User user;
 
     public Integer getReservationId() {
@@ -69,5 +71,13 @@ public class Reservation {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Tour getTour() {
+        return tour;
+    }
+
+    public void setTour(Tour tour) {
+        this.tour = tour;
     }
 }

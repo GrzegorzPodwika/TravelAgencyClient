@@ -23,9 +23,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml-files/LogInScene.fxml"));
         root = loader.load();
-
         activeUser = new User();
-        activeTour = new Tour();
         employee = new Employee();
         Main.primaryStage = primaryStage;
 
@@ -102,5 +100,13 @@ public class Main extends Application {
 
     public static void setHotel(Hotel hotel) {
         Main.hotel = hotel;
+    }
+
+    public static Tour getActiveTour() {
+        return activeTour;
+    }
+
+    public static void setActiveTour(Tour activeTour) {
+        Main.activeTour = activeTour;
     }
 }

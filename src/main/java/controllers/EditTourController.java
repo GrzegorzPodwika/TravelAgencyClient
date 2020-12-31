@@ -7,8 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -17,13 +15,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static utils.Constants.ERROR_EMPTY_VIEW;
 import static utils.Constants.ERROR_NOT_A_NUMBER;
 
-public class AddTourController {
+public class EditTourController {
+    @FXML public Label labelTourName;
+    @FXML public Label labelCountry;
+    @FXML public Label labelAvailableTickets;
+    @FXML public Label labelPrice;
+    @FXML public Label labelDepartureDate;
+    @FXML public Label labelArrivalDate;
+    @FXML public Label labelHotel;
+    @FXML public Label labelTransport;
+    @FXML public Label labelTourGuide;
+    @FXML public ListView<String> listViewTourServices;
+    @FXML public ListView<String> listViewAttractions;
 
     @FXML public TextField inputName;
     @FXML public TextField inputCountry;
@@ -36,11 +46,12 @@ public class AddTourController {
     @FXML public ComboBox<TourGuide> comboBoxTourGuide;
     @FXML public CheckComboBox<AdditionalService> checkComboBoxService;
     @FXML public CheckComboBox<Attraction> checkComboBoxAttraction;
-    @FXML public ListView<String> listViewImages;
+
     @FXML public Button buttonCancel;
     @FXML public Button buttonConfirm;
     @FXML public Label labelError;
 
+    private final Tour activeTour = Main.getActiveTour();
     private final HotelService hotelService = AgencyServiceGenerator.createService(HotelService.class);
     private final TransportService transportService = AgencyServiceGenerator.createService(TransportService.class);
     private final TourGuideService tourGuideService = AgencyServiceGenerator.createService(TourGuideService.class);
@@ -54,35 +65,57 @@ public class AddTourController {
     private final ObservableList<AdditionalService> observableAdditionalServices = FXCollections.observableArrayList();
     private final ObservableList<Attraction> observableAttractions = FXCollections.observableArrayList();
 
-    private final String IMAGE_LOCATION_PREFIX = "/images/";
-    private final String BALI = "Bali";
-    private final String CHILE = "Chile";
-    private final String CYPR = "Cypr";
-    private final String DOMINIKANA = "Dominikana";
-    private final String FRANCJA = "Francja";
-    private final String HISZPANIA = "Hiszpania";
-    private final String MADAGASKAR = "Madagaskar";
-    private final String NIEMCY = "Niemcy";
-    private final String OAHU = "Oahu";
-    private final String PORTUGALIA = "Portugalia";
-    private final String SZWAJCARIA = "Szwajcaria";
-    private final String WIELKABRYTANIA = "Wielka_Brytania";
-    private final String WIETNAM = "Wietnam";
-    private final String WLOCHY = "Wlochy";
-    private final String IMAGE_JPG_SUFFIX = ".jpg";
-
-
-    private final String[] imageNamesArray = {BALI, CHILE, CYPR, DOMINIKANA, FRANCJA, HISZPANIA, MADAGASKAR,
-            NIEMCY, OAHU, PORTUGALIA, SZWAJCARIA, WIELKABRYTANIA, WIETNAM, WLOCHY};
-    private final ObservableList<String> observableImages = FXCollections.observableArrayList(imageNamesArray);
-
     @FXML
     public void initialize() {
+        fillUpLabelsWithData();
         setObjectConvertersInComboBoxes();
         fetchAllNecessaryData();
-        setImagesIntoListView();
         setTextFieldsListeners();
     }
+
+    private void fillUpLabelsWithData() {
+        labelTourName.setText(activeTour.getTourName());
+        labelCountry.setText(activeTour.getCountry());
+        labelAvailableTickets.setText(String.valueOf(activeTour.getAvailableTickets()));
+        labelPrice.setText(String.valueOf(activeTour.getPrice()));
+        labelDepartureDate.setText(activeTour.getDepartureDate().toString());
+        labelArrivalDate.setText(activeTour.getArrivalDate().toString());
+        labelHotel.setText(activeTour.getHotel().getHotelName());
+        labelTransport.setText(activeTour.getTransport().getCarrier().getName() + " " + activeTour.getTransport().getTransportType());
+        labelTourGuide.setText(activeTour.getTourGuide().getName() + " " + activeTour.getTourGuide().getSurname());
+
+        var listOfAttractionsAsString = activeTour.getAttractions().stream()
+                .map(Attraction::getName).collect(Collectors.toList());
+        var listOfServicesAsString = activeTour.getAdditionalServices().stream()
+                .map(AdditionalService::getName).collect(Collectors.toList());
+
+        listViewAttractions.getItems().setAll(listOfAttractionsAsString);
+        listViewTourServices.getItems().setAll(listOfServicesAsString);
+
+        listViewAttractions.setCellFactory(cell -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String item, boolean b) {
+                super.updateItem(item, b);
+
+                if (item != null) {
+                    setText(item);
+                    setFont(Font.font(14));
+                }
+            }
+        });
+        listViewTourServices.setCellFactory(cell -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String item, boolean b) {
+                super.updateItem(item, b);
+
+                if (item != null) {
+                    setText(item);
+                    setFont(Font.font(14));
+                }
+            }
+        });
+    }
+
 
     private void setObjectConvertersInComboBoxes() {
         comboBoxHotel.setConverter(new StringConverter<Hotel>() {
@@ -150,7 +183,6 @@ public class AddTourController {
             }
         });
     }
-
 
     private void fetchAllNecessaryData() {
         var fetchHotelsCall = hotelService.getAll();
@@ -276,53 +308,6 @@ public class AddTourController {
         });
     }
 
-    private void setImagesIntoListView() {
-        listViewImages.setItems(observableImages);
-
-
-        listViewImages.setCellFactory(param -> new ListCell<String>() {
-            private final ImageView imageView = new ImageView();
-
-            @Override
-            protected void updateItem(String name, boolean empty) {
-                super.updateItem(name, empty);
-
-                if (empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    imageView.setFitWidth(128.0);
-                    imageView.setFitHeight(128.0);
-
-                    switch (name) {
-                        case BALI -> imageView.setImage(new Image("/images/Bali.jpg"));
-                        case CHILE -> imageView.setImage(new Image("/images/Chile.jpg"));
-                        case CYPR -> imageView.setImage(new Image("/images/Cypr.jpg"));
-                        case DOMINIKANA -> imageView.setImage(new Image("/images/Dominikana.jpg"));
-                        case FRANCJA -> imageView.setImage(new Image("/images/Francja.jpg"));
-                        case HISZPANIA -> imageView.setImage(new Image("/images/Hiszpania.jpg"));
-                        case MADAGASKAR -> imageView.setImage(new Image("/images/Madagaskar.jpg"));
-                        case NIEMCY -> imageView.setImage(new Image("/images/Niemcy.jpg"));
-                        case OAHU -> imageView.setImage(new Image("/images/Oahu.jpg"));
-                        case PORTUGALIA -> imageView.setImage(new Image("/images/Portugalia.jpg"));
-                        case SZWAJCARIA -> imageView.setImage(new Image("/images/Szwajcaria.jpg"));
-                        case WIELKABRYTANIA -> imageView.setImage(new Image("/images/Wielka_Brytania.jpg"));
-                        case WIETNAM -> imageView.setImage(new Image("/images/Wietnam.jpg"));
-                        case WLOCHY -> imageView.setImage(new Image("/images/Wlochy.jpg"));
-                    }
-
-                    setText(name);
-                    setGraphic(imageView);
-                    setFont(Font.font(20.0));
-                }
-            }
-        });
-    }
-
-    private String prepareUrlToImage(String imgName) {
-        return this.getClass().getResource(IMAGE_LOCATION_PREFIX + imgName + IMAGE_JPG_SUFFIX).getPath();
-    }
-
     private void setTextFieldsListeners() {
         inputNumOfAvailableTickets.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
@@ -358,75 +343,82 @@ public class AddTourController {
 
     @FXML
     public void onConfirmClick() {
-        if (viewsAreNotEmpty() && viewsAreCorrect()) {
-            Tour newTour = collectValuesFromViewsAndCreateNewTour();
+        Tour tourToUpdate = generateProperTour();
 
-            var saveTourCall = tourService.save(newTour);
-            saveTourCall.enqueue(new Callback<Integer>() {
-                @Override
-                public void onResponse(Call<Integer> call, Response<Integer> response) {
-                    if(response.isSuccessful()) {
-                        Platform.runLater(() -> {
-                            closeWindow();
-                        });
-                    } else  {
-                        Platform.runLater(() -> {
-                            labelError.setText("Problem z serwerem, kod = " + response.code());
-                        });
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Integer> call, Throwable throwable) {
-                    labelError.setText("Error has occurred " +throwable.getMessage());
-                }
-            });
-
-
-        } else {
-            labelError.setText(ERROR_EMPTY_VIEW);
+        try {
+            tourService.update(tourToUpdate).execute();
+            closeWindow();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private Tour collectValuesFromViewsAndCreateNewTour() {
-        Tour tour = new Tour();
+    private Tour generateProperTour() {
+        Tour tourToUpdate = new Tour();
+        tourToUpdate.setTourId(activeTour.getTourId());
 
-        tour.setTourId(0);
-        tour.setTourName(inputName.getText());
-        tour.setCountry(inputCountry.getText());
-        tour.setAvailableTickets(Integer.parseInt(inputNumOfAvailableTickets.getText()));
-        tour.setTakenTickets(0);
-        tour.setPrice(Double.parseDouble(inputPrice.getText()));
-        tour.setDepartureDate(datePickerDepartureDate.getValue());
-        tour.setArrivalDate(datePickerArrivalDate.getValue());
-        tour.setImgName(listViewImages.getSelectionModel().getSelectedItem());
-        tour.setEmployee(Main.getEmployee());
-        tour.setHotel(comboBoxHotel.getSelectionModel().getSelectedItem());
-        tour.setTransport(comboBoxTransport.getSelectionModel().getSelectedItem());
-        tour.setTourGuide(comboBoxTourGuide.getSelectionModel().getSelectedItem());
+        if (inputName.getText().isEmpty())
+            tourToUpdate.setTourName(activeTour.getTourName());
+        else
+            tourToUpdate.setTourName(inputName.getText());
 
-        var selectedAdditionalServices = checkComboBoxService.getCheckModel().getCheckedItems();
-        var selectedAttractions = checkComboBoxAttraction.getCheckModel().getCheckedItems();
+        if (inputCountry.getText().isEmpty())
+            tourToUpdate.setCountry(activeTour.getCountry());
+        else
+            tourToUpdate.setCountry(inputCountry.getText());
 
-        tour.setAdditionalServices(new HashSet<>(selectedAdditionalServices));
-        tour.setAttractions(new HashSet<>(selectedAttractions));
+        if(inputPrice.getText().isEmpty() || !isItAFloatNumber(inputPrice))
+            tourToUpdate.setPrice(activeTour.getPrice());
+        else
+            tourToUpdate.setPrice(Double.parseDouble(inputPrice.getText()));
 
-        return tour;
-    }
+        if (inputNumOfAvailableTickets.getText().isEmpty() || !isItANumber(inputNumOfAvailableTickets))
+            tourToUpdate.setAvailableTickets(activeTour.getAvailableTickets());
+        else
+            tourToUpdate.setAvailableTickets(Integer.parseInt(inputNumOfAvailableTickets.getText()));
 
-    //TODO tutaj implementacja
-    private boolean viewsAreNotEmpty() {
-        return !inputName.getText().isEmpty() && !inputCountry.getText().isEmpty()
-                && !inputPrice.getText().isEmpty() && !inputNumOfAvailableTickets.getText().isEmpty()
-                && datePickerDepartureDate.getValue() != null && datePickerArrivalDate.getValue() != null
-                && !comboBoxHotel.getSelectionModel().isEmpty() && !comboBoxTransport.getSelectionModel().isEmpty()
-                && !comboBoxTourGuide.getSelectionModel().isEmpty()
-                && !checkComboBoxAttraction.getCheckModel().isEmpty() && !listViewImages.getSelectionModel().isEmpty();
-            //&& !checkComboBoxService.getCheckModel().isEmpty()
-    }
+        tourToUpdate.setTakenTickets(activeTour.getTakenTickets());
 
-    private boolean viewsAreCorrect() {
-        return isItANumber(inputNumOfAvailableTickets) && isItAFloatNumber(inputPrice);
+        if (datePickerDepartureDate.getValue() == null)
+            tourToUpdate.setDepartureDate(activeTour.getDepartureDate());
+        else
+            tourToUpdate.setDepartureDate(datePickerDepartureDate.getValue());
+
+        if (datePickerArrivalDate.getValue() == null)
+            tourToUpdate.setArrivalDate(activeTour.getArrivalDate());
+        else
+            tourToUpdate.setArrivalDate(datePickerArrivalDate.getValue());
+
+        tourToUpdate.setImgName(activeTour.getImgName());
+        tourToUpdate.setEmployee(activeTour.getEmployee());
+
+        if (comboBoxHotel.getSelectionModel().isEmpty())
+            tourToUpdate.setHotel(activeTour.getHotel());
+        else
+            tourToUpdate.setHotel(comboBoxHotel.getSelectionModel().getSelectedItem());
+
+        if (comboBoxTransport.getSelectionModel().isEmpty())
+            tourToUpdate.setTransport(activeTour.getTransport());
+        else
+            tourToUpdate.setTransport(comboBoxTransport.getSelectionModel().getSelectedItem());
+
+        if (comboBoxTourGuide.getSelectionModel().isEmpty())
+            tourToUpdate.setTourGuide(activeTour.getTourGuide());
+        else
+            tourToUpdate.setTourGuide(comboBoxTourGuide.getSelectionModel().getSelectedItem());
+
+        if (checkComboBoxAttraction.getCheckModel().isEmpty())
+            tourToUpdate.setAttractions(activeTour.getAttractions());
+        else
+            tourToUpdate.setAttractions(new HashSet<>(checkComboBoxAttraction.getCheckModel().getCheckedItems()));
+
+        if (checkComboBoxService.getCheckModel().isEmpty())
+            tourToUpdate.setAdditionalServices(activeTour.getAdditionalServices());
+        else
+            tourToUpdate.setAdditionalServices(new HashSet<>(checkComboBoxService.getCheckModel().getCheckedItems()));
+
+
+        return tourToUpdate;
     }
 
     private boolean isItANumber(TextField textField) {
