@@ -1,37 +1,40 @@
-package main.java.controllers;
+package controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import main.java.Main;
-import main.java.utils.Clock;
-import main.java.utils.SceneCreator;
+import utils.Clock;
+import utils.SceneCreator;
 
 import java.io.IOException;
 
 public class ContactController {
-    @FXML
-    Label clockLabel;
+    @FXML public Label clockLabel;
 
-    Clock clk;
-    Thread th;
+    private Clock clk;
+    private Thread th;
+
     @FXML
-    public void initialize(){
-         clk = new Clock(clockLabel);
-         th = new Thread(clk);
+    public void initialize() {
+        clk = new Clock(clockLabel);
+        th = new Thread(clk);
         th.start();
     }
+
     @FXML
     public void logOutButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("LogInScene.fxml", Main.getUser());
+        Main.setUser(null);
+        SceneCreator.launchScene("LogInScene.fxml");
         shutdown();
     }
+
     @FXML
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("UserScene.fxml",Main.getUser());
+        SceneCreator.launchScene("UserScene.fxml");
         shutdown();
     }
-    public void shutdown(){
+
+    public void shutdown() {
         clk.terminate();
     }
 }

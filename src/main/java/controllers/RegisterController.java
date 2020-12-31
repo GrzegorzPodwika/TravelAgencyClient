@@ -1,80 +1,118 @@
-package main.java.controllers;
+package controllers;
 
+import backend.api.AgencyServiceGenerator;
+import backend.api.UserService;
+import backend.model.User;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import main.java.Main;
-import main.java.utils.SceneCreator;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import utils.SceneCreator;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 
 public class RegisterController {
+    private final UserService userService = AgencyServiceGenerator.createService(UserService.class);
 
-  @FXML
-  Label errorLabel;
-  @FXML
-  TextField usernameBox;
-  @FXML
-  TextField passwordBox;
-  @FXML
-  TextField nameBox;
-  @FXML
-  TextField surnameBox;
-  @FXML
-  TextField emailBox;
-  @FXML
-  AnchorPane mainPane;
+    @FXML public TextField labelNick;
+    @FXML public PasswordField labelPassword;
+    @FXML public TextField labelName;
+    @FXML public TextField labelSurname;
+    @FXML public TextField labelAge;
+    @FXML public TextField labelAddress;
+    @FXML public TextField labelZipcode;
+    @FXML public TextField labelCity;
+    @FXML public TextField labelPhoneNumber;
+    @FXML public TextField labelEmail;
+    @FXML public Label errorLabel;
+
+    public void initialize() {
+        // do skorzystania
+    }
 
     @FXML
-    public void registerButton(MouseEvent event) throws IOException{
-      if(!usernameBox.getText().isEmpty() && !passwordBox.getText().isEmpty() && !nameBox.getText().isEmpty() && !surnameBox.getText().isEmpty() && !emailBox.getText().isEmpty()) {
-        if(emailBox.getText().indexOf('@') == -1){
-          errorLabel.setText("Podaj poprawny adres E-mail!");
-        }else{
-          communicateWithServer();
+    public void registerButton(MouseEvent event) throws IOException {
+        if (areLabelsNotEmpty()) {
+            if (labelEmail.getText().indexOf('@') == -1) {
+                errorLabel.setText("Podaj poprawny adres E-mail!");
+            } else if(isLabelNotANumber(labelAge)) {
+                errorLabel.setText("Podaj liczbe jako wiek!");
+            } else if(isLabelNotANumber(labelPhoneNumber)) {
+                errorLabel.setText("Podaj 9cyfrową liczbe jako telefon!");
+            } else {
+                communicateWithServer();
+            }
+        } else {
+            errorLabel.setText("Wszystkie pola muszą zostać uzupełnione!");
         }
-      }else{
-        errorLabel.setText("Wszystkie pola muszą zostać uzupełnione!");
-      }
     }
+
+    private boolean isLabelNotANumber(TextField field) {
+        try {
+            var age = Integer.parseInt(field.getText());
+            return  false;
+        } catch (NumberFormatException e) {
+            return true;
+        }
+    }
+
+    private boolean areLabelsNotEmpty() {
+        return !labelNick.getText().isEmpty() && !labelPassword.getText().isEmpty() && !labelName.getText().isEmpty() && !labelSurname.getText().isEmpty() && !labelAge.getText().isEmpty()
+                && !labelAddress.getText().isEmpty() && !labelZipcode.getText().isEmpty() && !labelCity.getText().isEmpty() && !labelPhoneNumber.getText().isEmpty();
+    }
+
+    @FXML
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("LogInScene.fxml", Main.getUser());
+        SceneCreator.launchScene("LogInScene.fxml");
     }
 
-  public void communicateWithServer() throws IOException {
-    String result = "register " + usernameBox.getText() + " " + passwordBox.getText() + " " + nameBox.getText() + " " + surnameBox.getText() + " " + emailBox.getText();
-    Socket s = new Socket("localhost", 4999);
+    public void communicateWithServer() throws IOException {
+        User user = new User();
 
-    PrintWriter pr = new PrintWriter(s.getOutputStream());
-    pr.println(result);
-    pr.flush();
+        user.setPersonId(0);
+        user.setNick(labelNick.getText());
+        user.setPassword(labelPassword.getText());
+        user.setName(labelName.getText());
+        user.setSurname(labelSurname.getText());
+        user.setAge(Integer.parseInt(labelAge.getText()));
+        user.setAddress(labelAddress.getText());
+        user.setCity(labelCity.getText());
+        user.setZipcode(labelZipcode.getText());
+        user.setPhoneNumber(labelPhoneNumber.getText());
+        user.setEmail(labelEmail.getText());
 
-    InputStreamReader in = new InputStreamReader(s.getInputStream());
-    BufferedReader bf = new BufferedReader(in);
+        var call = userService.save(user);
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (response.isSuccessful()) {
+                    Platform.runLater( () -> {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Potwierdzenie");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Nowe konto użytkownika zostało utworzone!");
+                        alert.setX(750);
+                        alert.setY(384);
+                        alert.showAndWait();
 
-    String str = bf.readLine();
-    System.out.println("server : " + str);
-    if (str.equals("Accepted")) {
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Potwierdzenie");
-      alert.setHeaderText(null);
-      alert.setContentText("Nowe konto użytkownika zostało utworzone!");
-      alert.setX(750);
-      alert.setY(384);
-      alert.showAndWait();
+                        SceneCreator.launchScene("LogInScene.fxml");
+                    });
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Integer> call, Throwable throwable) {
+                errorLabel.setText("Błąd od serwera!" + throwable.getMessage());
 
-      SceneCreator.launchScene("LogInScene.fxml",Main.getUser());
-    } else {
-      errorLabel.setText("Użytkownik o podanych danych (email,nick) już istnieje!");
+            }
+        });
+
     }
-  }
 
 }

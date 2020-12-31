@@ -1,5 +1,7 @@
-package main.java.utils;
+package utils;
 
+import backend.model.Reservation;
+import controllers.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -7,8 +9,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
-import main.java.Main;
-import main.java.backend.model.Reservation;
+import utils.SceneCreator;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,7 +47,7 @@ public class ManageCell extends ListCell<Reservation> {
             try {
                 getTourId(getItem().getReservationId());
                 getTourFromServer(tourId);
-                SceneCreator.launchScene("ViewOneTourScene.fxml", Main.getUser());
+                SceneCreator.launchScene("ViewOneTourScene.fxml");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -55,7 +57,7 @@ public class ManageCell extends ListCell<Reservation> {
             try {
                 if(!getItem().getStatus().equals("oplacone")) confirmPopup();
                 changeToPayed(getItem().getReservationId());
-                getAllReservations();
+                //getAllReservations();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -86,14 +88,6 @@ public class ManageCell extends ListCell<Reservation> {
         BufferedReader bf = new BufferedReader(in);
         String str = bf.readLine();
         String[] data = str.split("\\s+");
-        Main.getTour().setId(Integer.parseInt(data[0]));
-        Main.getTour().setTitle(data[1]);
-        Main.getTour().setText(data[2]);
-        Main.getTour().setDistance(Integer.parseInt(data[3]));
-        Main.getTour().setDays(Integer.parseInt(data[4]));
-        Main.getTour().setPrice(Integer.parseInt(data[5]));
-        Main.getTour().setAvailableTickets(Integer.parseInt(data[6]));
-        Main.getTour().setImage(data[7]);
     }
     public void getTourId(int id) throws IOException {
         String query = "getTourId " + id;
@@ -118,25 +112,7 @@ public class ManageCell extends ListCell<Reservation> {
         BufferedReader bf = new BufferedReader(in);
         String str = bf.readLine();
     }
-    public void getAllReservations() throws IOException{
-        String result = "getAllReservations " + Main.getUser().getId();
-        Socket s = new Socket("localhost", 4999);
-        PrintWriter pr = new PrintWriter(s.getOutputStream());
-        pr.println(result);
-        pr.flush();
-        InputStreamReader in = new InputStreamReader(s.getInputStream());
-        BufferedReader bf = new BufferedReader(in);
-        String str = bf.readLine();
-        String[] all = str.split("#");
-        for(String reservation: all){
-            String[] one = reservation.split("@");
-            Reservation listReservation = new Reservation(Integer.parseInt(one[0]),one[1],Integer.parseInt(one[2]),one[3],one[4]);
-            list.add(listReservation);
 
-        }
-        getListView().setItems(list);
-        getListView().setCellFactory(param -> new ManageCell("Przejrzyj", "Opłać"));
-    }
     public void confirmPopup() throws IOException {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

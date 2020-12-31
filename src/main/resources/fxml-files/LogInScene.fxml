@@ -4,10 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="768" maxWidth="1024" minHeight="400" minWidth="700" prefHeight="768" prefWidth="1024" styleClass="bodybg" stylesheets="@../css-files/Welcome_background.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.LoginController">
+<AnchorPane maxHeight="768" maxWidth="1024" minHeight="400" minWidth="700" prefHeight="768" prefWidth="1024" styleClass="bodybg" stylesheets="@../css-files/Welcome_background.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
 <children>
    <AnchorPane layoutX="569.0" prefHeight="768.0" prefWidth="455.0" style="-fx-background-color: #353238; -fx-opacity: 95%; -fx-border-color: #7775; -fx-border-width: 5;">
       <children>
@@ -19,7 +20,7 @@
             <font>
                <Font size="18.0" />
             </font></Button>
-            <Button id="registerField"  layoutX="89.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#registerButton" prefHeight="39.0" prefWidth="277.0" style="-fx-background-color: #5ab849;" text="REJESTRACJA" textAlignment="CENTER" textFill="#ebdfdf">
+            <Button id="registerField" layoutX="89.0" layoutY="650.0" mnemonicParsing="false" onMouseClicked="#registerButton" prefHeight="39.0" prefWidth="277.0" style="-fx-background-color: #5ab849;" text="REJESTRACJA" textAlignment="CENTER" textFill="#ebdfdf">
                <font>
                   <Font size="18.0" />
                </font>
@@ -45,6 +46,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
+            <ImageView fx:id="testImage" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true" />
       </children>
    </AnchorPane>
 </children>

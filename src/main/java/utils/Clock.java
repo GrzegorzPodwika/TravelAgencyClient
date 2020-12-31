@@ -1,4 +1,4 @@
-package main.java.utils;
+package utils;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
@@ -6,10 +6,11 @@ import javafx.scene.control.Label;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Clock implements Runnable{
-Label clockLabel;
-public boolean flag = true;
-    public Clock(Label clockLabel){
+public class Clock implements Runnable {
+    private final Label clockLabel;
+    private boolean flag = true;
+
+    public Clock(Label clockLabel) {
         this.clockLabel = clockLabel;
     }
 
@@ -18,7 +19,7 @@ public boolean flag = true;
         while (flag) {
             LocalTime currentTime = LocalTime.now();
             final String time = currentTime.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-            Platform.runLater( () -> clockLabel.setText(time));
+            Platform.runLater(() -> clockLabel.setText(time));
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -26,7 +27,8 @@ public boolean flag = true;
             }
         }
     }
-    public void terminate(){
+
+    public void terminate() {
         flag = false;
     }
 }

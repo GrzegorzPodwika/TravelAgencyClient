@@ -1,5 +1,6 @@
-package main.java.controllers;
+package controllers;
 
+import backend.model.Reservation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,10 +9,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import main.java.Main;
-import main.java.backend.model.Reservation;
-import main.java.utils.Clock;
-import main.java.utils.SceneCreator;
+
+import utils.Clock;
+import utils.SceneCreator;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,16 +39,15 @@ public class RemoveReservationController {
         clk = new Clock(clockLabel);
         th = new Thread(clk);
         th.start();
-        getAllReservations();
     }
     @FXML
     public void logOutButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("LogInScene.fxml", Main.getUser());
+        SceneCreator.launchScene("LogInScene.fxml");
         shutdown();
     }
     @FXML
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("UserScene.fxml",Main.getUser());
+        SceneCreator.launchScene("UserScene.fxml");
         shutdown();
     }
 
@@ -65,8 +65,8 @@ public class RemoveReservationController {
             alert.setY(384);
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                giveBackToTour();
-                deleteReservation();
+                //giveBackToTour();
+                //deleteReservation();
             }
         }
     }
@@ -75,51 +75,6 @@ public class RemoveReservationController {
         clk.terminate();
     }
 
-    public void getAllReservations() throws IOException{
-        String result = "getAllReservations " + Main.getUser().getId();
-        Socket s = new Socket("localhost", 4999);
-        PrintWriter pr = new PrintWriter(s.getOutputStream());
-        pr.println(result);
-        pr.flush();
-        InputStreamReader in = new InputStreamReader(s.getInputStream());
-        BufferedReader bf = new BufferedReader(in);
-        String str = bf.readLine();
-        String[] all = str.split("#");
-        for(String reservation: all){
-            String[] one = reservation.split("@");
-            Reservation listReservation = new Reservation(Integer.parseInt(one[0]),one[1],Integer.parseInt(one[2]),one[3],one[4]);
-            list.add(listReservation);
-        }
-        this.removeList.setItems(list);
-    }
 
-    public void deleteReservation() throws IOException{
-
-        String result = "deleteReservation " + toBeDeletedId;
-        Socket s = new Socket("localhost", 4999);
-        PrintWriter pr = new PrintWriter(s.getOutputStream());
-        pr.println(result);
-        pr.flush();
-        InputStreamReader in = new InputStreamReader(s.getInputStream());
-        BufferedReader bf = new BufferedReader(in);
-        String str = bf.readLine();
-            for(Reservation el: list){
-                if(el.getReservationId() == toBeDeletedId) {
-                    list.remove(el);
-                    break;
-                }
-            }
-    }
-
-    public void giveBackToTour() throws IOException{
-        String result = "giveBack " + toBeDeletedId;
-        Socket s = new Socket("localhost", 4999);
-        PrintWriter pr = new PrintWriter(s.getOutputStream());
-        pr.println(result);
-        pr.flush();
-        InputStreamReader in = new InputStreamReader(s.getInputStream());
-        BufferedReader bf = new BufferedReader(in);
-        String str = bf.readLine();
-    }
 
 }

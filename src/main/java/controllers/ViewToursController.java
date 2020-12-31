@@ -1,5 +1,6 @@
-package main.java.controllers;
+package controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -12,9 +13,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import main.java.Main;
-import main.java.utils.Clock;
-import main.java.utils.SceneCreator;
+import utils.Clock;
+import utils.SceneCreator;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,18 +25,12 @@ import java.net.Socket;
 
 public class ViewToursController {
 
-  @FXML
-  Label clockLabel;
-  @FXML
-  ScrollPane scrollPane;
-  @FXML
-  GridPane gridPane;
-  @FXML
-  AnchorPane anchorPane2;
-  @FXML
-  Image image;
-  @FXML
-  ImageView picture;
+  @FXML Label clockLabel;
+  @FXML ScrollPane scrollPane;
+  @FXML GridPane gridPane;
+  @FXML AnchorPane anchorPane2;
+  @FXML Image image;
+  @FXML ImageView picture;
 
   HBox hBox = new HBox();
   Clock clk;
@@ -71,12 +66,12 @@ public class ViewToursController {
     }
     @FXML
     public void logOutButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("LogInScene.fxml", Main.getUser());
+        SceneCreator.launchScene("LogInScene.fxml");
         shutdown();
     }
     @FXML
     public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("UserScene.fxml",Main.getUser());
+        SceneCreator.launchScene("UserScene.fxml");
         shutdown();
     }
     public void shutdown(){
@@ -125,20 +120,14 @@ public class ViewToursController {
         GridPane.setConstraints(picture, columnNumber, rowNumber, 1,1, HPos.CENTER, VPos.CENTER);
         gridPane.getChildren().addAll(picture);
 
-        picture.setOnMouseClicked(e -> {
-            Main.getTour().setId(Integer.parseInt(s[0]));
-            Main.getTour().setTitle(s[1]);
-            Main.getTour().setText(s[2]);
-            Main.getTour().setDistance(Integer.parseInt(s[3]));
-            Main.getTour().setDays(Integer.parseInt(s[4]));
-            Main.getTour().setPrice(Integer.parseInt(s[5]));
-            Main.getTour().setAvailableTickets(Integer.parseInt(s[6]));
-            Main.getTour().setImage(s[7]);
-            try {
-                SceneCreator.launchScene("ViewOneTourScene.fxml", Main.getUser());
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        });
+
+    }
+
+    public void onLogoutClick() {
+        SceneCreator.launchScene("LogInScene.fxml");
+        shutdown();
+    }
+
+    public void onDeleteTourClick() {
     }
 }

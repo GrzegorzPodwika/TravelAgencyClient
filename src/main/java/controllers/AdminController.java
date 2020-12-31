@@ -1,11 +1,12 @@
-package main.java.controllers;
+package controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import main.java.Main;
-import main.java.utils.Clock;
-import main.java.utils.SceneCreator;
+
+import utils.Clock;
+import utils.SceneCreator;
+
 
 import java.io.IOException;
 
@@ -23,7 +24,7 @@ public class AdminController {
     }
     @FXML
     public void logOutButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("LogInScene.fxml", Main.getUser());
+        SceneCreator.launchScene("LogInScene.fxml");
         shutdown();
     }
     public void shutdown(){

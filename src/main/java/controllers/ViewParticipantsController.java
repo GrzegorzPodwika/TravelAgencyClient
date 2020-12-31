@@ -1,4 +1,4 @@
-package main.java.controllers;
+package controllers;
 
 public class ViewParticipantsController {
 }

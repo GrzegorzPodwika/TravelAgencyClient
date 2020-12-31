@@ -1,5 +1,6 @@
-package main.java.utils;
+package utils;
 
+import backend.model.Reservation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -7,7 +8,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
-import main.java.backend.model.Reservation;
 
 import java.io.BufferedReader;
 import java.io.IOException;
