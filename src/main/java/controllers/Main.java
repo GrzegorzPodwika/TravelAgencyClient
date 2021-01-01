@@ -18,6 +18,7 @@ public class Main extends Application {
     static Carrier carrier;
     static TourGuide tourGuide;
     static Hotel hotel;
+    static Reservation reservation;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -66,10 +67,6 @@ public class Main extends Application {
         return Main.activeUser;
     }
 
-    public static Tour getTour() {
-        return Main.activeTour;
-    }
-
     public static Employee getEmployee() {
         return employee;
     }
@@ -108,5 +105,13 @@ public class Main extends Application {
 
     public static void setActiveTour(Tour activeTour) {
         Main.activeTour = activeTour;
+    }
+
+    public static Reservation getReservation() {
+        return reservation;
+    }
+
+    public static void setReservation(Reservation reservation) {
+        Main.reservation = reservation;
     }
 }

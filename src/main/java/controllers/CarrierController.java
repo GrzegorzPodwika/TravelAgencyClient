@@ -128,12 +128,11 @@ public class CarrierController {
 
     @FXML
     public void onDeleteCarrierClick() {
-        var selectedCarrier = tableviewCarriers.getSelectionModel().getSelectedItem();
-
-        if (selectedCarrier == null)
+        if (tableviewCarriers.getSelectionModel().getSelectedIndex() == -1)
             return;
 
-        Carrier plainCarrier = transformToPlainCarrier(selectedCarrier);
+        var selectedCarrierIndex = tableviewCarriers.getSelectionModel().getSelectedIndex();
+        Carrier plainCarrier = allCarriers.get(selectedCarrierIndex);
 
         try {
             carrierService.delete(plainCarrier).execute();
@@ -143,18 +142,13 @@ public class CarrierController {
         }
     }
 
-    private Carrier transformToPlainCarrier(CarrierData selectedCarrier) {
-        return new Carrier(selectedCarrier.getTableCarrierId(), selectedCarrier.getTableName(), selectedCarrier.getTablePhoneNumber(), selectedCarrier.getTableEmail());
-    }
-
     @FXML
     public void onEditCarrierClick() {
-        var selectedCarrier = tableviewCarriers.getSelectionModel().getSelectedItem();
-
-        if (selectedCarrier == null)
+        if (tableviewCarriers.getSelectionModel().getSelectedIndex() == -1)
             return;
 
-        Carrier plainCarrier = transformToPlainCarrier(selectedCarrier);
+        var selectedCarrierIndex = tableviewCarriers.getSelectionModel().getSelectedIndex();
+        Carrier plainCarrier = allCarriers.get(selectedCarrierIndex);
         Main.setCarrier(plainCarrier);
 
         Pane root;

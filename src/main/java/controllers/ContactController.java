@@ -8,29 +8,31 @@ import utils.SceneCreator;
 
 import java.io.IOException;
 
+import static utils.Constants.LOGIN_SCENE;
+import static utils.Constants.USER_SCENE;
+
 public class ContactController {
     @FXML public Label clockLabel;
 
     private Clock clk;
-    private Thread th;
 
     @FXML
     public void initialize() {
         clk = new Clock(clockLabel);
-        th = new Thread(clk);
+        Thread th = new Thread(clk);
         th.start();
     }
 
     @FXML
-    public void logOutButton(MouseEvent event) throws IOException {
+    public void onLogoutClick() {
         Main.setUser(null);
-        SceneCreator.launchScene("LogInScene.fxml");
+        SceneCreator.launchScene(LOGIN_SCENE);
         shutdown();
     }
 
     @FXML
-    public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("UserScene.fxml");
+    public void onGoBackClick(){
+        SceneCreator.launchScene(USER_SCENE);
         shutdown();
     }
 

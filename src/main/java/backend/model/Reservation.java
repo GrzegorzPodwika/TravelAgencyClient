@@ -7,14 +7,13 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Reservation {
 
     private Integer reservationId;
     private String status;
     private int numberOfSeats;
+    private int numberOfTickets;
     private double totalPrice;
 
     @JsonSerialize(using = LocalDateSerializer.class)
@@ -22,8 +21,8 @@ public class Reservation {
     private LocalDate reservationDate;
 
     private Tour tour;
-
     private User user;
+    private Payment payment;
 
     public Integer getReservationId() {
         return reservationId;
@@ -39,6 +38,22 @@ public class Reservation {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getNumberOfTickets() {
+        return numberOfTickets;
+    }
+
+    public void setNumberOfTickets(int numberOfTickets) {
+        this.numberOfTickets = numberOfTickets;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public int getNumberOfSeats() {

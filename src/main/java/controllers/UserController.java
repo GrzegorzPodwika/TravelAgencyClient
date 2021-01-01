@@ -3,11 +3,10 @@ package controllers;
 import backend.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import utils.Clock;
 import utils.SceneCreator;
 
-import java.io.IOException;
+import static utils.Constants.*;
 
 public class UserController {
 
@@ -19,7 +18,6 @@ public class UserController {
     @FXML public Label emailLabel;
     @FXML public Label countLabel;
 
-    private Thread th;
     private Clock clk;
     private final User activeUser = Main.getUser();
 
@@ -27,7 +25,7 @@ public class UserController {
     @FXML
     public void initialize() {
         clk = new Clock(clockLabel);
-        th = new Thread(clk);
+        Thread th = new Thread(clk);
         th.start();
 
         putUserCredentialsIntoList();
@@ -44,41 +42,37 @@ public class UserController {
 
     //done
     @FXML
-    public void logOutButton(){
+    public void onLogoutClick(){
         Main.setUser(null);
-        SceneCreator.launchScene("LogInScene.fxml");
+        SceneCreator.launchScene(LOGIN_SCENE);
         shutdown();
     }
 
     //done
     @FXML
-    public void editButton(){
-        SceneCreator.launchScene("EditCredensialsScene.fxml");
-        shutdown();
-    }
-
-    @FXML
-    public void viewToursButton(){
-        SceneCreator.launchScene("ViewToursScene.fxml");
-        shutdown();
-    }
-
-    @FXML
-    public void viewReservationButton() {
-        SceneCreator.launchScene("ManageToursScene.fxml");
-        shutdown();
-    }
-
-    @FXML
-    public void removeReservationButton() {
-        SceneCreator.launchScene("RemoveReservationScene.fxml");
+    public void onEditUserCredentialsClick(){
+        SceneCreator.launchScene(EDIT_USER_CREDENTIALS_SCENE);
         shutdown();
     }
 
     //done
     @FXML
-    public void contactButton() {
-        SceneCreator.launchScene("ContactScene.fxml");
+    public void onViewToursClick(){
+        SceneCreator.launchScene(VIEW_TOURS_SCENE);
+        shutdown();
+    }
+
+    @FXML
+    public void onManageReservationClick() {
+        SceneCreator.launchScene(MANAGE_RESERVATIONS_SCENE);
+        shutdown();
+    }
+
+
+    //done
+    @FXML
+    public void onViewCompanyContactClick() {
+        SceneCreator.launchScene(CONTACT_SCENE);
         shutdown();
     }
 

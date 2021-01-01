@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -31,9 +32,9 @@
       <AnchorPane layoutX="235.0" layoutY="51.0" prefHeight="718.0" prefWidth="793.0">
          <children>
             <Line endX="-493.0" endY="63.0" layoutX="266.0" layoutY="56.0" startX="-241.0" startY="63.0" stroke="#525252" strokeWidth="2.0" />
-            <VBox layoutX="73.0" layoutY="44.0" prefHeight="200.0" prefWidth="647.0" spacing="40.0">
+            <VBox layoutX="73.0" layoutY="44.0" prefWidth="689.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onToursClick" prefHeight="36.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Wycieczki" textFill="WHITE" wrapText="true">
+                  <Button mnemonicParsing="false" onAction="#onToursClick" prefHeight="93.0" prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Wycieczki" textFill="WHITE" wrapText="true">
                      <font>
                         <Font size="42.0" />
                      </font>
@@ -59,9 +60,12 @@
                      </font>
                   </Button>
                </children>
+               <padding>
+                  <Insets bottom="30.0" top="30.0" />
+               </padding>
             </VBox>
          </children></AnchorPane>
-      <AnchorPane depthTest="DISABLE" layoutY="48.0" prefHeight="726.0" prefWidth="266.0" style="-fx-background-color: #353238; -fx-opacity: 95%; -fx-border-color: #7775; -fx-border-width: 4;">
+      <AnchorPane depthTest="DISABLE" layoutY="48.0" prefHeight="720.0" prefWidth="266.0" style="-fx-background-color: #353238; -fx-opacity: 95%; -fx-border-color: #7775; -fx-border-width: 4;" AnchorPane.bottomAnchor="0.0">
          <children>
             <Button layoutX="12.0" layoutY="656.0" mnemonicParsing="false" onAction="#onEditDataClick" prefHeight="39.0" prefWidth="242.0" style="-fx-background-color: #7775;" text="Edytuj dane" textFill="WHITE">
                <font>

@@ -414,15 +414,13 @@ public class AddTourController {
         return tour;
     }
 
-    //TODO tutaj implementacja
     private boolean viewsAreNotEmpty() {
         return !inputName.getText().isEmpty() && !inputCountry.getText().isEmpty()
                 && !inputPrice.getText().isEmpty() && !inputNumOfAvailableTickets.getText().isEmpty()
                 && datePickerDepartureDate.getValue() != null && datePickerArrivalDate.getValue() != null
                 && !comboBoxHotel.getSelectionModel().isEmpty() && !comboBoxTransport.getSelectionModel().isEmpty()
-                && !comboBoxTourGuide.getSelectionModel().isEmpty()
+                && !comboBoxTourGuide.getSelectionModel().isEmpty() && !checkComboBoxService.getCheckModel().isEmpty()
                 && !checkComboBoxAttraction.getCheckModel().isEmpty() && !listViewImages.getSelectionModel().isEmpty();
-            //&& !checkComboBoxService.getCheckModel().isEmpty()
     }
 
     private boolean viewsAreCorrect() {

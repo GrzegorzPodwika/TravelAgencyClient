@@ -12,11 +12,14 @@ public class Constants {
     public static final String REGISTER_SCENE = "RegisterScene.fxml";
     public static final String CARRIER_SCENE = "CarrierScene.fxml";
     public static final String EDIT_EMPLOYEE_CREDENTIALS_SCENE = "EditEmployeeCredentialsScene.fxml";
-    public static final String EDIT_USER_CREDENTIALS_SCENE = "EditCredensialsScene.fxml";
+    public static final String EDIT_USER_CREDENTIALS_SCENE = "EditUserCredentialsScene.fxml";
     public static final String EDIT_USERS_AS_EMPLOYEE_SCENE = "EditUserAsEmployeeScene.fxml";
     public static final String TOUR_GUIDE_SCENE = "TourGuideScene.fxml";
     public static final String MANAGE_USERS_SCENE = "ManageUsersScene.fxml";
     public static final String HOTEL_SCENE = "HotelScene.fxml";
     public static final String MANAGE_TOURS_SCENE = "ManageToursScene.fxml";
+    public static final String VIEW_TOURS_SCENE = "ViewToursScene.fxml";
+    public static final String MANAGE_RESERVATIONS_SCENE = "ManageReservationsScene.fxml";
+    public static final String CONTACT_SCENE = "ContactScene.fxml";
 
 }
