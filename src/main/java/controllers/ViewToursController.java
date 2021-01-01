@@ -123,8 +123,6 @@ public class ViewToursController {
                     imageView.setFitWidth(256.0);
                     imageView.setFitHeight(144.0);
 
-                    //TODO czesc substringa przed przecinkiem
-                    //String imgName = name.
                     int indexOfComma = name.indexOf(',');
                     String imgName = name.substring(0, indexOfComma);
 
