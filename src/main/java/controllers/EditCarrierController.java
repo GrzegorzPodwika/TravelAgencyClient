@@ -14,6 +14,7 @@ import java.io.IOException;
 import static utils.Constants.*;
 
 public class EditCarrierController {
+
     @FXML public TextField inputName;
     @FXML public TextField inputPhone;
     @FXML public TextField inputEmail;

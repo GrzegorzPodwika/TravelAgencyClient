@@ -18,7 +18,6 @@ import utils.SceneCreator;
 import java.io.IOException;
 
 public class RegisterController {
-    private final UserService userService = AgencyServiceGenerator.createService(UserService.class);
 
     @FXML public TextField labelNick;
     @FXML public PasswordField labelPassword;
@@ -32,9 +31,7 @@ public class RegisterController {
     @FXML public TextField labelEmail;
     @FXML public Label errorLabel;
 
-    public void initialize() {
-        // do skorzystania
-    }
+    private final UserService userService = AgencyServiceGenerator.createService(UserService.class);
 
     @FXML
     public void registerButton(MouseEvent event) throws IOException {

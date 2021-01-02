@@ -2,7 +2,6 @@ package controllers;
 
 import backend.api.AgencyServiceGenerator;
 import backend.api.UserService;
-import backend.model.Carrier;
 import backend.model.User;
 import backend.tabledata.UserData;
 import javafx.application.Platform;
@@ -39,8 +38,8 @@ public class ManageUsersController {
     @FXML public TableColumn<UserData, Integer> tableAge;
     @FXML public TableColumn<UserData, String> tablePhone;
     @FXML public TableColumn<UserData, String> tableEmail;
-    @FXML public Button buttonDeleteCarrier;
-    @FXML public Button buttonEditCarrier;
+    @FXML public Button buttonDeleteUser;
+    @FXML public Button buttonEditUser;
     @FXML public Label clockLabel;
 
     private Clock clk;
@@ -107,11 +106,11 @@ public class ManageUsersController {
     private void setRowClickListener() {
         tableviewUsers.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection == null){
-                buttonDeleteCarrier.setDisable(true);
-                buttonEditCarrier.setDisable(true);
+                buttonDeleteUser.setDisable(true);
+                buttonEditUser.setDisable(true);
             } else {
-                buttonDeleteCarrier.setDisable(false);
-                buttonEditCarrier.setDisable(false);
+                buttonDeleteUser.setDisable(false);
+                buttonEditUser.setDisable(false);
             }
         });
     }
@@ -130,9 +129,12 @@ public class ManageUsersController {
     }
 
     @FXML
-    public void onDeleteCarrierClick() {
-        var selectedIndex = tableviewUsers.getSelectionModel().getSelectedIndex();
-        User selectedUser = allUsers.get(selectedIndex);
+    public void onDeleteUserClick() {
+        if (tableviewUsers.getSelectionModel().getSelectedIndex() == -1)
+            return;
+
+        var selectedUserData = tableviewUsers.getSelectionModel().getSelectedItem();
+        User selectedUser = allUsers.stream().filter(user -> user.getPersonId() == selectedUserData.getTableUserId()).findFirst().get();
 
         try {
             userService.delete(selectedUser).execute();
@@ -144,10 +146,12 @@ public class ManageUsersController {
     }
 
     @FXML
-    public void onEditCarrierClick() {
-        var selectedIndex = tableviewUsers.getSelectionModel().getSelectedIndex();
-        User selectedUser = allUsers.get(selectedIndex);
+    public void onEditUserClick() {
+        if (tableviewUsers.getSelectionModel().getSelectedIndex() == -1)
+            return;
 
+        var selectedUserData = tableviewUsers.getSelectionModel().getSelectedItem();
+        User selectedUser = allUsers.stream().filter(user -> user.getPersonId() == selectedUserData.getTableUserId()).findFirst().get();
         Main.setUser(selectedUser);
 
         Pane root;

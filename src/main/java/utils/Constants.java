@@ -21,5 +21,7 @@ public class Constants {
     public static final String VIEW_TOURS_SCENE = "ViewToursScene.fxml";
     public static final String MANAGE_RESERVATIONS_SCENE = "ManageReservationsScene.fxml";
     public static final String CONTACT_SCENE = "ContactScene.fxml";
+    public static final String ADDITIONAL_SERVICE_SCENE = "AdditionalServiceScene.fxml";
+    public static final String ATTRACTION_SCENE = "AttractionScene.fxml";
 
 }

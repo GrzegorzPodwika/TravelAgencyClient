@@ -1,6 +1,7 @@
 package backend.api;
 
 import backend.model.Reservation;
+import backend.model.Tour;
 import backend.model.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -21,6 +22,9 @@ public interface ReservationService {
     @POST("/getAllReservationsByUser")
     Call<List<Reservation>> getAllByUser(@Body User user);
 
+    @POST("/getAllReservationsByTour")
+    Call<List<Reservation>> getAllByTour(@Body Tour tour);
+
     @POST("/saveReservation")
     Call<Integer> save(@Body Reservation attraction);
 
@@ -29,4 +33,5 @@ public interface ReservationService {
 
     @POST("/deleteReservation")
     Call<Void> delete(@Body Reservation attraction);
+
 }

@@ -140,7 +140,8 @@ public class HotelController {
         if (selectedIndex == -1)
             return;
 
-        Hotel selectedHotel = allHotels.get(selectedIndex);
+        var selectedHotelData = tableviewHotel.getSelectionModel().getSelectedItem();
+        Hotel selectedHotel = allHotels.stream().filter(hotel -> hotel.getHotelId() == selectedHotelData.getTableHotelId()).findFirst().get();
 
         try {
             hotelService.delete(selectedHotel).execute();
@@ -156,7 +157,8 @@ public class HotelController {
         if (selectedIndex == -1)
             return;
 
-        Hotel selectedHotel = allHotels.get(selectedIndex);
+        var selectedHotelData = tableviewHotel.getSelectionModel().getSelectedItem();
+        Hotel selectedHotel = allHotels.stream().filter(hotel -> hotel.getHotelId() == selectedHotelData.getTableHotelId()).findFirst().get();
         Main.setHotel(selectedHotel);
 
         Pane root;

@@ -2,11 +2,13 @@ package controllers;
 
 import backend.api.AgencyServiceGenerator;
 import backend.api.TourService;
+import backend.model.Reservation;
 import backend.model.Tour;
 import backend.tabledata.TourData;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -44,6 +46,7 @@ public class ManageToursController {
     public Button buttonDeleteTour;
     public Button buttonEditTour;
     public Button buttonAddTour;
+    public Button buttonShowReservations;
 
     private Clock clk;
     private final TourService tourService = AgencyServiceGenerator.createService(TourService.class);
@@ -115,9 +118,11 @@ public class ManageToursController {
             if (newSelection == null){
                 buttonDeleteTour.setDisable(true);
                 buttonEditTour.setDisable(true);
+                buttonShowReservations.setDisable(true);
             } else {
                 buttonDeleteTour.setDisable(false);
                 buttonEditTour.setDisable(false);
+                buttonShowReservations.setDisable(false);
             }
         });
     }
@@ -141,7 +146,9 @@ public class ManageToursController {
         if (selectedTourIndex == -1)
             return;
 
-        Tour selectedTour = allTours.get(selectedTourIndex);
+        var selectedTourData = tableviewTours.getSelectionModel().getSelectedItem();
+        Tour selectedTour = allTours.stream()
+                .filter(tour -> tour.getTourId() == selectedTourData.getTableTourId()).findFirst().get();
 
         try {
             tourService.delete(selectedTour).execute();
@@ -157,7 +164,9 @@ public class ManageToursController {
         if (selectedTourIndex == -1)
             return;
 
-        Tour selectedTour = allTours.get(selectedTourIndex);
+        var selectedTourData = tableviewTours.getSelectionModel().getSelectedItem();
+        Tour selectedTour = allTours.stream()
+                .filter(tour -> tour.getTourId() == selectedTourData.getTableTourId()).findFirst().get();
         Main.setActiveTour(selectedTour);
 
         Pane root;
@@ -196,7 +205,34 @@ public class ManageToursController {
         }
     }
 
-    public void shutdown(){
+    @FXML
+    public void onShowReservationsClick( ) {
+        var selectedTourIndex = tableviewTours.getSelectionModel().getSelectedIndex();
+        if (selectedTourIndex == -1)
+            return;
+
+        var selectedTourData = tableviewTours.getSelectionModel().getSelectedItem();
+        Tour selectedTour = allTours.stream().filter(tour -> tour.getTourId() == selectedTourData.getTableTourId()).findFirst().get();
+
+        Main.setActiveTour(selectedTour);
+
+        Pane root;
+        String fullPath = "fxml-files/ViewTourReservationsScene.fxml";
+
+        try {
+            Stage newStage = new Stage();
+            newStage.setResizable(false);
+            FXMLLoader loader = new FXMLLoader(this.getClass().getClassLoader().getResource(fullPath));
+            root = loader.load();
+            newStage.setScene(new Scene(root));
+            newStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void shutdown(){
         clk.terminate();
     }
 }

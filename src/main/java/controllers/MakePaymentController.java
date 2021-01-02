@@ -20,18 +20,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MakePaymentController {
-    @FXML
-    public Label labelTotalToPay;
-    @FXML
-    public Label labelDeadlineDate;
-    @FXML
-    public Label labelError;
-    @FXML
-    public ComboBox<String> comboBoxPaymentType;
-    @FXML
-    public Button buttonCancel;
-    @FXML
-    public Button buttonConfirm;
+
+    @FXML public Label labelTotalToPay;
+    @FXML public Label labelDeadlineDate;
+    @FXML public Label labelError;
+    @FXML public ComboBox<String> comboBoxPaymentType;
+    @FXML public Button buttonCancel;
+    @FXML public Button buttonConfirm;
 
     private final ReservationService reservationService = AgencyServiceGenerator.createService(ReservationService.class);
     private final Reservation reservation = Main.getReservation();

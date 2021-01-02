@@ -90,8 +90,8 @@ public class ManageReservationsController {
     }
 
     private void fetchAllReservationsFilteredByUser() {
-        var fetchAReservationsByUser = reservationService.getAllByUser(Main.getUser());
-        fetchAReservationsByUser.enqueue(new Callback<List<Reservation>>() {
+        var fetchAllReservationsByUser = reservationService.getAllByUser(Main.getUser());
+        fetchAllReservationsByUser.enqueue(new Callback<List<Reservation>>() {
             @Override
             public void onResponse(Call<List<Reservation>> call, Response<List<Reservation>> response) {
                 if (response.isSuccessful()) {
@@ -139,11 +139,12 @@ public class ManageReservationsController {
     @FXML
     public void onDeleteReservationClick() {
         int selectedReservationIndex = tableviewReservations.getSelectionModel().getSelectedIndex();
-
         if (selectedReservationIndex == -1)
             return;
 
-        Reservation selectedReservation = allReservationsFilteredByUser.get(selectedReservationIndex);
+        var selectedReservationData = tableviewReservations.getSelectionModel().getSelectedItem();
+        Reservation selectedReservation = allReservationsFilteredByUser.stream()
+                .filter(reservation -> reservation.getReservationId() == selectedReservationData.getTableReservationId()).findFirst().get();
 
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setHeaderText("Rezygnacja z rezerwacji");
@@ -198,12 +199,13 @@ public class ManageReservationsController {
     @FXML
     public void onPayReservationClick() {
         var selectedReservationIndex = tableviewReservations.getSelectionModel().getSelectedIndex();
-
         if (selectedReservationIndex == -1) {
             return;
         }
 
-        Reservation selectedReservation = allReservationsFilteredByUser.get(selectedReservationIndex);
+        var selectedReservationData = tableviewReservations.getSelectionModel().getSelectedItem();
+        Reservation selectedReservation = allReservationsFilteredByUser.stream()
+                .filter(reservation -> reservation.getReservationId() == selectedReservationData.getTableReservationId()).findFirst().get();
         Main.setReservation(selectedReservation);
 
         Pane root;

@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 import static utils.Constants.ERROR_NOT_A_NUMBER;
 
 public class EditTourController {
+
     @FXML public Label labelTourName;
     @FXML public Label labelCountry;
     @FXML public Label labelAvailableTickets;

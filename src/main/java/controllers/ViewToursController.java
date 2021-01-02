@@ -62,6 +62,7 @@ public class ViewToursController {
         initListView();
         fetchTours();
         setImagesIntoListView();
+        setRowClickListener();
     }
 
     private void initClock() {
@@ -86,7 +87,7 @@ public class ViewToursController {
                         List<String> fetchedImagesNames = new ArrayList<>();
 
                         for (Tour tour: allTours) {
-                            fetchedImagesNames.add(tour.getImgName() + ", " + tour.getPrice() + " PLN " + tour.getDepartureDate().toString() + "-" + tour.getArrivalDate().toString());
+                            fetchedImagesNames.add(tour.getImgName() + ", " + tour.getPrice() + " PLN " + tour.getDepartureDate().toString() + " " + tour.getArrivalDate().toString());
                         }
 
                         Platform.runLater(() -> {
@@ -151,6 +152,16 @@ public class ViewToursController {
         });
     }
 
+    private void setRowClickListener() {
+        listViewTours.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection == null){
+                buttonShowTourDetails.setDisable(true);
+            } else {
+                buttonShowTourDetails.setDisable(false);
+            }
+        });
+    }
+
     @FXML
     public void onLogoutClick() {
         Main.setUser(null);
@@ -168,6 +179,7 @@ public class ViewToursController {
     public void onShowTourDetailClick() {
         if (listViewTours.getSelectionModel().getSelectedIndex() != -1) {
             labelError.setText("");
+
             var selectedTourIndex = listViewTours.getSelectionModel().getSelectedIndex();
             Main.setActiveTour(allTours.get(selectedTourIndex));
 

@@ -19,6 +19,8 @@ public class Main extends Application {
     static TourGuide tourGuide;
     static Hotel hotel;
     static Reservation reservation;
+    static AdditionalService additionalService;
+    static Attraction attraction;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -113,5 +115,21 @@ public class Main extends Application {
 
     public static void setReservation(Reservation reservation) {
         Main.reservation = reservation;
+    }
+
+    public static AdditionalService getAdditionalService() {
+        return additionalService;
+    }
+
+    public static void setAdditionalService(AdditionalService additionalService) {
+        Main.additionalService = additionalService;
+    }
+
+    public static Attraction getAttraction() {
+        return attraction;
+    }
+
+    public static void setAttraction(Attraction attraction) {
+        Main.attraction = attraction;
     }
 }

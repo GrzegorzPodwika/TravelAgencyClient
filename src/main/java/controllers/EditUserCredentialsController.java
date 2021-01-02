@@ -49,13 +49,12 @@ public class EditUserCredentialsController {
     @FXML public TextField inputEmail;
 
     private Clock clk;
-    private Thread th;
     private final User fetchedUser = Main.getUser();
     private final UserService userService = AgencyServiceGenerator.createService(UserService.class);
 
     public void initialize(){
         clk = new Clock(clockLabel);
-        th = new Thread(clk);
+        Thread th = new Thread(clk);
         th.start();
 
         putUserCredentialsIntoList();

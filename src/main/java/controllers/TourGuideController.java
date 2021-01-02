@@ -129,12 +129,11 @@ public class TourGuideController {
 
     @FXML
     public void onDeleteTourGuideClick() {
-        var selectedTourGuide = tableviewTourGuides.getSelectionModel().getSelectedItem();
-
-        if (selectedTourGuide == null)
+        if (tableviewTourGuides.getSelectionModel().getSelectedIndex() == -1)
             return;
 
-        TourGuide plainTourGuide = transformToPlainFormat(selectedTourGuide);
+        var selectedTourGuideData = tableviewTourGuides.getSelectionModel().getSelectedItem();
+        TourGuide plainTourGuide = allTourGuides.stream().filter(tourGuide -> tourGuide.getTourGuideId() == selectedTourGuideData.getTableTourGuideId()).findFirst().get();
 
         try {
             tourGuideService.delete(plainTourGuide).execute();
@@ -144,19 +143,14 @@ public class TourGuideController {
         }
     }
 
-    private TourGuide transformToPlainFormat(TourGuideData selectedTourGuide) {
-        return new TourGuide(selectedTourGuide.getTableTourGuideId(), selectedTourGuide.getTableName(),
-                selectedTourGuide.getTableSurname(), selectedTourGuide.getTablePhoneNumber());
-    }
 
     @FXML
     public void onEditTourGuideClick() {
-        var selectedTourGuide = tableviewTourGuides.getSelectionModel().getSelectedItem();
-
-        if (selectedTourGuide == null)
+        if (tableviewTourGuides.getSelectionModel().getSelectedIndex() == -1)
             return;
 
-        TourGuide plainTourGuide = transformToPlainFormat(selectedTourGuide);
+        var selectedTourGuideData = tableviewTourGuides.getSelectionModel().getSelectedItem();
+        TourGuide plainTourGuide = allTourGuides.stream().filter(tourGuide -> tourGuide.getTourGuideId() == selectedTourGuideData.getTableTourGuideId()).findFirst().get();
         Main.setTourGuide(plainTourGuide);
 
         Pane root;

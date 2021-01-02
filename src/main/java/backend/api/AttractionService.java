@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public interface AttractionService {
 
-
     @GET("/getAttraction")
     Call<Optional<Attraction>> get(@Body Integer id);
 

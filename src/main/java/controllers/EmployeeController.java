@@ -1,6 +1,7 @@
 package controllers;
 
 import backend.model.Employee;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import utils.Clock;
@@ -14,6 +15,9 @@ public class EmployeeController {
     @FXML public Label labelSurname;
     @FXML public Label labelName;
     @FXML public Label labelNick;
+    @FXML public Label labelHourlyPay;
+    @FXML public Label labelWorkedHours;
+    @FXML public Label labelBonus;
     @FXML public Label labelSalary;
     @FXML public Label clockLabel;
 
@@ -31,12 +35,15 @@ public class EmployeeController {
 
     private void putEmployeeCredentialsIntoList() {
         labelHelloUser.setText("Witaj, " + activeEmployee.getName());
-        labelName.setText(activeEmployee.getName());
-        labelSurname.setText(activeEmployee.getSurname());
-        labelEmail.setText(activeEmployee.getEmail());
-        labelNick.setText(activeEmployee.getNick());
+        labelName.setText(labelName.getText() +  activeEmployee.getName());
+        labelSurname.setText(labelSurname.getText() +  activeEmployee.getSurname());
+        labelEmail.setText(labelEmail.getText() + activeEmployee.getEmail());
+        labelNick.setText(labelNick.getText() + activeEmployee.getNick());
+        labelHourlyPay.setText(labelHourlyPay.getText() + activeEmployee.getHourlyRate());
+        labelWorkedHours.setText(labelWorkedHours.getText() + activeEmployee.getNumberOfWorkedHours());
+        labelBonus.setText(labelBonus.getText() + activeEmployee.getBonus());
         double salary = activeEmployee.getHourlyRate() * activeEmployee.getNumberOfWorkedHours() + activeEmployee.getBonus();
-        labelSalary.setText(String.valueOf(salary));
+        labelSalary.setText(labelSalary.getText() + salary);
     }
 
     @FXML
@@ -82,6 +89,17 @@ public class EmployeeController {
         shutdown();
     }
 
+    @FXML
+    public void onAdditionalServiceClick( ) {
+        SceneCreator.launchScene(ADDITIONAL_SERVICE_SCENE);
+        shutdown();
+    }
+
+    @FXML
+    public void onAttractionClick( ) {
+        SceneCreator.launchScene(ATTRACTION_SCENE);
+        shutdown();
+    }
 
     private void shutdown() {
         clk.terminate();

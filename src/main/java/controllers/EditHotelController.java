@@ -14,6 +14,7 @@ import java.io.IOException;
 import static utils.Constants.ERROR_NOT_A_NUMBER;
 
 public class EditHotelController {
+
     @FXML public TextField inputName;
     @FXML public TextField inputNumbOfStars;
     @FXML public TextField inputAddress;

@@ -22,6 +22,10 @@ public class AdditionalService {
         this.name = name;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getDescription() {
         return description;
     }

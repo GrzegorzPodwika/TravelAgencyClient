@@ -9,72 +9,80 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #353238;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddCarrierController">
-   <children>
-      <VBox alignment="TOP_CENTER" layoutX="70.0" layoutY="81.0" prefHeight="349.0" prefWidth="300.0" spacing="20.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Label text="Nazwa przewoźnika:" textFill="WHITE">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label text="Telefon:" textFill="WHITE">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label text="Email:" textFill="WHITE">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-         </children>
-         <padding>
-            <Insets top="50.0" />
-         </padding>
-      </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="381.0" layoutY="40.0" prefHeight="349.0" prefWidth="300.0" spacing="10.0" AnchorPane.bottomAnchor="51.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <TextField fx:id="inputName" promptText="TGV">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="inputPhone" promptText="123456789">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="inputEmail" promptText="tgv@france.fr">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </TextField>
-            <Label fx:id="labelError" textFill="RED">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-         </children>
-         <padding>
-            <Insets right="10.0" top="50.0" />
-         </padding>
-      </VBox>
-      <Button fx:id="buttonCancel" layoutX="29.0" layoutY="357.0" mnemonicParsing="false" onAction="#onCancelClick" style="-fx-background-color: #0066FF;" text="Anuluj" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
-         <graphic>
-            <FontAwesomeIconView fill="WHITE" glyphName="REMOVE" />
-         </graphic>
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
-      <Button fx:id="buttonConfirm" layoutX="39.0" layoutY="367.0" mnemonicParsing="false" onAction="#onConfirmClick" style="-fx-background-color: #009933;" text="Potwierdź" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
-         <graphic>
-            <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
-         </graphic>
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #353238;"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.AddCarrierController">
+    <children>
+        <VBox alignment="TOP_CENTER" layoutX="70.0" layoutY="81.0" prefHeight="349.0" prefWidth="300.0" spacing="20.0"
+              AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label text="Nazwa przewoźnika:" textFill="WHITE">
+                    <font>
+                        <Font size="20.0"/>
+                    </font>
+                </Label>
+                <Label text="Telefon:" textFill="WHITE">
+                    <font>
+                        <Font size="20.0"/>
+                    </font>
+                </Label>
+                <Label text="Email:" textFill="WHITE">
+                    <font>
+                        <Font size="20.0"/>
+                    </font>
+                </Label>
+            </children>
+            <padding>
+                <Insets top="50.0"/>
+            </padding>
+        </VBox>
+        <VBox alignment="TOP_CENTER" layoutX="381.0" layoutY="40.0" prefHeight="349.0" prefWidth="300.0" spacing="10.0"
+              AnchorPane.bottomAnchor="51.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <TextField fx:id="inputName" promptText="TGV">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                </TextField>
+                <TextField fx:id="inputPhone" promptText="123456789">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                </TextField>
+                <TextField fx:id="inputEmail" promptText="tgv@france.fr">
+                    <font>
+                        <Font size="17.0"/>
+                    </font>
+                </TextField>
+                <Label fx:id="labelError" textFill="RED">
+                    <font>
+                        <Font size="20.0"/>
+                    </font>
+                </Label>
+            </children>
+            <padding>
+                <Insets right="10.0" top="50.0"/>
+            </padding>
+        </VBox>
+        <Button fx:id="buttonCancel" layoutX="29.0" layoutY="357.0" mnemonicParsing="false" onAction="#onCancelClick"
+                style="-fx-background-color: #0066FF;" text="Anuluj" textFill="WHITE" AnchorPane.bottomAnchor="10.0"
+                AnchorPane.leftAnchor="10.0">
+            <graphic>
+                <FontAwesomeIconView fill="WHITE" glyphName="REMOVE"/>
+            </graphic>
+            <font>
+                <Font size="16.0"/>
+            </font>
+        </Button>
+        <Button fx:id="buttonConfirm" layoutX="39.0" layoutY="367.0" mnemonicParsing="false" onAction="#onConfirmClick"
+                style="-fx-background-color: #009933;" text="Potwierdź" textFill="WHITE" AnchorPane.bottomAnchor="10.0"
+                AnchorPane.rightAnchor="10.0">
+            <graphic>
+                <FontAwesomeIconView fill="WHITE" glyphName="PLUS"/>
+            </graphic>
+            <font>
+                <Font size="16.0"/>
+            </font>
+        </Button>
+    </children>
 </AnchorPane>

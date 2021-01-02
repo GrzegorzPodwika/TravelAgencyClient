@@ -83,6 +83,7 @@ public class AddCarrierController {
                 closeWindow();
             } catch (IOException e) {
                 e.printStackTrace();
+                labelError.setText("Ups.. something gone wrong " + e.getMessage());
             }
         } else {
             labelError.setText(ERROR_EMPTY_VIEW);

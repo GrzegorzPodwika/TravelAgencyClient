@@ -54,7 +54,6 @@ public class AddTourController {
     private final ObservableList<AdditionalService> observableAdditionalServices = FXCollections.observableArrayList();
     private final ObservableList<Attraction> observableAttractions = FXCollections.observableArrayList();
 
-    private final String IMAGE_LOCATION_PREFIX = "/images/";
     private final String BALI = "Bali";
     private final String CHILE = "Chile";
     private final String CYPR = "Cypr";
@@ -69,8 +68,6 @@ public class AddTourController {
     private final String WIELKABRYTANIA = "Wielka_Brytania";
     private final String WIETNAM = "Wietnam";
     private final String WLOCHY = "Wlochy";
-    private final String IMAGE_JPG_SUFFIX = ".jpg";
-
 
     private final String[] imageNamesArray = {BALI, CHILE, CYPR, DOMINIKANA, FRANCJA, HISZPANIA, MADAGASKAR,
             NIEMCY, OAHU, PORTUGALIA, SZWAJCARIA, WIELKABRYTANIA, WIETNAM, WLOCHY};
@@ -150,7 +147,6 @@ public class AddTourController {
             }
         });
     }
-
 
     private void fetchAllNecessaryData() {
         var fetchHotelsCall = hotelService.getAll();
@@ -279,7 +275,6 @@ public class AddTourController {
     private void setImagesIntoListView() {
         listViewImages.setItems(observableImages);
 
-
         listViewImages.setCellFactory(param -> new ListCell<String>() {
             private final ImageView imageView = new ImageView();
 
@@ -317,10 +312,6 @@ public class AddTourController {
                 }
             }
         });
-    }
-
-    private String prepareUrlToImage(String imgName) {
-        return this.getClass().getResource(IMAGE_LOCATION_PREFIX + imgName + IMAGE_JPG_SUFFIX).getPath();
     }
 
     private void setTextFieldsListeners() {

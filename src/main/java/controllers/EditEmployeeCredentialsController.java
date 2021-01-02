@@ -47,14 +47,13 @@ public class EditEmployeeCredentialsController {
     @FXML public TextField inputEmail;
 
     private Clock clk;
-    private Thread th;
     private final Employee activeEmployee = Main.getEmployee();
     private final EmployeeService employeeService = AgencyServiceGenerator.createService(EmployeeService.class);
 
     @FXML
     public void initialize(){
         clk = new Clock(clockLabel);
-        th = new Thread(clk);
+        Thread th = new Thread(clk);
         th.start();
 
         putEmployeeCredentialsIntoList();

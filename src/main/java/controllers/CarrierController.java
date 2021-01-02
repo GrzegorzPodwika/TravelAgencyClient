@@ -81,9 +81,11 @@ public class CarrierController {
                         Platform.runLater(() -> {
                             tableviewCarriers.setItems(observableCarriers);
                         });
+                    } else {
+                        System.out.println("List of carriers == null");
                     }
                 } else {
-                    System.out.println("List of carriers == null");
+                    System.out.println("Response was not successful, code = " + response.code());
                 }
             }
 
@@ -128,14 +130,16 @@ public class CarrierController {
 
     @FXML
     public void onDeleteCarrierClick() {
-        if (tableviewCarriers.getSelectionModel().getSelectedIndex() == -1)
-            return;
-
         var selectedCarrierIndex = tableviewCarriers.getSelectionModel().getSelectedIndex();
-        Carrier plainCarrier = allCarriers.get(selectedCarrierIndex);
+        if (selectedCarrierIndex == -1) {
+            return;
+        }
+
+        var selectedCarrierData = tableviewCarriers.getSelectionModel().getSelectedItem();
+        Carrier selectedCarrier = allCarriers.stream().filter(carrier -> carrier.getCarrierId() == selectedCarrierData.getTableCarrierId()).findFirst().get();
 
         try {
-            carrierService.delete(plainCarrier).execute();
+            carrierService.delete(selectedCarrier).execute();
             fetchAllCarriers();
         } catch (IOException e) {
             e.printStackTrace();
@@ -144,12 +148,14 @@ public class CarrierController {
 
     @FXML
     public void onEditCarrierClick() {
-        if (tableviewCarriers.getSelectionModel().getSelectedIndex() == -1)
-            return;
-
         var selectedCarrierIndex = tableviewCarriers.getSelectionModel().getSelectedIndex();
-        Carrier plainCarrier = allCarriers.get(selectedCarrierIndex);
-        Main.setCarrier(plainCarrier);
+        if (selectedCarrierIndex == -1) {
+            return;
+        }
+
+        var selectedCarrierData = tableviewCarriers.getSelectionModel().getSelectedItem();
+        Carrier selectedCarrier = allCarriers.stream().filter(carrier -> carrier.getCarrierId() == selectedCarrierData.getTableCarrierId()).findFirst().get();
+        Main.setCarrier(selectedCarrier);
 
         Pane root;
         String fullPath = "fxml-files/EditCarrierScene.fxml";
