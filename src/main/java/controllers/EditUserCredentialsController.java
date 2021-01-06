@@ -118,7 +118,7 @@ public class EditUserCredentialsController {
     @FXML
     public void logOutButton(){
         Main.setUser(null);
-        SceneCreator.launchScene("LogInScene.fxml");
+        SceneCreator.launchScene(LOGIN_SCENE);
         shutdown();
     }
 
@@ -147,7 +147,7 @@ public class EditUserCredentialsController {
                             alert.setY(384);
                             alert.showAndWait();
 
-                            SceneCreator.launchScene("UserScene.fxml");
+                            SceneCreator.launchScene(USER_SCENE);
                             shutdown();
                         });
                     }
@@ -156,7 +156,7 @@ public class EditUserCredentialsController {
 
             @Override
             public void onFailure(Call<User> call, Throwable throwable) {
-
+                System.out.println("Błąd od serwera!" + throwable.getMessage());
             }
         });
     }

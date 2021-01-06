@@ -17,13 +17,13 @@ public interface UserService {
     Call<List<User>> getAll();
 
     @POST("/saveUser")
-    Call<Integer> save(@Body User carrier);
+    Call<Integer> save(@Body User user);
 
     @POST("/updateUser")
-    Call<User> update(@Body User carrier);
+    Call<User> update(@Body User user);
 
     @POST("/deleteUser")
-    Call<Void> delete(@Body User carrier);
+    Call<Void> delete(@Body User user);
 
     @FormUrlEncoded
     @POST("/loginUser")

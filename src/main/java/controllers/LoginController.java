@@ -23,6 +23,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import static utils.Constants.*;
+
 public class LoginController {
 
     private final LoginService loginService = AgencyServiceGenerator.createService(LoginService.class);
@@ -94,7 +96,7 @@ public class LoginController {
                         Platform.runLater(() -> {
                             Main.setUser(fetchedUser);
 
-                            SceneCreator.launchScene("UserScene.fxml");
+                            SceneCreator.launchScene(USER_SCENE);
                         });
                     } else {
                         Platform.runLater(() -> {
@@ -135,7 +137,7 @@ public class LoginController {
                         Platform.runLater(() -> {
                             Main.setEmployee(fetchedEmployee);
 
-                            SceneCreator.launchScene("EmployeeScene.fxml");
+                            SceneCreator.launchScene(EMPLOYEE_SCENE);
                         });
                     } else {
                         Platform.runLater(() -> {
@@ -160,7 +162,7 @@ public class LoginController {
         });
     }
 
-    public void registerButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("RegisterScene.fxml");
+    public void registerButton() {
+        SceneCreator.launchScene(REGISTER_SCENE);
     }
 }

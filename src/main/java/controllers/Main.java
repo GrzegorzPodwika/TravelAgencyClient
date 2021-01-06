@@ -21,9 +21,10 @@ public class Main extends Application {
     static Reservation reservation;
     static AdditionalService additionalService;
     static Attraction attraction;
+    static Transport transport;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml-files/LogInScene.fxml"));
         root = loader.load();
         activeUser = new User();
@@ -131,5 +132,13 @@ public class Main extends Application {
 
     public static void setAttraction(Attraction attraction) {
         Main.attraction = attraction;
+    }
+
+    public static Transport getTransport() {
+        return transport;
+    }
+
+    public static void setTransport(Transport transport) {
+        Main.transport = transport;
     }
 }

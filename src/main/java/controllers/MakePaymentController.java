@@ -59,10 +59,7 @@ public class MakePaymentController {
         int selectedPaymentTypeIndex = comboBoxPaymentType.getSelectionModel().getSelectedIndex();
         if (selectedPaymentTypeIndex != -1) {
             Payment updatedPayment = reservation.getPayment();
-
-            updatedPayment.setPaymentDate(LocalDate.now());
             updatedPayment.setPaymentType(paymentsTypes.get(selectedPaymentTypeIndex));
-            updatedPayment.setPaid(true);
 
             reservation.setPayment(updatedPayment);
             reservation.setStatus(ReservationStatus.PAYMENT_PAID.name());

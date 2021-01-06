@@ -78,11 +78,10 @@ public class ManageReservationsController {
                 buttonDeleteReservation.setDisable(true);
                 buttonPayReservation.setDisable(true);
             } else {
+                buttonDeleteReservation.setDisable(false);
                 if (newSelection.getTableStatus().equals(ReservationStatus.PENDING_FOR_PAYMENT.name())) {
-                    buttonDeleteReservation.setDisable(false);
                     buttonPayReservation.setDisable(false);
                 } else {
-                    buttonDeleteReservation.setDisable(true);
                     buttonPayReservation.setDisable(true);
                 }
             }
@@ -144,7 +143,8 @@ public class ManageReservationsController {
 
         var selectedReservationData = tableviewReservations.getSelectionModel().getSelectedItem();
         Reservation selectedReservation = allReservationsFilteredByUser.stream()
-                .filter(reservation -> reservation.getReservationId() == selectedReservationData.getTableReservationId()).findFirst().get();
+                .filter(reservation -> reservation.getReservationId() == selectedReservationData.getTableReservationId())
+                .findFirst().get();
 
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setHeaderText("Rezygnacja z rezerwacji");
@@ -152,14 +152,6 @@ public class ManageReservationsController {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
-            Tour tour = selectedReservation.getTour();
-            int newNumberOfAvailableTickets = tour.getAvailableTickets() +  selectedReservation.getNumberOfTickets();
-            int newNumberOfTakenTickets = tour.getTakenTickets() -  selectedReservation.getNumberOfTickets();
-
-            tour.setAvailableTickets(newNumberOfAvailableTickets);
-            tour.setTakenTickets(newNumberOfTakenTickets);
-
-            selectedReservation.setTour(tour);
 
             var cancelReservationCall = reservationService.delete(selectedReservation);
             cancelReservationCall.enqueue(new Callback<Void>() {
@@ -170,6 +162,7 @@ public class ManageReservationsController {
 
                         Platform.runLater(() -> {
                             showConfirmationDialog();
+                            fetchAllReservationsFilteredByUser();
                         });
                     } else {
                         System.out.println("Response wasn't successful, code = " + response.code());

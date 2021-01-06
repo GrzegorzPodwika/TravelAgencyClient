@@ -11,6 +11,8 @@ public class Constants {
     public static final String USER_SCENE = "UserScene.fxml";
     public static final String REGISTER_SCENE = "RegisterScene.fxml";
     public static final String CARRIER_SCENE = "CarrierScene.fxml";
+    public static final String TRANSPORT_SCENE = "TransportScene.fxml";
+
     public static final String EDIT_EMPLOYEE_CREDENTIALS_SCENE = "EditEmployeeCredentialsScene.fxml";
     public static final String EDIT_USER_CREDENTIALS_SCENE = "EditUserCredentialsScene.fxml";
     public static final String EDIT_USERS_AS_EMPLOYEE_SCENE = "EditUserAsEmployeeScene.fxml";

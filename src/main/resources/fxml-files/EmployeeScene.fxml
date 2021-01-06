@@ -47,54 +47,61 @@
                                 style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Wycieczki"
                                 textFill="WHITE" wrapText="true">
                             <font>
-                                <Font size="36.0"/>
+                                <Font size="30.0"/>
                             </font>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#onHotelsClick" prefHeight="70.0" prefWidth="647.0"
                                 style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Hotele" textFill="WHITE"
                                 wrapText="true">
                             <font>
-                                <Font size="36.0"/>
+                                <Font size="30.0"/>
                             </font>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#onTourGuidesClick" prefHeight="70.0"
                                 prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;"
                                 text="Przewodnicy" textFill="WHITE" wrapText="true">
                             <font>
-                                <Font size="36.0"/>
+                                <Font size="30.0"/>
                             </font>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#onCarriersClick" prefHeight="70.0" prefWidth="647.0"
                                 style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Przewoźnicy"
                                 textFill="WHITE" wrapText="true">
                             <font>
-                                <Font size="36.0"/>
+                                <Font size="30.0"/>
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onTransportClick" prefHeight="70.0" prefWidth="647.0"
+                                style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Transport"
+                                textFill="WHITE" wrapText="true">
+                            <font>
+                                <Font size="30.0"/>
                             </font>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#onAdditionalServiceClick" prefHeight="70.0"
                                 prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;"
                                 text="Dodatkowe usługi" textFill="WHITE" wrapText="true">
                             <font>
-                                <Font size="36.0"/>
+                                <Font size="30.0"/>
                             </font>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#onAttractionClick" prefHeight="70.0"
                                 prefWidth="647.0" style="-fx-background-color: #353238; -fx-opacity: 90%;"
                                 text="Atrakcje" textFill="WHITE" wrapText="true">
                             <font>
-                                <Font size="36.0"/>
+                                <Font size="30.0"/>
                             </font>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#onClientsClick" prefHeight="70.0" prefWidth="647.0"
                                 style="-fx-background-color: #353238; -fx-opacity: 90%;" text="Klienci" textFill="WHITE"
                                 wrapText="true">
                             <font>
-                                <Font size="36.0"/>
+                                <Font size="30.0"/>
                             </font>
                         </Button>
                     </children>
                     <padding>
-                        <Insets bottom="30.0" top="30.0"/>
+                        <Insets bottom="20.0" top="20.0"/>
                     </padding>
                 </VBox>
             </children>

@@ -10,100 +10,120 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1024.0" style="-fx-background-color: #525252;" styleClass="bodybg" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ViewTourDetailsController">
+<AnchorPane prefHeight="800.0" prefWidth="1024.0" style="-fx-background-color: #525252;" styleClass="bodybg"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.ViewTourDetailsController">
     <children>
-        <ImageView fx:id="imageViewTour" fitHeight="288.0" fitWidth="386.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-        <Label fx:id="labelTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="578.0" layoutY="14.0" prefHeight="49.0" prefWidth="253.0" text="Wycieczka" textAlignment="RIGHT" textFill="WHITE">
+        <ImageView fx:id="imageViewTour" fitHeight="288.0" fitWidth="386.0" layoutX="14.0" layoutY="14.0"
+                   pickOnBounds="true" preserveRatio="true"/>
+        <Label fx:id="labelTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="578.0" layoutY="14.0"
+               prefHeight="49.0" prefWidth="253.0" text="Wycieczka" textAlignment="RIGHT" textFill="WHITE">
             <font>
-                <Font size="33.0" />
+                <Font size="33.0"/>
             </font>
         </Label>
         <HBox layoutX="14.0" layoutY="316.0" spacing="15.0">
             <children>
                 <VBox>
                     <children>
-                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Kraj:" textAlignment="RIGHT" textFill="WHITE">
+                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Kraj:" textAlignment="RIGHT"
+                               textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Dostępne bilety:" textAlignment="RIGHT" textFill="WHITE">
+                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Dostępne bilety:" textAlignment="RIGHT"
+                               textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Cena:" textAlignment="RIGHT" textFill="WHITE">
+                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Cena:" textAlignment="RIGHT"
+                               textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Data wyjazdu:" textAlignment="RIGHT" textFill="WHITE">
+                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Data wyjazdu:" textAlignment="RIGHT"
+                               textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Data powrotu:" textAlignment="RIGHT" textFill="WHITE">
+                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Data powrotu:" textAlignment="RIGHT"
+                               textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Hotel:" textAlignment="RIGHT" textFill="WHITE">
+                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Hotel:" textAlignment="RIGHT"
+                               textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Transport:" textAlignment="RIGHT" textFill="WHITE">
+                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Transport:" textAlignment="RIGHT"
+                               textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Przewodnik:" textAlignment="RIGHT" textFill="WHITE">
+                        <Label contentDisplay="CENTER" prefHeight="49.0" text="Przewodnik:" textAlignment="RIGHT"
+                               textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
                     </children>
                 </VBox>
                 <VBox>
                     <children>
-                        <Label fx:id="labelCountry" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT" textFill="WHITE">
+                        <Label fx:id="labelCountry" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT"
+                               textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label fx:id="labelAvailableTickets" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT" textFill="WHITE">
+                        <Label fx:id="labelAvailableTickets" contentDisplay="CENTER" prefHeight="49.0"
+                               textAlignment="RIGHT" textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label fx:id="labelPrice" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT" textFill="#ffea00">
+                        <Label fx:id="labelPrice" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT"
+                               textFill="#ffea00">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label fx:id="labelDepartureDate" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT" textFill="WHITE">
+                        <Label fx:id="labelDepartureDate" contentDisplay="CENTER" prefHeight="49.0"
+                               textAlignment="RIGHT" textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label fx:id="labelArrivalDate" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT" textFill="WHITE">
+                        <Label fx:id="labelArrivalDate" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT"
+                               textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label fx:id="labelHotel" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT" textFill="WHITE">
+                        <Label fx:id="labelHotel" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT"
+                               textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label fx:id="labelTransport" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT" textFill="WHITE">
+                        <Label fx:id="labelTransport" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT"
+                               textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
-                        <Label fx:id="labelTourGuide" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT" textFill="WHITE">
+                        <Label fx:id="labelTourGuide" contentDisplay="CENTER" prefHeight="49.0" textAlignment="RIGHT"
+                               textFill="WHITE">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Label>
                     </children>
@@ -112,58 +132,71 @@
         </HBox>
         <VBox layoutX="425.0" layoutY="69.0" spacing="10.0">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="559.0" text="Atrakcje" textAlignment="CENTER" textFill="WHITE">
+                <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="559.0" text="Atrakcje"
+                       textAlignment="CENTER" textFill="WHITE">
                     <font>
-                        <Font size="22.0" />
+                        <Font size="22.0"/>
                     </font>
                 </Label>
-            <ListView fx:id="listViewAttractions" prefHeight="200.0" prefWidth="200.0" />
-                <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="559.0" text="Dodatkowe usługi" textAlignment="CENTER" textFill="WHITE">
+                <ListView fx:id="listViewAttractions" prefHeight="200.0" prefWidth="200.0"/>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="559.0" text="Dodatkowe usługi"
+                       textAlignment="CENTER" textFill="WHITE">
                     <font>
-                        <Font size="22.0" />
+                        <Font size="22.0"/>
                     </font>
                 </Label>
-            <ListView fx:id="listViewAdditionalServices" prefHeight="200.0" prefWidth="200.0" />
+                <ListView fx:id="listViewAdditionalServices" prefHeight="200.0" prefWidth="200.0"/>
             </children>
         </VBox>
         <HBox layoutX="817.0" layoutY="659.0" spacing="15.0" AnchorPane.rightAnchor="45.0">
             <children>
-                <Label contentDisplay="CENTER" prefHeight="49.0" text="Do zapłaty:" textAlignment="RIGHT" textFill="WHITE">
+                <Label contentDisplay="CENTER" prefHeight="49.0" text="Do zapłaty:" textAlignment="RIGHT"
+                       textFill="WHITE">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
-                <Label fx:id="labelTotalToPay" contentDisplay="CENTER" prefHeight="49.0" text="0" textAlignment="RIGHT" textFill="WHITE">
+                <Label fx:id="labelTotalToPay" contentDisplay="CENTER" prefHeight="49.0" text="0" textAlignment="RIGHT"
+                       textFill="WHITE">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
                 <Label contentDisplay="CENTER" prefHeight="49.0" text="PLN" textAlignment="RIGHT" textFill="WHITE">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
             </children>
         </HBox>
-        <ChoiceBox fx:id="choiceBox" layoutX="437.0" layoutY="671.0" prefHeight="25.0" prefWidth="223.0" style="-fx-background-color: #CACACA;" styleClass="choiceBox" stylesheets="@../css-files/choiceBox.css" />
-          <Label alignment="CENTER" layoutX="465.0" layoutY="623.0" prefHeight="31.0" text="Wybierz ilość miejsc :" textFill="WHITE">
-              <font>
-                  <Font size="18.0" />
-              </font>
-          </Label>
-        <Label fx:id="labelError" layoutX="267.0" layoutY="743.0" prefHeight="42.0" prefWidth="469.0" textFill="RED" wrapText="true">
+        <ChoiceBox fx:id="choiceBox" layoutX="437.0" layoutY="671.0" prefHeight="25.0" prefWidth="223.0"
+                   style="-fx-background-color: #CACACA;" styleClass="choiceBox"
+                   stylesheets="@../css-files/choiceBox.css"/>
+        <Label alignment="CENTER" layoutX="465.0" layoutY="623.0" prefHeight="31.0" text="Wybierz ilość miejsc :"
+               textFill="WHITE">
             <font>
-                <Font size="18.0" />
+                <Font size="18.0"/>
             </font>
         </Label>
-        <Button fx:id="buttonGoBack" layoutX="172.0" layoutY="647.0" mnemonicParsing="false" onAction="#onGoBackClick" prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #0066ff; -fx-opacity: 70%;" text="Powrót" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0">
+        <Label fx:id="labelError" layoutX="267.0" layoutY="743.0" prefHeight="42.0" prefWidth="469.0" textFill="RED"
+               wrapText="true">
             <font>
-                <Font size="19.0" />
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Button fx:id="buttonGoBack" layoutX="172.0" layoutY="647.0" mnemonicParsing="false" onAction="#onGoBackClick"
+                prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #0066ff; -fx-opacity: 70%;"
+                text="Powrót" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0">
+            <font>
+                <Font size="19.0"/>
             </font>
         </Button>
-        <Button fx:id="buttonMakeReservation" layoutX="626.0" layoutY="647.0" mnemonicParsing="false" onAction="#onMakeReservationClick" prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #5ab849; -fx-opacity: 70%;" text="Wykonaj rezerwację" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+        <Button fx:id="buttonMakeReservation" layoutX="626.0" layoutY="647.0" mnemonicParsing="false"
+                onAction="#onMakeReservationClick" prefHeight="31.0" prefWidth="223.0"
+                style="-fx-background-color: #5ab849; -fx-opacity: 70%;" text="Wykonaj rezerwację" textFill="WHITE"
+                AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
             <font>
-                <Font size="19.0" />
+                <Font size="19.0"/>
             </font>
         </Button>
     </children>

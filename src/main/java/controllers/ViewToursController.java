@@ -87,7 +87,8 @@ public class ViewToursController {
                         List<String> fetchedImagesNames = new ArrayList<>();
 
                         for (Tour tour: allTours) {
-                            fetchedImagesNames.add(tour.getImgName() + ", " + tour.getPrice() + " PLN " + tour.getDepartureDate().toString() + " " + tour.getArrivalDate().toString());
+                            fetchedImagesNames.add(tour.getImgName() + ", " + tour.getPrice() + " PLN "
+                                    + tour.getDepartureDate().toString() + " " + tour.getArrivalDate().toString());
                         }
 
                         Platform.runLater(() -> {

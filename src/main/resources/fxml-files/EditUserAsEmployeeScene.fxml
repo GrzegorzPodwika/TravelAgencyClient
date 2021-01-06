@@ -9,167 +9,193 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #CACACA;" styleClass="bodybg" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditUserAsEmployeeController">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #CACACA;" styleClass="bodybg"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.EditUserAsEmployeeController">
     <children>
-        <Label layoutY="-2.0" prefHeight="49.0" prefWidth="1028.0" style="-fx-background-color: #525252;" text=" Widok pracownika" textFill="WHITE">
+        <Label layoutY="-2.0" prefHeight="49.0" prefWidth="1028.0" style="-fx-background-color: #525252;"
+               text=" Widok pracownika" textFill="WHITE">
             <font>
-                <Font size="36.0" />
+                <Font size="36.0"/>
             </font>
         </Label>
         <AnchorPane layoutY="50.0" prefHeight="718.0" prefWidth="1028.0" style="-fx-background-color: #353238;">
-         <children>
-            <Label layoutX="685.0" layoutY="39.0" prefHeight="36.0" prefWidth="174.0" text="Aktualne dane:" textFill="WHITE">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <Label layoutX="145.0" layoutY="39.0" prefHeight="36.0" prefWidth="198.0" text="Nowe dane:" textFill="WHITE">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
-            <Line endX="1016.5" endY="159.5" layoutX="3.0" layoutY="383.0" startY="159.5" stroke="#908a8a" />
-            <Button layoutX="144.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#onCancelClick" prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #0066ff; -fx-opacity: 70%;" text="Powrót" textFill="WHITE">
-               <font>
-                  <Font size="19.0" />
-               </font>
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="REMOVE" size="19.0" />
-               </graphic>
-            </Button>
-            <Button layoutX="658.0" layoutY="596.0" fx:id="buttonConfirm" mnemonicParsing="false" onMouseClicked="#onConfirmClick" prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #009933; -fx-opacity: 80%;" text="Potwierdź" textFill="WHITE">
-               <font>
-                  <Font size="19.0" />
-               </font>
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="19.0" />
-               </graphic>
-            </Button>
-            <Label fx:id="errorLabelAge" layoutX="367.0" layoutY="286.0" prefHeight="32.0" prefWidth="147.0" textFill="#f50000" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <VBox layoutX="570.0" layoutY="120.0" prefHeight="200.0" prefWidth="400.0" spacing="10.0">
-               <children>
-                  <Label fx:id="labelLogin" prefHeight="36.0" prefWidth="412.0" text="Login" textFill="WHITE">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelPassword" prefHeight="36.0" prefWidth="412.0" text="Hasło" textFill="WHITE">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelName" prefHeight="36.0" prefWidth="412.0" text="Imię" textFill="WHITE">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelSurname" prefHeight="36.0" prefWidth="412.0" text="Nazwisko" textFill="WHITE">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelAge" prefHeight="36.0" prefWidth="412.0" text="Wiek" textFill="WHITE">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelAddress" prefHeight="36.0" prefWidth="412.0" text="Adres" textFill="WHITE">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelZipcode" prefHeight="36.0" prefWidth="412.0" text="Kod pocztowy" textFill="WHITE">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelCity" prefHeight="36.0" prefWidth="412.0" text="Miasto" textFill="WHITE">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelPhoneNumber" prefHeight="36.0" prefWidth="412.0" text="Numer telefonu" textFill="WHITE">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="labelEmail" prefHeight="36.0" prefWidth="412.0" text="Email" textFill="WHITE">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox layoutX="56.0" layoutY="120.0" prefHeight="200.0" prefWidth="300.0" spacing="11.0">
-               <children>
-                  <TextField fx:id="inputLogin" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowy login" style="-fx-background-color: #525252;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="inputPassword" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowe hasło" style="-fx-background-color: #525252;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="inputName" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowe imię" style="-fx-background-color: #525252;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="inputSurname" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowe nazwisko" style="-fx-background-color: #525252;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="inputAge" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowy wiek" style="-fx-background-color: #525252;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="inputAddress" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowy adres" style="-fx-background-color: #525252;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="inputZipcode" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowy kod pocztowy" style="-fx-background-color: #525252;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="inputCity" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowe miasto" style="-fx-background-color: #525252;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="inputPhoneNumber" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowy numer telefonu" style="-fx-background-color: #525252;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="inputEmail" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowy email" style="-fx-background-color: #525252;">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </VBox>
-            <Label fx:id="errorLabelPhone" layoutX="367.0" layoutY="456.0" prefHeight="32.0" prefWidth="147.0" textFill="#f50000" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="errorLabelEmail" layoutX="367.0" layoutY="497.0" prefHeight="32.0" prefWidth="147.0" textFill="#f50000" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-         </children></AnchorPane>
-      <Line endX="514.0" endY="51.0" startX="514.0" startY="590.0" stroke="#908a8a" />
-      <Line endX="1021.5" endY="159.5" startY="159.5" stroke="#908a8a" />
+            <children>
+                <Label layoutX="685.0" layoutY="39.0" prefHeight="36.0" prefWidth="174.0" text="Aktualne dane:"
+                       textFill="WHITE">
+                    <font>
+                        <Font size="25.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="145.0" layoutY="39.0" prefHeight="36.0" prefWidth="198.0" text="Nowe dane:"
+                       textFill="WHITE">
+                    <font>
+                        <Font size="25.0"/>
+                    </font>
+                </Label>
+                <Line endX="1016.5" endY="159.5" layoutX="3.0" layoutY="383.0" startY="159.5" stroke="#908a8a"/>
+                <Button layoutX="144.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#onCancelClick"
+                        prefHeight="31.0" prefWidth="223.0" style="-fx-background-color: #0066ff; -fx-opacity: 70%;"
+                        text="Powrót" textFill="WHITE">
+                    <font>
+                        <Font size="19.0"/>
+                    </font>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="REMOVE" size="19.0"/>
+                    </graphic>
+                </Button>
+                <Button layoutX="658.0" layoutY="596.0" fx:id="buttonConfirm" mnemonicParsing="false"
+                        onMouseClicked="#onConfirmClick" prefHeight="31.0" prefWidth="223.0"
+                        style="-fx-background-color: #009933; -fx-opacity: 80%;" text="Potwierdź" textFill="WHITE">
+                    <font>
+                        <Font size="19.0"/>
+                    </font>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CHECK" size="19.0"/>
+                    </graphic>
+                </Button>
+                <Label fx:id="errorLabelAge" layoutX="367.0" layoutY="286.0" prefHeight="32.0" prefWidth="147.0"
+                       textFill="#f50000" wrapText="true">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </Label>
+                <VBox layoutX="570.0" layoutY="120.0" prefHeight="200.0" prefWidth="400.0" spacing="10.0">
+                    <children>
+                        <Label fx:id="labelLogin" prefHeight="36.0" prefWidth="412.0" text="Login" textFill="WHITE">
+                            <font>
+                                <Font size="22.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="labelPassword" prefHeight="36.0" prefWidth="412.0" text="Hasło" textFill="WHITE">
+                            <font>
+                                <Font size="22.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="labelName" prefHeight="36.0" prefWidth="412.0" text="Imię" textFill="WHITE">
+                            <font>
+                                <Font size="22.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="labelSurname" prefHeight="36.0" prefWidth="412.0" text="Nazwisko"
+                               textFill="WHITE">
+                            <font>
+                                <Font size="22.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="labelAge" prefHeight="36.0" prefWidth="412.0" text="Wiek" textFill="WHITE">
+                            <font>
+                                <Font size="22.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="labelAddress" prefHeight="36.0" prefWidth="412.0" text="Adres" textFill="WHITE">
+                            <font>
+                                <Font size="22.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="labelZipcode" prefHeight="36.0" prefWidth="412.0" text="Kod pocztowy"
+                               textFill="WHITE">
+                            <font>
+                                <Font size="22.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="labelCity" prefHeight="36.0" prefWidth="412.0" text="Miasto" textFill="WHITE">
+                            <font>
+                                <Font size="22.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="labelPhoneNumber" prefHeight="36.0" prefWidth="412.0" text="Numer telefonu"
+                               textFill="WHITE">
+                            <font>
+                                <Font size="22.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="labelEmail" prefHeight="36.0" prefWidth="412.0" text="Email" textFill="WHITE">
+                            <font>
+                                <Font size="22.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <VBox layoutX="56.0" layoutY="120.0" prefHeight="200.0" prefWidth="300.0" spacing="11.0">
+                    <children>
+                        <TextField fx:id="inputLogin" prefHeight="32.0" prefWidth="223.0"
+                                   promptText="Wprowadź nowy login" style="-fx-background-color: #525252;">
+                            <font>
+                                <Font size="15.0"/>
+                            </font>
+                        </TextField>
+                        <TextField fx:id="inputPassword" prefHeight="32.0" prefWidth="223.0"
+                                   promptText="Wprowadź nowe hasło" style="-fx-background-color: #525252;">
+                            <font>
+                                <Font size="15.0"/>
+                            </font>
+                        </TextField>
+                        <TextField fx:id="inputName" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowe imię"
+                                   style="-fx-background-color: #525252;">
+                            <font>
+                                <Font size="15.0"/>
+                            </font>
+                        </TextField>
+                        <TextField fx:id="inputSurname" prefHeight="32.0" prefWidth="223.0"
+                                   promptText="Wprowadź nowe nazwisko" style="-fx-background-color: #525252;">
+                            <font>
+                                <Font size="15.0"/>
+                            </font>
+                        </TextField>
+                        <TextField fx:id="inputAge" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowy wiek"
+                                   style="-fx-background-color: #525252;">
+                            <font>
+                                <Font size="15.0"/>
+                            </font>
+                        </TextField>
+                        <TextField fx:id="inputAddress" prefHeight="32.0" prefWidth="223.0"
+                                   promptText="Wprowadź nowy adres" style="-fx-background-color: #525252;">
+                            <font>
+                                <Font size="15.0"/>
+                            </font>
+                        </TextField>
+                        <TextField fx:id="inputZipcode" prefHeight="32.0" prefWidth="223.0"
+                                   promptText="Wprowadź nowy kod pocztowy" style="-fx-background-color: #525252;">
+                            <font>
+                                <Font size="15.0"/>
+                            </font>
+                        </TextField>
+                        <TextField fx:id="inputCity" prefHeight="32.0" prefWidth="223.0"
+                                   promptText="Wprowadź nowe miasto" style="-fx-background-color: #525252;">
+                            <font>
+                                <Font size="15.0"/>
+                            </font>
+                        </TextField>
+                        <TextField fx:id="inputPhoneNumber" prefHeight="32.0" prefWidth="223.0"
+                                   promptText="Wprowadź nowy numer telefonu" style="-fx-background-color: #525252;">
+                            <font>
+                                <Font size="15.0"/>
+                            </font>
+                        </TextField>
+                        <TextField fx:id="inputEmail" prefHeight="32.0" prefWidth="223.0"
+                                   promptText="Wprowadź nowy email" style="-fx-background-color: #525252;">
+                            <font>
+                                <Font size="15.0"/>
+                            </font>
+                        </TextField>
+                    </children>
+                </VBox>
+                <Label fx:id="errorLabelPhone" layoutX="367.0" layoutY="456.0" prefHeight="32.0" prefWidth="147.0"
+                       textFill="#f50000" wrapText="true">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="errorLabelEmail" layoutX="367.0" layoutY="497.0" prefHeight="32.0" prefWidth="147.0"
+                       textFill="#f50000" wrapText="true">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <Line endX="514.0" endY="51.0" startX="514.0" startY="590.0" stroke="#908a8a"/>
+        <Line endX="1021.5" endY="159.5" startY="159.5" stroke="#908a8a"/>
     </children>
 </AnchorPane>

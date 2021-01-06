@@ -129,17 +129,18 @@ public class CarrierController {
     }
 
     @FXML
-    public void onDeleteCarrierClick() {
-        var selectedCarrierIndex = tableviewCarriers.getSelectionModel().getSelectedIndex();
-        if (selectedCarrierIndex == -1) {
-            return;
-        }
-
-        var selectedCarrierData = tableviewCarriers.getSelectionModel().getSelectedItem();
-        Carrier selectedCarrier = allCarriers.stream().filter(carrier -> carrier.getCarrierId() == selectedCarrierData.getTableCarrierId()).findFirst().get();
+    public void onAddCarrierClick() {
+        Pane root;
+        String fullPath = "fxml-files/AddCarrierScene.fxml";
 
         try {
-            carrierService.delete(selectedCarrier).execute();
+            Stage newStage = new Stage();
+            newStage.setResizable(false);
+            FXMLLoader loader = new FXMLLoader(this.getClass().getClassLoader().getResource(fullPath));
+            root = loader.load();
+            newStage.setScene(new Scene(root));
+            newStage.showAndWait();
+
             fetchAllCarriers();
         } catch (IOException e) {
             e.printStackTrace();
@@ -176,18 +177,17 @@ public class CarrierController {
     }
 
     @FXML
-    public void onAddCarrierClick() {
-        Pane root;
-        String fullPath = "fxml-files/AddCarrierScene.fxml";
+    public void onDeleteCarrierClick() {
+        var selectedCarrierIndex = tableviewCarriers.getSelectionModel().getSelectedIndex();
+        if (selectedCarrierIndex == -1) {
+            return;
+        }
+
+        var selectedCarrierData = tableviewCarriers.getSelectionModel().getSelectedItem();
+        Carrier selectedCarrier = allCarriers.stream().filter(carrier -> carrier.getCarrierId() == selectedCarrierData.getTableCarrierId()).findFirst().get();
 
         try {
-            Stage newStage = new Stage();
-            newStage.setResizable(false);
-            FXMLLoader loader = new FXMLLoader(this.getClass().getClassLoader().getResource(fullPath));
-            root = loader.load();
-            newStage.setScene(new Scene(root));
-            newStage.showAndWait();
-
+            carrierService.delete(selectedCarrier).execute();
             fetchAllCarriers();
         } catch (IOException e) {
             e.printStackTrace();
@@ -195,7 +195,7 @@ public class CarrierController {
     }
 
 
-    public void shutdown(){
+    private void shutdown(){
         clk.terminate();
     }
 }

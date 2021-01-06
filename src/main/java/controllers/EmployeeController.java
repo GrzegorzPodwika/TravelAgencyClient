@@ -84,6 +84,12 @@ public class EmployeeController {
     }
 
     @FXML
+    public void onTransportClick() {
+        SceneCreator.launchScene(TRANSPORT_SCENE);
+        shutdown();
+    }
+
+    @FXML
     public void onClientsClick() {
         SceneCreator.launchScene(MANAGE_USERS_SCENE);
         shutdown();
@@ -104,4 +110,5 @@ public class EmployeeController {
     private void shutdown() {
         clk.terminate();
     }
+
 }

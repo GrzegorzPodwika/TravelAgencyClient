@@ -35,9 +35,9 @@ public class EditCarrierController {
     }
 
     private void initLabels() {
-        labelName.setText(labelName.getText() + " " + fetchedCarrier.getName());
-        labelPhone.setText(labelPhone.getText() + " " + fetchedCarrier.getPhoneNumber());
-        labelEmail.setText(labelEmail.getText() + " " + fetchedCarrier.getEmail());
+        labelName.setText(labelName.getText() + fetchedCarrier.getName());
+        labelPhone.setText(labelPhone.getText() + fetchedCarrier.getPhoneNumber());
+        labelEmail.setText(labelEmail.getText() + fetchedCarrier.getEmail());
     }
 
     private void setTextFieldsListeners() {

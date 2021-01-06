@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" style="-fx-background-color: #353238;" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditTransportController">
+    <children>
+        <HBox>
+            <children>
+                <VBox alignment="TOP_RIGHT" maxWidth="400.0" prefHeight="349.0" spacing="20.0">
+                    <children>
+                        <Label fx:id="labelTransportType" text="Typ transportu: " textFill="WHITE">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="labelJourneyTime" text="Czas podróży: " textFill="WHITE">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="labelJourneyDescription" text="Opis podróży: " textFill="WHITE" wrapText="true">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Label>
+                        <Label fx:id="labelCarrier" text="Przewoźnik: " textFill="WHITE">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets left="20.0" right="20.0" top="50.0"/>
+                    </padding>
+                </VBox>
+                <VBox alignment="TOP_CENTER" prefHeight="349.0" prefWidth="300.0" spacing="10.0">
+                    <children>
+                        <ComboBox fx:id="comboBoxTransportType" prefHeight="40.0" prefWidth="162.0"
+                                  promptText="Typ transportu"/>
+                        <HBox>
+                            <children>
+                                <TextField fx:id="inputJourneyTime" prefHeight="38.0" prefWidth="243.0"
+                                           promptText="160">
+                                    <font>
+                                        <Font size="17.0"/>
+                                    </font>
+                                </TextField>
+                                <Label alignment="BOTTOM_LEFT" prefHeight="38.0" prefWidth="53.0" text="min"
+                                       textFill="WHITE">
+                                    <font>
+                                        <Font size="19.0"/>
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="5.0"/>
+                                    </HBox.margin>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <TextField fx:id="inputJourneyDescription" alignment="TOP_LEFT" prefWidth="280.0"
+                                   promptText="Podróż odbywa się przez malownicze tereny Loary">
+                            <font>
+                                <Font size="17.0"/>
+                            </font>
+                        </TextField>
+                        <ComboBox fx:id="comboBoxCarrier" prefHeight="40.0" prefWidth="162.0" promptText="Przewoźnik"/>
+                        <Label fx:id="labelError" textFill="RED">
+                            <font>
+                                <Font size="20.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets right="20.0" top="50.0"/>
+                    </padding>
+                </VBox>
+            </children>
+        </HBox>
+        <Button fx:id="buttonCancel" layoutX="29.0" layoutY="357.0" mnemonicParsing="false" onAction="#onCancelClick"
+                style="-fx-background-color: #0066FF;" text="Anuluj" textFill="WHITE" AnchorPane.bottomAnchor="15.0"
+                AnchorPane.leftAnchor="15.0">
+            <graphic>
+                <FontAwesomeIconView fill="WHITE" glyphName="REMOVE"/>
+            </graphic>
+            <font>
+                <Font size="16.0"/>
+            </font>
+        </Button>
+        <Button fx:id="buttonConfirm" layoutX="39.0" layoutY="367.0" mnemonicParsing="false" onAction="#onConfirmClick"
+                style="-fx-background-color: #009933;" text="Potwierdź" textFill="WHITE" AnchorPane.bottomAnchor="15.0"
+                AnchorPane.rightAnchor="15.0">
+            <graphic>
+                <FontAwesomeIconView fill="WHITE" glyphName="PLUS"/>
+            </graphic>
+            <font>
+                <Font size="16.0"/>
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

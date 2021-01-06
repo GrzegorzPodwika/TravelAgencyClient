@@ -12,11 +12,16 @@ public class UserController {
 
     @FXML public Label clockLabel;
     @FXML public Label helloUser;
-    @FXML public Label nameLabel;
-    @FXML public Label surnameLabel;
-    @FXML public Label nickLabel;
-    @FXML public Label emailLabel;
-    @FXML public Label countLabel;
+
+    @FXML public Label labelName;
+    @FXML public Label labelSurname;
+    @FXML public Label labelAge;
+    @FXML public Label labelAddress;
+    @FXML public Label labelZipcode;
+    @FXML public Label labelCity;
+    @FXML public Label labelPhoneNumber;
+    @FXML public Label labelEmail;
+
 
     private Clock clk;
     private final User activeUser = Main.getUser();
@@ -34,10 +39,15 @@ public class UserController {
 
     private void putUserCredentialsIntoList() {
         helloUser.setText("Witaj, " + activeUser.getName());
-        nameLabel.setText(activeUser.getName());
-        surnameLabel.setText(activeUser.getSurname());
-        nickLabel.setText(activeUser.getNick());
-        emailLabel.setText(activeUser.getEmail());
+
+        labelName.setText(labelName.getText() + activeUser.getName());
+        labelSurname.setText(labelSurname.getText() + activeUser.getSurname());
+        labelAge.setText(labelAge.getText() + activeUser.getAge());
+        labelAddress.setText(labelAddress.getText() + activeUser.getAddress());
+        labelZipcode.setText(labelZipcode.getText() + activeUser.getZipcode());
+        labelCity.setText(labelCity.getText() + activeUser.getCity());
+        labelPhoneNumber.setText(labelPhoneNumber.getText() + activeUser.getPhoneNumber());
+        labelEmail.setText(labelEmail.getText() + activeUser.getEmail());
     }
 
     //done

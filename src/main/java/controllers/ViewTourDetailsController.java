@@ -109,13 +109,6 @@ public class ViewTourDetailsController {
         if (choiceBox.getSelectionModel().getSelectedItem() != 0) {
             labelError.setText("");
 
-            int chosenNumberOfTickets = choiceBox.getSelectionModel().getSelectedItem();
-            int newNumberOfAvailableTickets = tour.getAvailableTickets() - chosenNumberOfTickets;
-            int newNumberOfTakenTickets = tour.getTakenTickets() + chosenNumberOfTickets;
-
-            tour.setAvailableTickets(newNumberOfAvailableTickets);
-            tour.setTakenTickets(newNumberOfTakenTickets);
-
             Reservation reservation = prepareReservationToSave();
 
             var saveReservationCall = reservationService.save(reservation);

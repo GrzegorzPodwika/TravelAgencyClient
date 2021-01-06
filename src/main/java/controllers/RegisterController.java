@@ -17,6 +17,8 @@ import utils.SceneCreator;
 
 import java.io.IOException;
 
+import static utils.Constants.LOGIN_SCENE;
+
 public class RegisterController {
 
     @FXML public TextField labelNick;
@@ -34,7 +36,7 @@ public class RegisterController {
     private final UserService userService = AgencyServiceGenerator.createService(UserService.class);
 
     @FXML
-    public void registerButton(MouseEvent event) throws IOException {
+    public void registerButton(){
         if (areLabelsNotEmpty()) {
             if (labelEmail.getText().indexOf('@') == -1) {
                 errorLabel.setText("Podaj poprawny adres E-mail!");
@@ -43,7 +45,7 @@ public class RegisterController {
             } else if(isLabelNotANumber(labelPhoneNumber)) {
                 errorLabel.setText("Podaj 9cyfrową liczbe jako telefon!");
             } else {
-                communicateWithServer();
+                tryRegister();
             }
         } else {
             errorLabel.setText("Wszystkie pola muszą zostać uzupełnione!");
@@ -65,11 +67,11 @@ public class RegisterController {
     }
 
     @FXML
-    public void goBackButton(MouseEvent event) throws IOException {
-        SceneCreator.launchScene("LogInScene.fxml");
+    public void goBackButton() {
+        SceneCreator.launchScene(LOGIN_SCENE);
     }
 
-    public void communicateWithServer() throws IOException {
+    public void tryRegister() {
         User user = new User();
 
         user.setPersonId(0);
@@ -98,7 +100,7 @@ public class RegisterController {
                         alert.setY(384);
                         alert.showAndWait();
 
-                        SceneCreator.launchScene("LogInScene.fxml");
+                        SceneCreator.launchScene(LOGIN_SCENE);
                     });
                 }
             }

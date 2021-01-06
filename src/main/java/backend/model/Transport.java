@@ -9,6 +9,17 @@ public class Transport {
 
     private Carrier carrier;
 
+    public Transport() {
+    }
+
+    public Transport(Integer transportId, String transportType, double journeyTime, String journeyDescription, Carrier carrier) {
+        this.transportId = transportId;
+        this.transportType = transportType;
+        this.journeyTime = journeyTime;
+        this.journeyDescription = journeyDescription;
+        this.carrier = carrier;
+    }
+
     public Integer getTransportId() {
         return transportId;
     }

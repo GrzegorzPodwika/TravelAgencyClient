@@ -35,11 +35,6 @@ public class EditAttractionController {
         labelDescription.setText(labelDescription.getText() + fetchedAttraction.getDescription());
     }
 
-    private void closeWindow() {
-        Stage currentStage = (Stage) buttonConfirm.getScene().getWindow();
-        currentStage.close();
-    }
-
     @FXML
     public void onCancelClick() {
         closeWindow();
@@ -74,5 +69,10 @@ public class EditAttractionController {
             attractionToUpdate.setDescription(inputDescription.getText());
 
         return attractionToUpdate;
+    }
+
+    private void closeWindow() {
+        Stage currentStage = (Stage) buttonConfirm.getScene().getWindow();
+        currentStage.close();
     }
 }
