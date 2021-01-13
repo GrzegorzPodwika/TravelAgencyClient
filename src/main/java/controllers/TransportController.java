@@ -11,10 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -26,6 +23,7 @@ import utils.SceneCreator;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static utils.Constants.EMPLOYEE_SCENE;
@@ -175,12 +173,21 @@ public class TransportController {
         Transport selectedTransport = allTransports.stream()
                 .filter(transport -> transport.getTransportId() == selectedTransportData.getTableTransportId()).findFirst().get();
 
-        try {
-            transportService.delete(selectedTransport).execute();
-            fetchAllTransports();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Usunięcie transportu");
+        alert.setContentText("Usunięcie transportu spowoduje usunięcie transportu powiązanego z wycieczką. Czy na pewno chcesz usunąć transport?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            try {
+                transportService.delete(selectedTransport).execute();
+                fetchAllTransports();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     public void onGoBackClick( ) {

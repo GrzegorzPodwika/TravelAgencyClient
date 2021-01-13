@@ -10,10 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -25,6 +22,7 @@ import utils.SceneCreator;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static utils.Constants.*;
@@ -186,12 +184,21 @@ public class CarrierController {
         var selectedCarrierData = tableviewCarriers.getSelectionModel().getSelectedItem();
         Carrier selectedCarrier = allCarriers.stream().filter(carrier -> carrier.getCarrierId() == selectedCarrierData.getTableCarrierId()).findFirst().get();
 
-        try {
-            carrierService.delete(selectedCarrier).execute();
-            fetchAllCarriers();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Usunięcie przewoźnika");
+        alert.setContentText("Usunięcie przewoźnika może spowodować usunięcie powiązanego transportu. Czy na pewno chcesz usunąć przewoźnika?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            try {
+                carrierService.delete(selectedCarrier).execute();
+                fetchAllCarriers();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
 

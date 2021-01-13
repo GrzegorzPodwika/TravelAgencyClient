@@ -10,10 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -25,6 +22,7 @@ import utils.SceneCreator;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static utils.Constants.*;
@@ -181,11 +179,19 @@ public class AttractionController {
         var selectedAttractionData = tableviewAttractions.getSelectionModel().getSelectedItem();
         Attraction selectedAttraction = allAttractions.stream().filter(attraction -> attraction.getAttractionId() == selectedAttractionData.getTableAttractionId()).findFirst().get();
 
-        try {
-            attractionService.delete(selectedAttraction).execute();
-            fetchAllAttractions();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Usunięcie atrakcji");
+        alert.setContentText("Usunięcie atrakcji spowoduje usunięcie wszystkich informacji o tej atrakcji powiązanej z wieloma wycieczkami." +
+                " Czy na pewno chcesz usunąć atrakcje?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            try {
+                attractionService.delete(selectedAttraction).execute();
+                fetchAllAttractions();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

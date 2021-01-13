@@ -10,10 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -25,6 +22,7 @@ import utils.SceneCreator;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static utils.Constants.EMPLOYEE_SCENE;
@@ -136,11 +134,20 @@ public class ManageUsersController {
         var selectedUserData = tableviewUsers.getSelectionModel().getSelectedItem();
         User selectedUser = allUsers.stream().filter(user -> user.getPersonId() == selectedUserData.getTableUserId()).findFirst().get();
 
-        try {
-            userService.delete(selectedUser).execute();
-            fetchAllUsers();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Usunięcie klienta");
+        alert.setContentText("Usunięcie klienta spowoduje usunięcie wszystkich informacji powiązanych z klientem, jak rezerwacje i  płatności." +
+                " Czy na pewno chcesz usunąć klienta?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            try {
+                userService.delete(selectedUser).execute();
+                fetchAllUsers();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }

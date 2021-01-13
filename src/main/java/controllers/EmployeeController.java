@@ -90,12 +90,6 @@ public class EmployeeController {
     }
 
     @FXML
-    public void onClientsClick() {
-        SceneCreator.launchScene(MANAGE_USERS_SCENE);
-        shutdown();
-    }
-
-    @FXML
     public void onAdditionalServiceClick( ) {
         SceneCreator.launchScene(ADDITIONAL_SERVICE_SCENE);
         shutdown();
@@ -104,6 +98,12 @@ public class EmployeeController {
     @FXML
     public void onAttractionClick( ) {
         SceneCreator.launchScene(ATTRACTION_SCENE);
+        shutdown();
+    }
+
+    @FXML
+    public void onClientsClick() {
+        SceneCreator.launchScene(MANAGE_USERS_SCENE);
         shutdown();
     }
 

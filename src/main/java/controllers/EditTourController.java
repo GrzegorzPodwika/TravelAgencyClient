@@ -81,9 +81,24 @@ public class EditTourController {
         labelPrice.setText(String.valueOf(activeTour.getPrice()));
         labelDepartureDate.setText(activeTour.getDepartureDate().toString());
         labelArrivalDate.setText(activeTour.getArrivalDate().toString());
-        labelHotel.setText(activeTour.getHotel().getHotelName());
-        labelTransport.setText(activeTour.getTransport().getCarrier().getName() + " " + activeTour.getTransport().getTransportType());
-        labelTourGuide.setText(activeTour.getTourGuide().getName() + " " + activeTour.getTourGuide().getSurname());
+
+
+        if (activeTour.getHotel() != null) {
+            labelHotel.setText(activeTour.getHotel().getHotelName());
+        } else {
+            labelHotel.setText("NULL!");
+        }
+
+        if (activeTour.getTransport() != null) {
+            labelTransport.setText(activeTour.getTransport().getCarrier().getName() + " " + activeTour.getTransport().getTransportType());
+        } else {
+            labelTransport.setText("NULL!");
+        }
+
+        if(activeTour.getTourGuide() != null)
+            labelTourGuide.setText(activeTour.getTourGuide().getName() + " " + activeTour.getTourGuide().getSurname());
+        else
+            labelTourGuide.setText("NULL!");
 
         var listOfAttractionsAsString = activeTour.getAttractions().stream()
                 .map(Attraction::getName).collect(Collectors.toList());
@@ -391,7 +406,11 @@ public class EditTourController {
             tourToUpdate.setArrivalDate(datePickerArrivalDate.getValue());
 
         tourToUpdate.setImgName(activeTour.getImgName());
-        tourToUpdate.setEmployee(activeTour.getEmployee());
+
+        if(activeTour.getEmployee() == null)
+            activeTour.setEmployee(Main.getEmployee());
+        else
+            tourToUpdate.setEmployee(activeTour.getEmployee());
 
         if (comboBoxHotel.getSelectionModel().isEmpty())
             tourToUpdate.setHotel(activeTour.getHotel());

@@ -10,10 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -26,6 +23,7 @@ import utils.SceneCreator;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static utils.Constants.EMPLOYEE_SCENE;
@@ -135,11 +133,19 @@ public class TourGuideController {
         var selectedTourGuideData = tableviewTourGuides.getSelectionModel().getSelectedItem();
         TourGuide plainTourGuide = allTourGuides.stream().filter(tourGuide -> tourGuide.getTourGuideId() == selectedTourGuideData.getTableTourGuideId()).findFirst().get();
 
-        try {
-            tourGuideService.delete(plainTourGuide).execute();
-            fetchAllTourGuides();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Usunięcie przewodnika");
+        alert.setContentText("Usunięcie przewodnika spowoduje usunięcie przewodnika powiązanego z wycieczką. Czy na pewno chcesz usunąć przewodnika?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            try {
+                tourGuideService.delete(plainTourGuide).execute();
+                fetchAllTourGuides();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

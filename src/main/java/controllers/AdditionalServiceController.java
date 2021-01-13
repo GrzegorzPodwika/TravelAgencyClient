@@ -24,6 +24,7 @@ import utils.SceneCreator;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static utils.Constants.*;
@@ -178,12 +179,22 @@ public class AdditionalServiceController {
         var selectedServiceData = tableviewAdditionalServices.getSelectionModel().getSelectedItem();
         AdditionalService selectedService = allAdditionalServices.stream().filter(service -> service.getAdditionalServiceId() == selectedServiceData.getTableAdditionalServiceId()).findFirst().get();
 
-        try {
-            additionalServiceService.delete(selectedService).execute();
-            fetchAllServices();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Usunięcie usługi");
+        alert.setContentText("Usunięcie usługi spowoduje usunięcie wszystkich informacji o tej usłudze powiązanej z wieloma wycieczkami." +
+                " Czy na pewno chcesz usunąć usługę?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            try {
+                additionalServiceService.delete(selectedService).execute();
+                fetchAllServices();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     private void shutdown() {

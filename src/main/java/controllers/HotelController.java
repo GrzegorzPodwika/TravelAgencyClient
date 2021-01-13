@@ -11,10 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -26,6 +23,7 @@ import utils.SceneCreator;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static utils.Constants.EMPLOYEE_SCENE;
@@ -143,12 +141,21 @@ public class HotelController {
         var selectedHotelData = tableviewHotel.getSelectionModel().getSelectedItem();
         Hotel selectedHotel = allHotels.stream().filter(hotel -> hotel.getHotelId() == selectedHotelData.getTableHotelId()).findFirst().get();
 
-        try {
-            hotelService.delete(selectedHotel).execute();
-            fetchAllHotels();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Usunięcie hotelu");
+        alert.setContentText("Usunięcie hotelu spowoduje usunięcie hotelu powiązanego z wycieczką. Czy na pewno chcesz usunąć hotel?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            try {
+                hotelService.delete(selectedHotel).execute();
+                fetchAllHotels();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     @FXML
