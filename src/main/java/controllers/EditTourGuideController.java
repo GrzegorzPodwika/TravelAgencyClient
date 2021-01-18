@@ -11,8 +11,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static utils.Constants.ERROR_NOT_A_NUMBER;
-import static utils.Constants.ERROR_WRONG_PHONE;
+import static utils.Constants.*;
+import static utils.Constants.ERROR_CAPITALIZE_WORD;
 
 public class EditTourGuideController {
     @FXML public TextField inputName;
@@ -58,6 +58,30 @@ public class EditTourGuideController {
                 labelError.setText("");
             }
         });
+
+        inputName.textProperty().addListener((observableValue, oldValue, newValue) -> {
+
+            if (newValue != null && !newValue.isEmpty()) {
+                if (!newValue.matches("^[A-Z]([a-z])+$"))
+                    labelError.setText(ERROR_CAPITALIZE_WORD);
+                else
+                    labelError.setText("");
+            } else {
+                labelError.setText("");
+            }
+        } );
+
+        inputSurname.textProperty().addListener((observableValue, oldValue, newValue) -> {
+
+            if (newValue != null && !newValue.isEmpty()) {
+                if (!newValue.matches("^[A-Z]([a-z])+$"))
+                    labelError.setText(ERROR_CAPITALIZE_WORD);
+                else
+                    labelError.setText("");
+            } else {
+                labelError.setText("");
+            }
+        } );
     }
 
     @FXML
@@ -82,12 +106,12 @@ public class EditTourGuideController {
         TourGuide tourGuideToUpdate = new TourGuide();
         tourGuideToUpdate.setTourGuideId(fetchedTourGuide.getTourGuideId());
 
-        if (inputName.getText() == null || inputName.getText().isEmpty())
+        if (inputName.getText() == null || inputName.getText().isEmpty() || !inputName.getText().matches("^[A-Z]([a-z])+$"))
             tourGuideToUpdate.setName(fetchedTourGuide.getName());
         else
             tourGuideToUpdate.setName(inputName.getText());
 
-        if (inputSurname.getText() == null || inputSurname.getText().isEmpty())
+        if (inputSurname.getText() == null || inputSurname.getText().isEmpty() || !inputSurname.getText().matches("^[A-Z]([a-z])+$"))
             tourGuideToUpdate.setSurname(fetchedTourGuide.getSurname());
         else
             tourGuideToUpdate.setSurname(inputSurname.getText());

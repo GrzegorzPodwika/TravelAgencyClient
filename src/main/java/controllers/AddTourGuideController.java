@@ -46,6 +46,30 @@ public class AddTourGuideController {
                 labelError.setText("");
             }
         });
+
+        inputName.textProperty().addListener((observableValue, oldValue, newValue) -> {
+
+            if (newValue != null && !newValue.isEmpty()) {
+                if (!newValue.matches("^[A-Z]([a-z])+$"))
+                    labelError.setText(ERROR_CAPITALIZE_WORD);
+                else
+                    labelError.setText("");
+            } else {
+                labelError.setText("");
+            }
+        } );
+
+        inputSurname.textProperty().addListener((observableValue, oldValue, newValue) -> {
+
+            if (newValue != null && !newValue.isEmpty()) {
+                if (!newValue.matches("^[A-Z]([a-z])+$"))
+                    labelError.setText(ERROR_CAPITALIZE_WORD);
+                else
+                    labelError.setText("");
+            } else {
+                labelError.setText("");
+            }
+        } );
     }
 
     @FXML
@@ -57,17 +81,21 @@ public class AddTourGuideController {
     public void onConfirmClick() {
         if (viewsAreNotEmpty()) {
             if (phoneIsCorrect()) {
-                var name = inputName.getText();
-                var surname = inputSurname.getText();
-                var phoneNumber = inputPhone.getText();
+                if (nameAndSurnameIsCorrect()) {
+                    var name = inputName.getText();
+                    var surname = inputSurname.getText();
+                    var phoneNumber = inputPhone.getText();
 
-                TourGuide newTourGuide = new TourGuide(0, name, surname, phoneNumber);
+                    TourGuide newTourGuide = new TourGuide(0, name, surname, phoneNumber);
 
-                try {
-                    tourGuideService.save(newTourGuide).execute();
-                    closeWindow();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    try {
+                        tourGuideService.save(newTourGuide).execute();
+                        closeWindow();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    labelError.setText(ERROR_CAPITALIZE_WORD);
                 }
             } else {
                 labelError.setText(ERROR_WRONG_PHONE);
@@ -75,6 +103,10 @@ public class AddTourGuideController {
         } else {
             labelError.setText(ERROR_EMPTY_VIEW);
         }
+    }
+
+    private boolean nameAndSurnameIsCorrect() {
+        return inputName.getText().matches("^[A-Z]([a-z])+$") && inputSurname.getText().matches("^[A-Z]([a-z])+$");
     }
 
     private boolean viewsAreNotEmpty() {
