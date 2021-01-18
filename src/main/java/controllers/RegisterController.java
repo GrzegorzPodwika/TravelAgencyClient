@@ -9,13 +9,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import utils.SceneCreator;
-
-import java.io.IOException;
 
 import static utils.Constants.LOGIN_SCENE;
 
@@ -66,7 +63,7 @@ public class RegisterController {
             } else if(isLabelNotANumber(labelPhoneNumber) || labelPhoneNumber.getLength() != 9) {
                 errorLabel.setText("Podaj 9 cyfrową liczbę jako telefon!");
             } else {
-                tryRegister();
+                registerUser();
             }
         } else {
             errorLabel.setText("Wszystkie pola muszą zostać uzupełnione!");
@@ -74,8 +71,15 @@ public class RegisterController {
     }
 
     private boolean areLabelsNotEmpty() {
-        return !labelNick.getText().isEmpty() && !labelPassword.getText().isEmpty() && !labelName.getText().isEmpty() && !labelSurname.getText().isEmpty() && !labelAge.getText().isEmpty()
-                && !labelAddress.getText().isEmpty() && !labelZipcode.getText().isEmpty() && !labelCity.getText().isEmpty() && !labelPhoneNumber.getText().isEmpty();
+        return labelNick.getText() != null && !labelNick.getText().isEmpty()
+                && labelPassword.getText() != null && !labelPassword.getText().isEmpty()
+                && labelName.getText() != null && !labelName.getText().isEmpty()
+                && labelSurname.getText() != null && !labelSurname.getText().isEmpty()
+                && labelAge.getText() != null && !labelAge.getText().isEmpty()
+                && labelAddress.getText() != null && !labelAddress.getText().isEmpty()
+                && labelZipcode.getText() != null && !labelZipcode.getText().isEmpty()
+                && labelCity.getText() != null && !labelCity.getText().isEmpty()
+                && labelPhoneNumber.getText() != null && !labelPhoneNumber.getText().isEmpty();
     }
 
     private boolean isLabelNotANumber(TextField field) {
@@ -92,7 +96,7 @@ public class RegisterController {
         SceneCreator.launchScene(LOGIN_SCENE);
     }
 
-    public void tryRegister() {
+    public void registerUser() {
         User user = new User();
 
         user.setPersonId(0);

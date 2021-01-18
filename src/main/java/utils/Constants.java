@@ -28,4 +28,22 @@ public class Constants {
     public static final String ADDITIONAL_SERVICE_SCENE = "AdditionalServiceScene.fxml";
     public static final String ATTRACTION_SCENE = "AttractionScene.fxml";
 
+
+    private static final String BALI = "Bali";
+    private static final String CHILE = "Chile";
+    private static final String CYPR = "Cypr";
+    private static final String DOMINIKANA = "Dominikana";
+    private static final String FRANCJA = "Francja";
+    private static final String HISZPANIA = "Hiszpania";
+    private static final String MADAGASKAR = "Madagaskar";
+    private static final String NIEMCY = "Niemcy";
+    private static final String OAHU = "Oahu";
+    private static final String PORTUGALIA = "Portugalia";
+    private static final String SZWAJCARIA = "Szwajcaria";
+    private static final String WIELKABRYTANIA = "Wielka_Brytania";
+    private static final String WIETNAM = "Wietnam";
+    private static final String WLOCHY = "Wlochy";
+
+    public static final String[] COUNTRIES = {BALI, CHILE, CYPR, DOMINIKANA, FRANCJA, HISZPANIA, MADAGASKAR,
+            NIEMCY, OAHU, PORTUGALIA, SZWAJCARIA, WIELKABRYTANIA, WIETNAM, WLOCHY};
 }

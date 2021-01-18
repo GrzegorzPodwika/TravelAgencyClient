@@ -4,16 +4,15 @@ import backend.api.AgencyServiceGenerator;
 import backend.api.HotelService;
 import backend.model.Hotel;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import utils.Constants;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import static utils.Constants.*;
 import static utils.Constants.ERROR_NOT_A_NUMBER;
 
 public class EditHotelController {
@@ -31,7 +30,7 @@ public class EditHotelController {
     @FXML public TextField inputAddress;
     @FXML public TextField inputZipcode;
     @FXML public TextField inputCity;
-    @FXML public TextField inputCountry;
+    @FXML public ComboBox<String> comboBoxCountry;
 
     @FXML public Button buttonCancel;
     @FXML public Button buttonConfirm;
@@ -44,7 +43,7 @@ public class EditHotelController {
     @FXML
     public void initialize() {
         initLabels();
-        initChoiceBox();
+        initChoiceBoxAndComboBox();
     }
 
     private void initLabels() {
@@ -56,8 +55,9 @@ public class EditHotelController {
         labelCountry.setText(labelCountry.getText() + fetchedHotel.getCountry());
     }
 
-    private void initChoiceBox() {
-            choiceBoxNumbOfStars.getItems().setAll(stars);
+    private void initChoiceBoxAndComboBox() {
+        choiceBoxNumbOfStars.getItems().setAll(stars);
+        comboBoxCountry.getItems().setAll(COUNTRIES);
     }
 
     @FXML
@@ -106,11 +106,10 @@ public class EditHotelController {
         else
             hotelToUpdate.setCity(inputCity.getText());
 
-        if (inputCountry.getText() == null || inputCountry.getText().isEmpty())
+        if (comboBoxCountry.getSelectionModel().getSelectedItem() == null)
             hotelToUpdate.setCountry(fetchedHotel.getCountry());
         else
-            hotelToUpdate.setCountry(inputCountry.getText());
-
+            hotelToUpdate.setCountry(comboBoxCountry.getSelectionModel().getSelectedItem());
 
         return hotelToUpdate;
     }

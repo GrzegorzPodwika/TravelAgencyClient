@@ -82,17 +82,17 @@ public class EditTourGuideController {
         TourGuide tourGuideToUpdate = new TourGuide();
         tourGuideToUpdate.setTourGuideId(fetchedTourGuide.getTourGuideId());
 
-        if (inputName.getText().isEmpty())
+        if (inputName.getText() == null || inputName.getText().isEmpty())
             tourGuideToUpdate.setName(fetchedTourGuide.getName());
         else
             tourGuideToUpdate.setName(inputName.getText());
 
-        if (inputSurname.getText().isEmpty())
+        if (inputSurname.getText() == null || inputSurname.getText().isEmpty())
             tourGuideToUpdate.setSurname(fetchedTourGuide.getSurname());
         else
             tourGuideToUpdate.setSurname(inputSurname.getText());
 
-        if (inputPhone.getText().isEmpty() || !phoneIsCorrect()) {
+        if (inputPhone.getText() == null || inputPhone.getText().isEmpty() || !phoneIsCorrect()) {
             tourGuideToUpdate.setPhoneNumber(fetchedTourGuide.getPhoneNumber());
         }
         else {
@@ -105,7 +105,7 @@ public class EditTourGuideController {
 
     private boolean phoneIsCorrect() {
         try {
-            var isNumber = Integer.parseInt(inputPhone.getText());
+            Integer.parseInt(inputPhone.getText());
             return inputPhone.getText().length() == 9;
         } catch (NumberFormatException e) {
             return false;

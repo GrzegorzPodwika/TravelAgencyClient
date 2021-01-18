@@ -29,12 +29,16 @@ public class UserController {
 
     @FXML
     public void initialize() {
-        clk = new Clock(clockLabel);
-        Thread th = new Thread(clk);
-        th.start();
+        initClock();
 
         putUserCredentialsIntoList();
 
+    }
+
+    private void initClock() {
+        clk = new Clock(clockLabel);
+        Thread th = new Thread(clk);
+        th.start();
     }
 
     private void putUserCredentialsIntoList() {
@@ -50,7 +54,6 @@ public class UserController {
         labelEmail.setText(labelEmail.getText() + activeUser.getEmail());
     }
 
-    //done
     @FXML
     public void onLogoutClick(){
         Main.setUser(null);
@@ -58,14 +61,12 @@ public class UserController {
         shutdown();
     }
 
-    //done
     @FXML
     public void onEditUserCredentialsClick(){
         SceneCreator.launchScene(EDIT_USER_CREDENTIALS_SCENE);
         shutdown();
     }
 
-    //done
     @FXML
     public void onViewToursClick(){
         SceneCreator.launchScene(VIEW_TOURS_SCENE);
@@ -78,8 +79,6 @@ public class UserController {
         shutdown();
     }
 
-
-    //done
     @FXML
     public void onViewCompanyContactClick() {
         SceneCreator.launchScene(CONTACT_SCENE);

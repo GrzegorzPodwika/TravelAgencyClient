@@ -107,13 +107,17 @@ public class EditUserCredentialsController {
     private void setInputFieldsListeners() {
         inputAge.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
-                try {
-                    Integer.parseInt(newValue);
-                    errorLabelAge.setText("");
-                } catch (NumberFormatException e) {
-                    errorLabelAge.setText(ERROR_NOT_A_NUMBER);
+                if (inputAge.getText().length() > 3) {
+                    String sub = inputAge.getText().substring(0, 3);
+                    inputAge.setText(sub);
+                } else  {
+                    try {
+                        Integer.parseInt(newValue);
+                        errorLabelAge.setText("");
+                    } catch (NumberFormatException e) {
+                        errorLabelAge.setText(ERROR_NOT_A_NUMBER);
+                    }
                 }
-
             } else {
                 errorLabelAge.setText("");
             }

@@ -14,7 +14,8 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane prefHeight="650.0" style="-fx-background-color: #353238;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditTourController">
+<AnchorPane prefHeight="650.0" style="-fx-background-color: #353238;" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditTourController">
     <children>
         <HBox prefHeight="588.0" prefWidth="820.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -22,169 +23,175 @@
                     <children>
                         <Label text="Nazwa wycieczki:" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label text="Kraj:" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label text="Dostępne bilety:" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label text="Cena:" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label text="Data wyjazdu:" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label text="Data powrotu:" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label text="Hotel:" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label text="Transport:" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label text="Przewodnik:" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label text="Usługi:" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label text="Atrakcje:" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                     </children>
                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                     </padding>
                 </VBox>
                 <VBox prefHeight="349.0" prefWidth="329.0" spacing="20.0">
                     <children>
                         <Label fx:id="labelTourName" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label fx:id="labelCountry" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label fx:id="labelAvailableTickets" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label fx:id="labelPrice" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label fx:id="labelDepartureDate" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label fx:id="labelArrivalDate" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label fx:id="labelHotel" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label fx:id="labelTransport" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
                         <Label fx:id="labelTourGuide" text="6554654" textFill="WHITE">
                             <font>
-                                <Font size="20.0" />
+                                <Font size="20.0"/>
                             </font>
                         </Label>
-                        <ListView fx:id="listViewTourServices" prefHeight="65.0" prefWidth="289.0" />
-                        <ListView fx:id="listViewAttractions" prefHeight="62.0" prefWidth="289.0" />
+                        <ListView fx:id="listViewTourServices" prefHeight="65.0" prefWidth="289.0"/>
+                        <ListView fx:id="listViewAttractions" prefHeight="62.0" prefWidth="289.0"/>
                     </children>
                     <padding>
-                        <Insets left="20.0" right="20.0" top="20.0" />
+                        <Insets left="20.0" right="20.0" top="20.0"/>
                     </padding>
                 </VBox>
                 <VBox alignment="TOP_CENTER" prefHeight="349.0" prefWidth="300.0" spacing="13.0">
                     <children>
                         <TextField fx:id="inputName" promptText="Wycieczka Madagaskar">
                             <font>
-                                <Font size="17.0" />
+                                <Font size="17.0"/>
                             </font>
                         </TextField>
-                  <ComboBox fx:id="comboBoxCountry" prefHeight="39.0" prefWidth="290.0" promptText="Kraj" />
+                        <ComboBox fx:id="comboBoxCountry" prefHeight="39.0" prefWidth="290.0" promptText="Kraj"/>
                         <TextField fx:id="inputNumOfAvailableTickets" promptText="40">
                             <font>
-                                <Font size="17.0" />
+                                <Font size="17.0"/>
                             </font>
                         </TextField>
                         <TextField fx:id="inputPrice" promptText="450.0">
                             <font>
-                                <Font size="17.0" />
+                                <Font size="17.0"/>
                             </font>
                         </TextField>
-                        <DatePicker fx:id="datePickerDepartureDate" prefHeight="33.0" prefWidth="260.0" />
-                        <DatePicker fx:id="datePickerArrivalDate" prefHeight="33.0" prefWidth="260.0" />
-                        <ComboBox fx:id="comboBoxHotel" prefHeight="36.0" prefWidth="260.0" promptText="Wybierz hotel" />
-                        <ComboBox fx:id="comboBoxTransport" prefHeight="36.0" prefWidth="260.0" promptText="Wybierz transport" />
-                        <ComboBox fx:id="comboBoxTourGuide" prefHeight="36.0" prefWidth="260.0" promptText="Wybierz przewodnika" />
-                        <CheckComboBox fx:id="checkComboBoxService" prefHeight="36.0" prefWidth="260.0" />
-                        <CheckComboBox fx:id="checkComboBoxAttraction" prefHeight="36.0" prefWidth="260.0" />
+                        <DatePicker fx:id="datePickerDepartureDate" prefHeight="33.0" prefWidth="260.0"/>
+                        <DatePicker fx:id="datePickerArrivalDate" prefHeight="33.0" prefWidth="260.0"/>
+                        <ComboBox fx:id="comboBoxHotel" prefHeight="36.0" prefWidth="260.0" promptText="Wybierz hotel"/>
+                        <ComboBox fx:id="comboBoxTransport" prefHeight="36.0" prefWidth="260.0"
+                                  promptText="Wybierz transport"/>
+                        <ComboBox fx:id="comboBoxTourGuide" prefHeight="36.0" prefWidth="260.0"
+                                  promptText="Wybierz przewodnika"/>
+                        <CheckComboBox fx:id="checkComboBoxService" prefHeight="36.0" prefWidth="260.0"/>
+                        <CheckComboBox fx:id="checkComboBoxAttraction" prefHeight="36.0" prefWidth="260.0"/>
                     </children>
                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                     </padding>
                 </VBox>
             </children>
         </HBox>
-        <Button fx:id="buttonCancel" layoutX="29.0" layoutY="357.0" mnemonicParsing="false" onAction="#onCancelClick" style="-fx-background-color: #0066FF;" text="Anuluj" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0">
+        <Button fx:id="buttonCancel" layoutX="29.0" layoutY="357.0" mnemonicParsing="false" onAction="#onCancelClick"
+                style="-fx-background-color: #0066FF;" text="Anuluj" textFill="WHITE" AnchorPane.bottomAnchor="15.0"
+                AnchorPane.leftAnchor="15.0">
             <graphic>
-                <FontAwesomeIconView fill="WHITE" glyphName="REMOVE" />
+                <FontAwesomeIconView fill="WHITE" glyphName="REMOVE"/>
             </graphic>
             <font>
-                <Font size="16.0" />
+                <Font size="16.0"/>
             </font>
         </Button>
-        <Button fx:id="buttonConfirm" layoutX="39.0" layoutY="367.0" mnemonicParsing="false" onAction="#onConfirmClick" style="-fx-background-color: #009933;" text="Potwierdź" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+        <Button fx:id="buttonConfirm" layoutX="39.0" layoutY="367.0" mnemonicParsing="false" onAction="#onConfirmClick"
+                style="-fx-background-color: #009933;" text="Potwierdź" textFill="WHITE" AnchorPane.bottomAnchor="15.0"
+                AnchorPane.rightAnchor="15.0">
             <graphic>
-                <FontAwesomeIconView fill="WHITE" glyphName="PLUS" />
+                <FontAwesomeIconView fill="WHITE" glyphName="PLUS"/>
             </graphic>
             <font>
-                <Font size="16.0" />
+                <Font size="16.0"/>
             </font>
         </Button>
         <Label fx:id="labelError" layoutX="542.0" layoutY="555.0" prefHeight="30.0" textFill="RED">
             <font>
-                <Font size="20.0" />
+                <Font size="20.0"/>
             </font>
         </Label>
     </children>

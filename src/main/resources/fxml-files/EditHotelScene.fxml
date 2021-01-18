@@ -10,6 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #353238;"
             xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controllers.EditHotelController">
@@ -76,11 +77,8 @@
                         <Font size="17.0"/>
                     </font>
                 </TextField>
-                <TextField fx:id="inputCountry" promptText="Szwajcaria">
-                    <font>
-                        <Font size="17.0"/>
-                    </font>
-                </TextField>
+                <ComboBox fx:id="comboBoxCountry" prefHeight="39.0" prefWidth="290.0" />
+
                 <Label fx:id="labelError" textFill="RED">
                     <font>
                         <Font size="20.0"/>

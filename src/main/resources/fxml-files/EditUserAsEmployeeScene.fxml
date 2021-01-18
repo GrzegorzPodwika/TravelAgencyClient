@@ -126,55 +126,55 @@
                             </font>
                         </TextField>
                         <TextField fx:id="inputPassword" prefHeight="32.0" prefWidth="223.0"
-                                   promptText="Wprowadź nowe hasło" style="-fx-background-color: #525252;">
+                                   promptText="Wprowadź nowe hasło" style="-fx-background-color: #525252; -fx-text-fill: #FFFFFF;">
                             <font>
                                 <Font size="15.0"/>
                             </font>
                         </TextField>
                         <TextField fx:id="inputName" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowe imię"
-                                   style="-fx-background-color: #525252;">
+                                   style="-fx-background-color: #525252; -fx-text-fill: #FFFFFF;">
                             <font>
                                 <Font size="15.0"/>
                             </font>
                         </TextField>
                         <TextField fx:id="inputSurname" prefHeight="32.0" prefWidth="223.0"
-                                   promptText="Wprowadź nowe nazwisko" style="-fx-background-color: #525252;">
+                                   promptText="Wprowadź nowe nazwisko" style="-fx-background-color: #525252; -fx-text-fill: #FFFFFF;">
                             <font>
                                 <Font size="15.0"/>
                             </font>
                         </TextField>
                         <TextField fx:id="inputAge" prefHeight="32.0" prefWidth="223.0" promptText="Wprowadź nowy wiek"
-                                   style="-fx-background-color: #525252;">
+                                   style="-fx-background-color: #525252; -fx-text-fill: #FFFFFF;">
                             <font>
                                 <Font size="15.0"/>
                             </font>
                         </TextField>
                         <TextField fx:id="inputAddress" prefHeight="32.0" prefWidth="223.0"
-                                   promptText="Wprowadź nowy adres" style="-fx-background-color: #525252;">
+                                   promptText="Wprowadź nowy adres" style="-fx-background-color: #525252; -fx-text-fill: #FFFFFF;">
                             <font>
                                 <Font size="15.0"/>
                             </font>
                         </TextField>
                         <TextField fx:id="inputZipcode" prefHeight="32.0" prefWidth="223.0"
-                                   promptText="Wprowadź nowy kod pocztowy" style="-fx-background-color: #525252;">
+                                   promptText="Wprowadź nowy kod pocztowy" style="-fx-background-color: #525252; -fx-text-fill: #FFFFFF;">
                             <font>
                                 <Font size="15.0"/>
                             </font>
                         </TextField>
                         <TextField fx:id="inputCity" prefHeight="32.0" prefWidth="223.0"
-                                   promptText="Wprowadź nowe miasto" style="-fx-background-color: #525252;">
+                                   promptText="Wprowadź nowe miasto" style="-fx-background-color: #525252; -fx-text-fill: #FFFFFF;">
                             <font>
                                 <Font size="15.0"/>
                             </font>
                         </TextField>
                         <TextField fx:id="inputPhoneNumber" prefHeight="32.0" prefWidth="223.0"
-                                   promptText="Wprowadź nowy numer telefonu" style="-fx-background-color: #525252;">
+                                   promptText="Wprowadź nowy numer telefonu" style="-fx-background-color: #525252; -fx-text-fill: #FFFFFF;">
                             <font>
                                 <Font size="15.0"/>
                             </font>
                         </TextField>
                         <TextField fx:id="inputEmail" prefHeight="32.0" prefWidth="223.0"
-                                   promptText="Wprowadź nowy email" style="-fx-background-color: #525252;">
+                                   promptText="Wprowadź nowy email" style="-fx-background-color: #525252; -fx-text-fill: #FFFFFF;">
                             <font>
                                 <Font size="15.0"/>
                             </font>

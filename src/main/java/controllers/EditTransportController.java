@@ -19,6 +19,7 @@ import javafx.util.StringConverter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import utils.TravelUtils;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static utils.Constants.ERROR_NOT_A_NUMBER;
+import static utils.TravelUtils.roundOffStrToDouble;
 
 public class EditTransportController {
     @FXML public TextField inputJourneyTime;
@@ -154,7 +156,7 @@ public class EditTransportController {
         if (inputJourneyTime.getText() == null || inputJourneyTime.getText().isEmpty() || !isANumber(inputJourneyTime))
             transportToUpdate.setJourneyTime(fetchedTransport.getJourneyTime());
         else
-            transportToUpdate.setJourneyTime(Double.parseDouble(inputJourneyTime.getText()));
+            transportToUpdate.setJourneyTime(roundOffStrToDouble(inputJourneyTime.getText()));
 
         if (inputJourneyDescription.getText() == null || inputJourneyDescription.getText().isEmpty())
             transportToUpdate.setJourneyDescription(fetchedTransport.getJourneyDescription());

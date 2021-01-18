@@ -57,6 +57,7 @@ public class MakePaymentController {
     @FXML
     public void onConfirmClick() {
         int selectedPaymentTypeIndex = comboBoxPaymentType.getSelectionModel().getSelectedIndex();
+
         if (selectedPaymentTypeIndex != -1) {
             Payment updatedPayment = reservation.getPayment();
             updatedPayment.setPaymentType(paymentsTypes.get(selectedPaymentTypeIndex));

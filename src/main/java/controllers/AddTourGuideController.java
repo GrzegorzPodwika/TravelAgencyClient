@@ -77,6 +77,12 @@ public class AddTourGuideController {
         }
     }
 
+    private boolean viewsAreNotEmpty() {
+        return inputName.getText() != null && !inputName.getText().isEmpty()
+                && inputSurname.getText() != null && !inputSurname.getText().isEmpty()
+                && inputPhone.getText() != null && !inputPhone.getText().isEmpty();
+    }
+
     private boolean phoneIsCorrect() {
         try {
             var isNumber = Integer.parseInt(inputPhone.getText());
@@ -84,11 +90,6 @@ public class AddTourGuideController {
         } catch (NumberFormatException e) {
             return false;
         }
-    }
-
-    private boolean viewsAreNotEmpty() {
-        return !inputName.getText().isEmpty() && !inputSurname.getText().isEmpty()
-                && !inputPhone.getText().isEmpty();
     }
 
     private void closeWindow() {

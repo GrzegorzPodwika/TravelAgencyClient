@@ -82,12 +82,17 @@ public class EditEmployeeCredentialsController {
 
     @FXML
     public void initialize() {
+        initClock();
+
+        putEmployeeCredentialsIntoList();
+        setInputFieldsListeners();
+    }
+
+    private void initClock() {
         clk = new Clock(clockLabel);
         Thread th = new Thread(clk);
         th.start();
 
-        putEmployeeCredentialsIntoList();
-        setInputFieldsListeners();
     }
 
     private void putEmployeeCredentialsIntoList() {
@@ -106,17 +111,22 @@ public class EditEmployeeCredentialsController {
     private void setInputFieldsListeners() {
         inputAge.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
-                try {
-                    Integer.parseInt(newValue);
-                    errorLabelAge.setText("");
-                } catch (NumberFormatException e) {
-                    errorLabelAge.setText(ERROR_NOT_A_NUMBER);
+                if (inputAge.getText().length() > 3) {
+                    String sub = inputAge.getText().substring(0, 3);
+                    inputAge.setText(sub);
+                } else {
+                    try {
+                        Integer.parseInt(newValue);
+                        errorLabelAge.setText("");
+                    } catch (NumberFormatException e) {
+                        errorLabelAge.setText(ERROR_NOT_A_NUMBER);
+                    }
                 }
-
             } else {
                 errorLabelAge.setText("");
             }
         });
+
         inputPhoneNumber.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
                 if (inputPhoneNumber.getText().length() > 9) {

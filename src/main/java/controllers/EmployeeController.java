@@ -6,8 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import utils.Clock;
 import utils.SceneCreator;
+import utils.TravelUtils;
 
 import static utils.Constants.*;
+import static utils.TravelUtils.*;
 
 public class EmployeeController {
     @FXML public Label labelHelloUser;
@@ -26,11 +28,15 @@ public class EmployeeController {
 
     @FXML
     public void initialize() {
+        initClock();
+
+        putEmployeeCredentialsIntoList();
+    }
+
+    private void initClock() {
         clk = new Clock(clockLabel);
         Thread th = new Thread(clk);
         th.start();
-
-        putEmployeeCredentialsIntoList();
     }
 
     private void putEmployeeCredentialsIntoList() {
@@ -43,6 +49,7 @@ public class EmployeeController {
         labelWorkedHours.setText(labelWorkedHours.getText() + activeEmployee.getNumberOfWorkedHours());
         labelBonus.setText(labelBonus.getText() + activeEmployee.getBonus());
         double salary = activeEmployee.getHourlyRate() * activeEmployee.getNumberOfWorkedHours() + activeEmployee.getBonus();
+        salary = roundOff(salary);
         labelSalary.setText(labelSalary.getText() + salary);
     }
 

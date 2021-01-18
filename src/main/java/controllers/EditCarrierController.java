@@ -102,17 +102,17 @@ public class EditCarrierController {
         Carrier carrierToUpdate = new Carrier();
         carrierToUpdate.setCarrierId(fetchedCarrier.getCarrierId());
 
-        if (inputName.getText().isEmpty())
+        if (inputName.getText() == null || inputName.getText().isEmpty())
             carrierToUpdate.setName(fetchedCarrier.getName());
         else
             carrierToUpdate.setName(inputName.getText());
 
-        if (inputPhone.getText().isEmpty() || !phoneIsCorrect())
+        if (inputPhone.getText() == null || inputPhone.getText().isEmpty() || !phoneIsCorrect())
             carrierToUpdate.setPhoneNumber(fetchedCarrier.getPhoneNumber());
         else
             carrierToUpdate.setPhoneNumber(inputPhone.getText());
 
-        if (inputEmail.getText().isEmpty() || !emailIsCorrect())
+        if (inputEmail.getText() == null || inputEmail.getText().isEmpty() || !emailIsCorrect())
             carrierToUpdate.setEmail(fetchedCarrier.getEmail());
         else
             carrierToUpdate.setEmail(inputEmail.getText());

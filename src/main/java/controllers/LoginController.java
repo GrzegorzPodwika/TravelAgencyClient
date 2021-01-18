@@ -3,54 +3,47 @@ package controllers;
 import backend.api.*;
 import backend.model.Employee;
 import backend.model.LoginResponse;
-import backend.model.Tour;
 import backend.model.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import utils.SceneCreator;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.List;
 
 import static utils.Constants.*;
 
 public class LoginController {
 
+    @FXML public TextField usernameBox;
+    @FXML public PasswordField passwordBox;
+    @FXML public Label errorLabel;
+
     private final LoginService loginService = AgencyServiceGenerator.createService(LoginService.class);
     private final UserService userService = AgencyServiceGenerator.createService(UserService.class);
     private final EmployeeService employeeService = AgencyServiceGenerator.createService(EmployeeService.class);
 
-    public ImageView testImage;
-
-    @FXML TextField usernameBox;
-    @FXML PasswordField passwordBox;
-    @FXML Label errorLabel;
 
     @FXML
     public void loginButton() {
         if(areLabelsNotEmpty()) {
-            tryLogin();
+            loginUser();
         }else{
             errorLabel.setText("Pole nazwa użytkownika i hasło nie mogą być puste!");
         }
     }
 
     private boolean areLabelsNotEmpty() {
-        return !usernameBox.getText().isEmpty() && !passwordBox.getText().isEmpty();
+        return usernameBox.getText() != null && !usernameBox.getText().isEmpty()
+                && passwordBox.getText() != null && !passwordBox.getText().isEmpty();
     }
 
-    private void tryLogin() {
+    private void loginUser() {
         String username = usernameBox.getText();
         String password = passwordBox.getText();
 
@@ -102,7 +95,7 @@ public class LoginController {
 
                 } else {
                     Platform.runLater(() -> {
-                        errorLabel.setText("Response from server is not successful! " + response.code());
+                        errorLabel.setText("Response from server was not successful! " + response.code());
                     });
                 }
             }

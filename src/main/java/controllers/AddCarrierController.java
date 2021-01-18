@@ -93,11 +93,22 @@ public class AddCarrierController {
     }
 
     private boolean viewsAreNotEmpty() {
-        return !inputName.getText().isEmpty() && !inputPhone.getText().isEmpty()
-                && !inputEmail.getText().isEmpty();
+        return inputName.getText() != null && !inputName.getText().isEmpty()
+                && inputPhone.getText() != null && !inputPhone.getText().isEmpty()
+                && inputEmail.getText() != null && !inputEmail.getText().isEmpty();
     }
 
     private boolean viewsAreCorrect() {
-        return labelError.getText().equals("");
+        return inputPhone.getText().length() == 9 && isNumber(inputPhone) &&
+                inputEmail.getText().matches("^([a-zA-Z0-9_\\.\\-+])+@[a-zA-Z0-9-.]+\\.[a-zA-Z0-9-]{2,}$");
+    }
+
+    private boolean isNumber(TextField inputPhone) {
+        try {
+            Integer.parseInt(inputPhone.getText());
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

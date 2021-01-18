@@ -17,11 +17,14 @@ import javafx.stage.Stage;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import utils.TravelUtils;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static utils.TravelUtils.roundOff;
 
 public class ViewTourDetailsController {
 
@@ -79,7 +82,7 @@ public class ViewTourDetailsController {
 
         choiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             double totalPrice = tour.getPrice() * newValue;
-            totalPrice =  Math.round(totalPrice * 100.0) / 100.0;
+            totalPrice = roundOff(totalPrice);
 
             labelTotalToPay.setText(String.valueOf(totalPrice));
         });
@@ -152,7 +155,7 @@ public class ViewTourDetailsController {
         reservation.setNumberOfTickets(chosenNumberOfTickets);
 
         double totalPrice = tour.getPrice() * chosenNumberOfTickets;
-        totalPrice =  Math.round(totalPrice * 100.0) / 100.0;
+        totalPrice =  roundOff(totalPrice);
         reservation.setTotalPrice(totalPrice);
 
         reservation.setReservationDate(LocalDate.now());

@@ -16,10 +16,11 @@ import org.controlsfx.control.CheckComboBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import utils.TravelUtils;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static utils.Constants.*;
 import static utils.TravelUtils.*;
@@ -50,7 +51,7 @@ public class AddTourController {
     private final AttractionService attractionService = AgencyServiceGenerator.createService(AttractionService.class);
     private final TourService tourService = AgencyServiceGenerator.createService(TourService.class);
 
-    private final ObservableList<Hotel> observableHotels = FXCollections.observableArrayList();
+    private List<Hotel> allHotels = new ArrayList<>();
     private final ObservableList<Transport> observableTransports = FXCollections.observableArrayList();
     private final ObservableList<TourGuide> observableTourGuides = FXCollections.observableArrayList();
     private final ObservableList<AdditionalService> observableAdditionalServices = FXCollections.observableArrayList();
@@ -78,10 +79,23 @@ public class AddTourController {
 
     @FXML
     public void initialize() {
+        initCountryComboBox();
         setObjectConvertersInComboBoxes();
         fetchAllNecessaryData();
         setImagesIntoListView();
         setTextFieldsListeners();
+    }
+
+    private void initCountryComboBox() {
+        comboBoxCountry.getItems().setAll(imageNamesArray);
+        comboBoxCountry.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue == null) {
+                comboBoxHotel.getItems().clear();
+            } else {
+                List<Hotel> filteredHotels = allHotels.stream().filter(hot -> hot.getCountry().equals(newValue)).collect(Collectors.toList());
+                comboBoxHotel.getItems().setAll(filteredHotels);
+            }
+        });
     }
 
     private void setObjectConvertersInComboBoxes() {
@@ -150,7 +164,6 @@ public class AddTourController {
             }
         });
 
-        comboBoxCountry.getItems().setAll(imageNamesArray);
     }
 
     private void fetchAllNecessaryData() {
@@ -159,16 +172,7 @@ public class AddTourController {
             @Override
             public void onResponse(Call<List<Hotel>> call, Response<List<Hotel>> response) {
                 if (response.isSuccessful()) {
-                    var hotels = response.body();
-
-                    if (hotels != null) {
-                        observableHotels.addAll(hotels);
-                        Platform.runLater(() -> {
-                            comboBoxHotel.setItems(observableHotels);
-                        });
-                    } else {
-                        System.out.println("List of hotels == null");
-                    }
+                    allHotels = response.body();
                 }
             }
 

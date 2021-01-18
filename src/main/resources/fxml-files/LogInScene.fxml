@@ -63,8 +63,6 @@
                         <Font size="15.0"/>
                     </font>
                 </Label>
-                <ImageView fx:id="testImage" fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="483.0"
-                           pickOnBounds="true" preserveRatio="true"/>
             </children>
         </AnchorPane>
     </children>

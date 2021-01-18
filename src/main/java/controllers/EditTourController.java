@@ -14,8 +14,10 @@ import org.controlsfx.control.CheckComboBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import utils.Constants;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,29 +62,11 @@ public class EditTourController {
     private final AttractionService attractionService = AgencyServiceGenerator.createService(AttractionService.class);
     private final TourService tourService = AgencyServiceGenerator.createService(TourService.class);
 
-    private final ObservableList<Hotel> observableHotels = FXCollections.observableArrayList();
+    private List<Hotel> allHotels = new ArrayList<>();
     private final ObservableList<Transport> observableTransports = FXCollections.observableArrayList();
     private final ObservableList<TourGuide> observableTourGuides = FXCollections.observableArrayList();
     private final ObservableList<AdditionalService> observableAdditionalServices = FXCollections.observableArrayList();
     private final ObservableList<Attraction> observableAttractions = FXCollections.observableArrayList();
-
-    private final String BALI = "Bali";
-    private final String CHILE = "Chile";
-    private final String CYPR = "Cypr";
-    private final String DOMINIKANA = "Dominikana";
-    private final String FRANCJA = "Francja";
-    private final String HISZPANIA = "Hiszpania";
-    private final String MADAGASKAR = "Madagaskar";
-    private final String NIEMCY = "Niemcy";
-    private final String OAHU = "Oahu";
-    private final String PORTUGALIA = "Portugalia";
-    private final String SZWAJCARIA = "Szwajcaria";
-    private final String WIELKABRYTANIA = "Wielka_Brytania";
-    private final String WIETNAM = "Wietnam";
-    private final String WLOCHY = "Wlochy";
-
-    private final String[] imageNamesArray = {BALI, CHILE, CYPR, DOMINIKANA, FRANCJA, HISZPANIA, MADAGASKAR,
-            NIEMCY, OAHU, PORTUGALIA, SZWAJCARIA, WIELKABRYTANIA, WIETNAM, WLOCHY};
 
     @FXML
     public void initialize() {
@@ -100,8 +84,6 @@ public class EditTourController {
         labelPrice.setText(String.valueOf(activeTour.getPrice()));
         labelDepartureDate.setText(activeTour.getDepartureDate().toString());
         labelArrivalDate.setText(activeTour.getArrivalDate().toString());
-
-
 
         if (activeTour.getHotel() != null) {
             labelHotel.setText(activeTour.getHotel().getHotelName());
@@ -153,9 +135,16 @@ public class EditTourController {
     }
 
     private void initCountryComboBox() {
-        comboBoxCountry.getItems().setAll(imageNamesArray);
+        comboBoxCountry.getItems().setAll(Constants.COUNTRIES);
+        comboBoxCountry.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue == null) {
+                comboBoxHotel.getItems().clear();
+            } else {
+                List<Hotel> filteredHotels = allHotels.stream().filter(hot -> hot.getCountry().equals(newValue)).collect(Collectors.toList());
+                comboBoxHotel.getItems().setAll(filteredHotels);
+            }
+        });
     }
-
 
     private void setObjectConvertersInComboBoxes() {
         comboBoxHotel.setConverter(new StringConverter<Hotel>() {
@@ -230,16 +219,8 @@ public class EditTourController {
             @Override
             public void onResponse(Call<List<Hotel>> call, Response<List<Hotel>> response) {
                 if (response.isSuccessful()) {
-                    var hotels = response.body();
+                    allHotels = response.body();
 
-                    if (hotels != null) {
-                        observableHotels.addAll(hotels);
-                        Platform.runLater(() -> {
-                            comboBoxHotel.setItems(observableHotels);
-                        });
-                    } else {
-                        System.out.println("List of hotels == null");
-                    }
                 }
             }
 
@@ -397,7 +378,7 @@ public class EditTourController {
         Tour tourToUpdate = new Tour();
         tourToUpdate.setTourId(activeTour.getTourId());
 
-        if (inputName.getText().isEmpty())
+        if (inputName.getText() == null || inputName.getText().isEmpty())
             tourToUpdate.setTourName(activeTour.getTourName());
         else
             tourToUpdate.setTourName(inputName.getText());
@@ -407,12 +388,13 @@ public class EditTourController {
         else
             tourToUpdate.setCountry(comboBoxCountry.getSelectionModel().getSelectedItem());
 
-        if(inputPrice.getText().isEmpty() || !isItAFloatNumber(inputPrice))
+        if(inputPrice.getText() == null || inputPrice.getText().isEmpty() || !isItAFloatNumber(inputPrice))
             tourToUpdate.setPrice(activeTour.getPrice());
         else
             tourToUpdate.setPrice(Double.parseDouble(inputPrice.getText()));
 
-        if (inputNumOfAvailableTickets.getText().isEmpty() || !isItANumber(inputNumOfAvailableTickets))
+        if (inputNumOfAvailableTickets.getText() == null || inputNumOfAvailableTickets.getText().isEmpty()
+                || !isItANumber(inputNumOfAvailableTickets))
             tourToUpdate.setAvailableTickets(activeTour.getAvailableTickets());
         else
             tourToUpdate.setAvailableTickets(Integer.parseInt(inputNumOfAvailableTickets.getText()));
@@ -439,17 +421,17 @@ public class EditTourController {
         else
             tourToUpdate.setEmployee(activeTour.getEmployee());
 
-        if (comboBoxHotel.getSelectionModel().isEmpty())
+        if (comboBoxHotel.getSelectionModel().getSelectedItem() == null || comboBoxHotel.getSelectionModel().isEmpty())
             tourToUpdate.setHotel(activeTour.getHotel());
         else
             tourToUpdate.setHotel(comboBoxHotel.getSelectionModel().getSelectedItem());
 
-        if (comboBoxTransport.getSelectionModel().isEmpty())
+        if (comboBoxTransport.getSelectionModel().getSelectedItem() == null || comboBoxTransport.getSelectionModel().isEmpty())
             tourToUpdate.setTransport(activeTour.getTransport());
         else
             tourToUpdate.setTransport(comboBoxTransport.getSelectionModel().getSelectedItem());
 
-        if (comboBoxTourGuide.getSelectionModel().isEmpty())
+        if (comboBoxTourGuide.getSelectionModel().getSelectedItem() == null || comboBoxTourGuide.getSelectionModel().isEmpty())
             tourToUpdate.setTourGuide(activeTour.getTourGuide());
         else
             tourToUpdate.setTourGuide(comboBoxTourGuide.getSelectionModel().getSelectedItem());
