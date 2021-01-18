@@ -12,10 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -28,6 +25,7 @@ import utils.SceneCreator;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static utils.Constants.*;
@@ -150,12 +148,21 @@ public class ManageToursController {
         Tour selectedTour = allTours.stream()
                 .filter(tour -> tour.getTourId() == selectedTourData.getTableTourId()).findFirst().get();
 
-        try {
-            tourService.delete(selectedTour).execute();
-            fetchAllTours();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Usunięcie wycieczki");
+        alert.setContentText("Usunięcie wycieczki spowoduje usunięcie powiązanych rezerwacji klienta!. Czy na pewno chcesz usunąć wycieczkę?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK) {
+            try {
+                tourService.delete(selectedTour).execute();
+                fetchAllTours();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     @FXML

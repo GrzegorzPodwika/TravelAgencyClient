@@ -16,17 +16,18 @@ import org.controlsfx.control.CheckComboBox;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import utils.TravelUtils;
 
 import java.util.HashSet;
 import java.util.List;
 
-import static utils.Constants.ERROR_EMPTY_VIEW;
-import static utils.Constants.ERROR_NOT_A_NUMBER;
+import static utils.Constants.*;
+import static utils.TravelUtils.*;
 
 public class AddTourController {
 
     @FXML public TextField inputName;
-    @FXML public TextField inputCountry;
+    @FXML public ComboBox<String> comboBoxCountry;
     @FXML public TextField inputNumOfAvailableTickets;
     @FXML public TextField inputPrice;
     @FXML public DatePicker datePickerDepartureDate;
@@ -37,6 +38,7 @@ public class AddTourController {
     @FXML public CheckComboBox<AdditionalService> checkComboBoxService;
     @FXML public CheckComboBox<Attraction> checkComboBoxAttraction;
     @FXML public ListView<String> listViewImages;
+
     @FXML public Button buttonCancel;
     @FXML public Button buttonConfirm;
     @FXML public Label labelError;
@@ -72,6 +74,7 @@ public class AddTourController {
     private final String[] imageNamesArray = {BALI, CHILE, CYPR, DOMINIKANA, FRANCJA, HISZPANIA, MADAGASKAR,
             NIEMCY, OAHU, PORTUGALIA, SZWAJCARIA, WIELKABRYTANIA, WIETNAM, WLOCHY};
     private final ObservableList<String> observableImages = FXCollections.observableArrayList(imageNamesArray);
+
 
     @FXML
     public void initialize() {
@@ -146,6 +149,8 @@ public class AddTourController {
                         .filter(attraction -> attraction.getName().equals(s)).findFirst().orElse(null);
             }
         });
+
+        comboBoxCountry.getItems().setAll(imageNamesArray);
     }
 
     private void fetchAllNecessaryData() {
@@ -317,12 +322,18 @@ public class AddTourController {
     private void setTextFieldsListeners() {
         inputNumOfAvailableTickets.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
-                try {
-                    var isNumber = Integer.parseInt(newValue);
-                    labelError.setText("");
-                } catch (NumberFormatException e) {
-                    labelError.setText(ERROR_NOT_A_NUMBER);
+                if (inputNumOfAvailableTickets.getText().length() > 3) {
+                    String sub = inputNumOfAvailableTickets.getText().substring(0, 3);
+                    inputNumOfAvailableTickets.setText(sub);
+                } else {
+                    try {
+                        Integer.parseInt(newValue);
+                        labelError.setText("");
+                    } catch (NumberFormatException e) {
+                        labelError.setText(ERROR_NOT_A_NUMBER);
+                    }
                 }
+
             } else {
                 labelError.setText("");
             }
@@ -330,11 +341,16 @@ public class AddTourController {
 
         inputPrice.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
-                try {
-                    var isNumber = Double.parseDouble(newValue);
-                    labelError.setText("");
-                } catch (NumberFormatException e) {
-                    labelError.setText(ERROR_NOT_A_NUMBER);
+                if (inputPrice.getText().length() > 9) {
+                    String sub = inputPrice.getText().substring(0, 9);
+                    inputPrice.setText(sub);
+                } else {
+                    try {
+                        Double.parseDouble(newValue);
+                        labelError.setText("");
+                    } catch (NumberFormatException e) {
+                        labelError.setText(ERROR_NOT_A_NUMBER);
+                    }
                 }
             } else {
                 labelError.setText("");
@@ -350,28 +366,32 @@ public class AddTourController {
     @FXML
     public void onConfirmClick() {
         if (viewsAreNotEmpty() && viewsAreCorrect()) {
-            Tour newTour = collectValuesFromViewsAndCreateNewTour();
+            if (secondDateIsLaterThanFirstOne()) {
+                Tour newTour = collectValuesFromViewsAndCreateNewTour();
 
-            var saveTourCall = tourService.save(newTour);
-            saveTourCall.enqueue(new Callback<Integer>() {
-                @Override
-                public void onResponse(Call<Integer> call, Response<Integer> response) {
-                    if(response.isSuccessful()) {
-                        Platform.runLater(() -> {
-                            closeWindow();
-                        });
-                    } else  {
-                        Platform.runLater(() -> {
-                            labelError.setText("Problem z serwerem, kod = " + response.code());
-                        });
+                var saveTourCall = tourService.save(newTour);
+                saveTourCall.enqueue(new Callback<Integer>() {
+                    @Override
+                    public void onResponse(Call<Integer> call, Response<Integer> response) {
+                        if(response.isSuccessful()) {
+                            Platform.runLater(() -> {
+                                closeWindow();
+                            });
+                        } else  {
+                            Platform.runLater(() -> {
+                                labelError.setText("Problem z serwerem, kod = " + response.code());
+                            });
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<Integer> call, Throwable throwable) {
-                    labelError.setText("Error has occurred " +throwable.getMessage());
-                }
-            });
+                    @Override
+                    public void onFailure(Call<Integer> call, Throwable throwable) {
+                        labelError.setText("Error has occurred " +throwable.getMessage());
+                    }
+                });
+            } else {
+                labelError.setText(ERROR_WRONG_DATES);
+            }
 
 
         } else {
@@ -379,15 +399,56 @@ public class AddTourController {
         }
     }
 
+    private boolean viewsAreNotEmpty() {
+        return inputName.getText() != null && !inputName.getText().isEmpty()
+                && comboBoxCountry.getSelectionModel().getSelectedItem() != null && !comboBoxCountry.getSelectionModel().isEmpty()
+                && inputPrice.getText() != null && !inputPrice.getText().isEmpty()
+                && inputNumOfAvailableTickets.getText() != null && !inputNumOfAvailableTickets.getText().isEmpty()
+                && datePickerDepartureDate.getValue() != null && datePickerArrivalDate.getValue() != null
+                && !comboBoxHotel.getSelectionModel().isEmpty() && !comboBoxTransport.getSelectionModel().isEmpty()
+                && !comboBoxTourGuide.getSelectionModel().isEmpty() && !checkComboBoxService.getCheckModel().isEmpty()
+                && !checkComboBoxAttraction.getCheckModel().isEmpty() && !listViewImages.getSelectionModel().isEmpty();
+    }
+
+    private boolean viewsAreCorrect() {
+        return isItANumber(inputNumOfAvailableTickets) && isItAFloatNumber(inputPrice);
+    }
+
+    private boolean isItANumber(TextField textField) {
+        try {
+            Integer.parseInt(textField.getText());
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean isItAFloatNumber(TextField textField) {
+        try {
+            Double.parseDouble(textField.getText());
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean secondDateIsLaterThanFirstOne() {
+        var depDate = datePickerDepartureDate.getValue();
+        var arrDate = datePickerArrivalDate.getValue();
+
+        return depDate.isBefore(arrDate) && !depDate.equals(arrDate);
+
+    }
+
     private Tour collectValuesFromViewsAndCreateNewTour() {
         Tour tour = new Tour();
 
         tour.setTourId(0);
         tour.setTourName(inputName.getText());
-        tour.setCountry(inputCountry.getText());
+        tour.setCountry(comboBoxCountry.getSelectionModel().getSelectedItem());
         tour.setAvailableTickets(Integer.parseInt(inputNumOfAvailableTickets.getText()));
         tour.setTakenTickets(0);
-        tour.setPrice(Double.parseDouble(inputPrice.getText()));
+        tour.setPrice(roundOffStrToDouble(inputPrice.getText()));
         tour.setDepartureDate(datePickerDepartureDate.getValue());
         tour.setArrivalDate(datePickerArrivalDate.getValue());
         tour.setImgName(listViewImages.getSelectionModel().getSelectedItem());
@@ -403,37 +464,6 @@ public class AddTourController {
         tour.setAttractions(new HashSet<>(selectedAttractions));
 
         return tour;
-    }
-
-    private boolean viewsAreNotEmpty() {
-        return !inputName.getText().isEmpty() && !inputCountry.getText().isEmpty()
-                && !inputPrice.getText().isEmpty() && !inputNumOfAvailableTickets.getText().isEmpty()
-                && datePickerDepartureDate.getValue() != null && datePickerArrivalDate.getValue() != null
-                && !comboBoxHotel.getSelectionModel().isEmpty() && !comboBoxTransport.getSelectionModel().isEmpty()
-                && !comboBoxTourGuide.getSelectionModel().isEmpty() && !checkComboBoxService.getCheckModel().isEmpty()
-                && !checkComboBoxAttraction.getCheckModel().isEmpty() && !listViewImages.getSelectionModel().isEmpty();
-    }
-
-    private boolean viewsAreCorrect() {
-        return isItANumber(inputNumOfAvailableTickets) && isItAFloatNumber(inputPrice);
-    }
-
-    private boolean isItANumber(TextField textField) {
-        try {
-            var isNumber = Integer.parseInt(textField.getText());
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private boolean isItAFloatNumber(TextField textField) {
-        try {
-            var isNumber = Double.parseDouble(textField.getText());
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 
     private void closeWindow() {

@@ -43,14 +43,16 @@ public class EditTourGuideController {
     private void setTextFieldsListeners() {
         inputPhone.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
-                try {
-                    var isNumber = Integer.parseInt(newValue);
-                    if (newValue.length() != 9) {
-                        labelError.setText(ERROR_WRONG_PHONE);
-                    } else
+                if (inputPhone.getText().length() > 9) {
+                    String sub = inputPhone.getText().substring(0, 9);
+                    inputPhone.setText(sub);
+                } else {
+                    try {
+                        Integer.parseInt(newValue);
                         labelError.setText("");
-                } catch (NumberFormatException e) {
-                    labelError.setText(ERROR_NOT_A_NUMBER);
+                    } catch (NumberFormatException e) {
+                        labelError.setText(ERROR_NOT_A_NUMBER);
+                    }
                 }
             } else {
                 labelError.setText("");

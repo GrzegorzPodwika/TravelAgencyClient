@@ -31,14 +31,16 @@ public class AddCarrierController {
     private void setTextFieldsListeners() {
         inputPhone.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
-                try {
-                    var isNumber = Integer.parseInt(newValue);
-                    if (newValue.length() != 9) {
-                        labelError.setText(ERROR_WRONG_PHONE);
-                    } else
+                if (inputPhone.getText().length() > 9) {
+                    String sub = inputPhone.getText().substring(0, 9);
+                    inputPhone.setText(sub);
+                } else {
+                    try {
+                        var isNumber = Integer.parseInt(newValue);
                         labelError.setText("");
-                } catch (NumberFormatException e) {
-                    labelError.setText(ERROR_NOT_A_NUMBER);
+                    } catch (NumberFormatException e) {
+                        labelError.setText(ERROR_NOT_A_NUMBER);
+                    }
                 }
             } else {
                 labelError.setText("");
@@ -47,7 +49,7 @@ public class AddCarrierController {
 
         inputEmail.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
-                if (newValue.indexOf('@') == -1) {
+                if (!newValue.matches("^([a-zA-Z0-9_\\.\\-+])+@[a-zA-Z0-9-.]+\\.[a-zA-Z0-9-]{2,}$")) {
                     labelError.setText(ERROR_NOT_A_EMAIL);
                 } else {
                     labelError.setText("");
@@ -90,12 +92,12 @@ public class AddCarrierController {
         }
     }
 
-    private boolean viewsAreCorrect() {
-        return labelError.getText().equals("");
-    }
-
     private boolean viewsAreNotEmpty() {
         return !inputName.getText().isEmpty() && !inputPhone.getText().isEmpty()
                 && !inputEmail.getText().isEmpty();
+    }
+
+    private boolean viewsAreCorrect() {
+        return labelError.getText().equals("");
     }
 }

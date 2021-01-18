@@ -2,7 +2,6 @@ package controllers;
 
 import backend.api.AgencyServiceGenerator;
 import backend.api.TourGuideService;
-import backend.model.Carrier;
 import backend.model.TourGuide;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,14 +31,16 @@ public class AddTourGuideController {
     private void setTextFieldsListeners() {
         inputPhone.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
-                try {
-                    var isNumber = Integer.parseInt(newValue);
-                    if (newValue.length() != 9) {
-                        labelError.setText(ERROR_WRONG_PHONE);
-                    } else
+                if (inputPhone.getText().length() > 9) {
+                    String sub = inputPhone.getText().substring(0, 9);
+                    inputPhone.setText(sub);
+                } else {
+                    try {
+                        var isNumber = Integer.parseInt(newValue);
                         labelError.setText("");
-                } catch (NumberFormatException e) {
-                    labelError.setText(ERROR_NOT_A_NUMBER);
+                    } catch (NumberFormatException e) {
+                        labelError.setText(ERROR_NOT_A_NUMBER);
+                    }
                 }
             } else {
                 labelError.setText("");
@@ -54,24 +55,35 @@ public class AddTourGuideController {
 
     @FXML
     public void onConfirmClick() {
-        if (viewsAreNotEmpty() && viewsAreCorrect()) {
-            var name = inputName.getText();
-            var surname = inputSurname.getText();
-            var phoneNumber = inputPhone.getText();
+        if (viewsAreNotEmpty()) {
+            if (phoneIsCorrect()) {
+                var name = inputName.getText();
+                var surname = inputSurname.getText();
+                var phoneNumber = inputPhone.getText();
 
-            TourGuide newTourGuide = new TourGuide(0, name, surname, phoneNumber);
+                TourGuide newTourGuide = new TourGuide(0, name, surname, phoneNumber);
 
-            try {
-                tourGuideService.save(newTourGuide).execute();
-                closeWindow();
-            } catch (IOException e) {
-                e.printStackTrace();
+                try {
+                    tourGuideService.save(newTourGuide).execute();
+                    closeWindow();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                labelError.setText(ERROR_WRONG_PHONE);
             }
+        } else {
+            labelError.setText(ERROR_EMPTY_VIEW);
         }
     }
 
-    private boolean viewsAreCorrect() {
-        return labelError.getText().equals("");
+    private boolean phoneIsCorrect() {
+        try {
+            var isNumber = Integer.parseInt(inputPhone.getText());
+            return inputPhone.getText().length() == 9;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private boolean viewsAreNotEmpty() {

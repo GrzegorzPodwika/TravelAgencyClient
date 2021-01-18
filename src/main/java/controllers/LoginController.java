@@ -37,12 +37,8 @@ public class LoginController {
     @FXML PasswordField passwordBox;
     @FXML Label errorLabel;
 
-    public void initialize() {
-
-    }
-
     @FXML
-    public void loginButton(MouseEvent event) {
+    public void loginButton() {
         if(areLabelsNotEmpty()) {
             tryLogin();
         }else{
@@ -72,7 +68,7 @@ public class LoginController {
                 }
             } else {
                 errorLabel.setText("Response from server is not successful! " + loginResponse.code());
-                System.out.println("COS zlego jest w Response LoginResponse");
+                System.out.println("Response from server is not successful! " + loginResponse.code());
             }
         } catch (IOException e) {
             errorLabel.setText("Błąd połączenia z serwerem!");

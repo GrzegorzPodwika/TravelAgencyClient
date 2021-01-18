@@ -35,21 +35,47 @@ public class RegisterController {
 
     private final UserService userService = AgencyServiceGenerator.createService(UserService.class);
 
+    public void initialize() {
+        addTextLimiterToPhoneLabel();
+    }
+
+    private void addTextLimiterToPhoneLabel() {
+        labelPhoneNumber.textProperty().addListener((obs, oldValue, newValue) -> {
+            if (labelPhoneNumber.getText().length() > 9) {
+                String sub = labelPhoneNumber.getText().substring(0, 9);
+                labelPhoneNumber.setText(sub);
+            }
+        });
+    }
+
     @FXML
     public void registerButton(){
         if (areLabelsNotEmpty()) {
-            if (labelEmail.getText().indexOf('@') == -1) {
+            if (!labelEmail.getText().matches("^([a-zA-Z0-9_\\.\\-+])+@[a-zA-Z0-9-.]+\\.[a-zA-Z0-9-]{2,}$")) {
                 errorLabel.setText("Podaj poprawny adres E-mail!");
+            } else if(!labelNick.getText().matches("^\\w+$")) {
+                errorLabel.setText("Podaj poprawny login!");
+            } else if(!labelName.getText().matches("^[A-Z]([a-z])+$")) {
+                errorLabel.setText("Podaj poprawne imię!");
+            } else if(!labelSurname.getText().matches("^[A-Z]([a-z])+$")) {
+                errorLabel.setText("Podaj poprawne nazwisko!");
+            } else if(!labelCity.getText().matches("^[A-Z]([a-z])+$")) {
+                errorLabel.setText("Podaj poprawne miasto!");
             } else if(isLabelNotANumber(labelAge)) {
-                errorLabel.setText("Podaj liczbe jako wiek!");
-            } else if(isLabelNotANumber(labelPhoneNumber)) {
-                errorLabel.setText("Podaj 9cyfrową liczbe jako telefon!");
+                errorLabel.setText("Podaj wiek jako liczbę!");
+            } else if(isLabelNotANumber(labelPhoneNumber) || labelPhoneNumber.getLength() != 9) {
+                errorLabel.setText("Podaj 9 cyfrową liczbę jako telefon!");
             } else {
                 tryRegister();
             }
         } else {
             errorLabel.setText("Wszystkie pola muszą zostać uzupełnione!");
         }
+    }
+
+    private boolean areLabelsNotEmpty() {
+        return !labelNick.getText().isEmpty() && !labelPassword.getText().isEmpty() && !labelName.getText().isEmpty() && !labelSurname.getText().isEmpty() && !labelAge.getText().isEmpty()
+                && !labelAddress.getText().isEmpty() && !labelZipcode.getText().isEmpty() && !labelCity.getText().isEmpty() && !labelPhoneNumber.getText().isEmpty();
     }
 
     private boolean isLabelNotANumber(TextField field) {
@@ -59,11 +85,6 @@ public class RegisterController {
         } catch (NumberFormatException e) {
             return true;
         }
-    }
-
-    private boolean areLabelsNotEmpty() {
-        return !labelNick.getText().isEmpty() && !labelPassword.getText().isEmpty() && !labelName.getText().isEmpty() && !labelSurname.getText().isEmpty() && !labelAge.getText().isEmpty()
-                && !labelAddress.getText().isEmpty() && !labelZipcode.getText().isEmpty() && !labelCity.getText().isEmpty() && !labelPhoneNumber.getText().isEmpty();
     }
 
     @FXML

@@ -43,14 +43,19 @@ public class EditCarrierController {
     private void setTextFieldsListeners() {
         inputPhone.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
-                try {
-                    var isNumber = Integer.parseInt(newValue);
-                    if (newValue.length() != 9) {
-                        labelError.setText(ERROR_WRONG_PHONE);
-                    } else
-                        labelError.setText("");
-                } catch (NumberFormatException e) {
-                    labelError.setText(ERROR_NOT_A_NUMBER);
+                if (inputPhone.getText().length() > 9) {
+                    String sub = inputPhone.getText().substring(0, 9);
+                    inputPhone.setText(sub);
+                } else {
+                    try {
+                        var isNumber = Integer.parseInt(newValue);
+                        if (newValue.length() != 9) {
+                            labelError.setText(ERROR_WRONG_PHONE);
+                        } else
+                            labelError.setText("");
+                    } catch (NumberFormatException e) {
+                        labelError.setText(ERROR_NOT_A_NUMBER);
+                    }
                 }
             } else {
                 labelError.setText("");
@@ -59,7 +64,7 @@ public class EditCarrierController {
 
         inputEmail.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
-                if (newValue.indexOf('@') == -1) {
+                if (!newValue.matches("^([a-zA-Z0-9_\\.\\-+])+@[a-zA-Z0-9-.]+\\.[a-zA-Z0-9-]{2,}$")) {
                     labelError.setText(ERROR_NOT_A_EMAIL);
                 } else {
                     labelError.setText("");
@@ -107,7 +112,7 @@ public class EditCarrierController {
         else
             carrierToUpdate.setPhoneNumber(inputPhone.getText());
 
-        if (inputEmail.getText().isEmpty() || emailIsIncorrect())
+        if (inputEmail.getText().isEmpty() || !emailIsCorrect())
             carrierToUpdate.setEmail(fetchedCarrier.getEmail());
         else
             carrierToUpdate.setEmail(inputEmail.getText());
@@ -124,8 +129,8 @@ public class EditCarrierController {
         }
     }
 
-    private boolean emailIsIncorrect() {
-        return inputEmail.getText().indexOf('@') == -1;
+    private boolean emailIsCorrect() {
+        return inputEmail.getText().matches("^([a-zA-Z0-9_\\.\\-+])+@[a-zA-Z0-9-.]+\\.[a-zA-Z0-9-]{2,}$");
     }
 
 }

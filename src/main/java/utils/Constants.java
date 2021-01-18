@@ -5,6 +5,8 @@ public class Constants {
     public static final String ERROR_WRONG_PHONE = "Numer musi mieć 9 cyfr!";
     public static final String ERROR_NOT_A_EMAIL = "Wprowadź poprawny email!";
     public static final String ERROR_EMPTY_VIEW = "Wypełnij wszystkie pola!";
+    public static final String ERROR_CAPITALIZE_WORD = "Słowo z dużej litery!";
+    public static final String ERROR_WRONG_DATES= "WYbierz poprawne daty!";
 
     public static final String LOGIN_SCENE = "LogInScene.fxml";
     public static final String EMPLOYEE_SCENE = "EmployeeScene.fxml";

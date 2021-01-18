@@ -8,77 +8,108 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="mainPane" fx:id="mainPane" maxHeight="768" maxWidth="1024" minHeight="400" minWidth="700"
-            prefHeight="768" prefWidth="1024" styleClass="bodybg" stylesheets="@../css-files/Welcome_background.css"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controllers.RegisterController">
+<AnchorPane id="mainPane" fx:id="mainPane" maxHeight="768" maxWidth="1024" minHeight="400" minWidth="700" prefHeight="768" prefWidth="1024" styleClass="bodybg" stylesheets="@../css-files/Welcome_background.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RegisterController">
     <children>
-        <AnchorPane layoutX="569.0" prefHeight="768.0" prefWidth="455.0"
-                    style="-fx-background-color: #353238; -fx-opacity: 95%; -fx-border-color: #7775; -fx-border-width: 5;">
+        <AnchorPane layoutX="569.0" prefHeight="768.0" prefWidth="455.0" style="-fx-background-color: #353238; -fx-opacity: 95%; -fx-border-color: #7775; -fx-border-width: 5;">
             <children>
-                <Button id="registerField" layoutX="89.0" layoutY="628.0" mnemonicParsing="false"
-                        onMouseClicked="#registerButton" prefHeight="39.0" prefWidth="277.0"
-                        style="-fx-background-color: #5ab849;" text="UTWÓRZ KONTO" textAlignment="CENTER"
-                        textFill="#ebdfdf">
+                <Button id="registerField" layoutX="89.0" layoutY="628.0" mnemonicParsing="false" onMouseClicked="#registerButton" prefHeight="39.0" prefWidth="277.0" style="-fx-background-color: #5ab849;" text="UTWÓRZ KONTO" textAlignment="CENTER" textFill="#ebdfdf">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                 </Button>
 
-                <Label layoutX="156.0" layoutY="141.0" prefHeight="35.0" prefWidth="143.0" text="REJESTRACJA"
-                       textAlignment="CENTER" textFill="WHITE">
+                <Label layoutX="156.0" layoutY="141.0" prefHeight="35.0" prefWidth="143.0" text="REJESTRACJA" textAlignment="CENTER" textFill="WHITE">
                     <font>
-                        <Font size="24.0"/>
+                        <Font size="24.0" />
                     </font>
                 </Label>
-                <Label layoutX="53.0" layoutY="13.0" prefHeight="67.0" prefWidth="350.0" text="BIURO PODRÓŻY "
-                       textFill="#18a6c9">
+                <Label layoutX="53.0" layoutY="13.0" prefHeight="67.0" prefWidth="350.0" text="BIURO PODRÓŻY " textFill="#18a6c9">
                     <font>
-                        <Font size="44.0"/>
+                        <Font size="44.0" />
                     </font>
                 </Label>
-                <Label layoutX="21.0" layoutY="80.0" prefHeight="69.0" prefWidth="415.0" text="ZASIEDMIOGÓROGRÓD"
-                       textFill="#18a6c9">
+                <Label layoutX="21.0" layoutY="80.0" prefHeight="69.0" prefWidth="415.0" text="ZASIEDMIOGÓROGRÓD" textFill="#18a6c9">
                     <font>
-                        <Font size="38.0"/>
+                        <Font size="38.0" />
                     </font>
                 </Label>
-                <Button id="registerField" layoutX="89.0" layoutY="681.0" mnemonicParsing="false"
-                        onMouseClicked="#goBackButton" prefHeight="39.0" prefWidth="277.0"
-                        style="-fx-background-color: #525252;" text="POWRÓT" textAlignment="CENTER" textFill="#ebdfdf">
+                <Button id="registerField" layoutX="89.0" layoutY="681.0" mnemonicParsing="false" onMouseClicked="#goBackButton" prefHeight="39.0" prefWidth="277.0" style="-fx-background-color: #525252;" text="POWRÓT" textAlignment="CENTER" textFill="#ebdfdf">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                 </Button>
-                <Label fx:id="errorLabel" layoutX="90.0" layoutY="552.0" prefHeight="53.0" prefWidth="277.0"
-                       textFill="RED" wrapText="true">
+                <Label fx:id="errorLabel" layoutX="90.0" layoutY="552.0" prefHeight="53.0" prefWidth="277.0" textFill="RED" wrapText="true">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <VBox layoutX="103.0" layoutY="184.0" prefHeight="200.0" prefWidth="250.0" spacing="10.0">
+            <VBox alignment="TOP_RIGHT" layoutX="21.0" layoutY="194.0" prefHeight="200.0" spacing="10.0" AnchorPane.rightAnchor="335.0">
+               <children>
+                  <Label text="Login:" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Hasło:" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Imię:" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Nazwisko:" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Wiek:" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Adres:" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Kod pocztowy:" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Miasto:" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Numer:" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="Email:" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+                <VBox layoutX="135.0" layoutY="189.0" prefHeight="200.0" prefWidth="250.0" spacing="10.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="189.0">
                     <children>
 
-                        <TextField id="loginTextField" fx:id="labelNick" prefHeight="26.0" prefWidth="277.0"
-                                   promptText="Login"/>
-                        <PasswordField id="passwordTextField" fx:id="labelPassword" prefHeight="26.0" prefWidth="277.0"
-                                       promptText="Hasło"/>
-                        <TextField id="loginTextField" fx:id="labelName" prefHeight="26.0" prefWidth="277.0"
-                                   promptText="Imię"/>
-                        <TextField id="loginTextField" fx:id="labelSurname" prefHeight="26.0" prefWidth="277.0"
-                                   promptText="Nazwisko"/>
-                        <TextField id="loginTextField" fx:id="labelAge" prefHeight="26.0" prefWidth="277.0"
-                                   promptText="Wiek"/>
-                        <TextField id="loginTextField" fx:id="labelAddress" prefHeight="26.0" prefWidth="277.0"
-                                   promptText="Adres"/>
-                        <TextField id="loginTextField" fx:id="labelZipcode" prefHeight="26.0" prefWidth="277.0"
-                                   promptText="Kod pocztowy"/>
-                        <TextField id="loginTextField" fx:id="labelCity" prefHeight="26.0" prefWidth="277.0"
-                                   promptText="Miasto"/>
-                        <TextField id="loginTextField" fx:id="labelPhoneNumber" prefHeight="26.0" prefWidth="277.0"
-                                   promptText="Numer telefonu"/>
-                        <TextField id="loginTextField" fx:id="labelEmail" prefHeight="26.0" prefWidth="277.0"
-                                   promptText="Email"/>
+                        <TextField id="loginTextField" fx:id="labelNick" prefHeight="26.0" prefWidth="277.0" promptText="Login" />
+                        <PasswordField id="passwordTextField" fx:id="labelPassword" prefHeight="26.0" prefWidth="277.0" promptText="Hasło" />
+                        <TextField id="loginTextField" fx:id="labelName" prefHeight="26.0" prefWidth="277.0" promptText="Imię" />
+                        <TextField id="loginTextField" fx:id="labelSurname" prefHeight="26.0" prefWidth="277.0" promptText="Nazwisko" />
+                        <TextField id="loginTextField" fx:id="labelAge" prefHeight="26.0" prefWidth="277.0" promptText="Wiek" />
+                        <TextField id="loginTextField" fx:id="labelAddress" prefHeight="26.0" prefWidth="277.0" promptText="Adres" />
+                        <TextField id="loginTextField" fx:id="labelZipcode" prefHeight="26.0" prefWidth="277.0" promptText="Kod pocztowy" />
+                        <TextField id="loginTextField" fx:id="labelCity" prefHeight="26.0" prefWidth="277.0" promptText="Miasto" />
+                        <TextField id="loginTextField" fx:id="labelPhoneNumber" prefHeight="26.0" prefWidth="277.0" promptText="Numer telefonu" />
+                        <TextField id="loginTextField" fx:id="labelEmail" prefHeight="26.0" prefWidth="277.0" promptText="Email" />
                     </children>
                 </VBox>
             </children>

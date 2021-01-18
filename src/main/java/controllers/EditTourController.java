@@ -37,7 +37,7 @@ public class EditTourController {
     @FXML public ListView<String> listViewAttractions;
 
     @FXML public TextField inputName;
-    @FXML public TextField inputCountry;
+    @FXML public ComboBox<String> comboBoxCountry;
     @FXML public TextField inputNumOfAvailableTickets;
     @FXML public TextField inputPrice;
     @FXML public DatePicker datePickerDepartureDate;
@@ -66,9 +66,28 @@ public class EditTourController {
     private final ObservableList<AdditionalService> observableAdditionalServices = FXCollections.observableArrayList();
     private final ObservableList<Attraction> observableAttractions = FXCollections.observableArrayList();
 
+    private final String BALI = "Bali";
+    private final String CHILE = "Chile";
+    private final String CYPR = "Cypr";
+    private final String DOMINIKANA = "Dominikana";
+    private final String FRANCJA = "Francja";
+    private final String HISZPANIA = "Hiszpania";
+    private final String MADAGASKAR = "Madagaskar";
+    private final String NIEMCY = "Niemcy";
+    private final String OAHU = "Oahu";
+    private final String PORTUGALIA = "Portugalia";
+    private final String SZWAJCARIA = "Szwajcaria";
+    private final String WIELKABRYTANIA = "Wielka_Brytania";
+    private final String WIETNAM = "Wietnam";
+    private final String WLOCHY = "Wlochy";
+
+    private final String[] imageNamesArray = {BALI, CHILE, CYPR, DOMINIKANA, FRANCJA, HISZPANIA, MADAGASKAR,
+            NIEMCY, OAHU, PORTUGALIA, SZWAJCARIA, WIELKABRYTANIA, WIETNAM, WLOCHY};
+
     @FXML
     public void initialize() {
         fillUpLabelsWithData();
+        initCountryComboBox();
         setObjectConvertersInComboBoxes();
         fetchAllNecessaryData();
         setTextFieldsListeners();
@@ -81,6 +100,7 @@ public class EditTourController {
         labelPrice.setText(String.valueOf(activeTour.getPrice()));
         labelDepartureDate.setText(activeTour.getDepartureDate().toString());
         labelArrivalDate.setText(activeTour.getArrivalDate().toString());
+
 
 
         if (activeTour.getHotel() != null) {
@@ -130,6 +150,10 @@ public class EditTourController {
                 }
             }
         });
+    }
+
+    private void initCountryComboBox() {
+        comboBoxCountry.getItems().setAll(imageNamesArray);
     }
 
 
@@ -378,10 +402,10 @@ public class EditTourController {
         else
             tourToUpdate.setTourName(inputName.getText());
 
-        if (inputCountry.getText().isEmpty())
+        if (comboBoxCountry.getSelectionModel().getSelectedItem() == null)
             tourToUpdate.setCountry(activeTour.getCountry());
         else
-            tourToUpdate.setCountry(inputCountry.getText());
+            tourToUpdate.setCountry(comboBoxCountry.getSelectionModel().getSelectedItem());
 
         if(inputPrice.getText().isEmpty() || !isItAFloatNumber(inputPrice))
             tourToUpdate.setPrice(activeTour.getPrice());
@@ -395,15 +419,18 @@ public class EditTourController {
 
         tourToUpdate.setTakenTickets(activeTour.getTakenTickets());
 
-        if (datePickerDepartureDate.getValue() == null)
+        if(datePickerDepartureDate.getValue() != null && datePickerArrivalDate.getValue() != null) {
+            if (secondDateIsLaterThanFirstOne()) {
+                tourToUpdate.setDepartureDate(datePickerDepartureDate.getValue());
+                tourToUpdate.setArrivalDate(datePickerArrivalDate.getValue());
+            } else {
+                tourToUpdate.setDepartureDate(activeTour.getDepartureDate());
+                tourToUpdate.setArrivalDate(activeTour.getArrivalDate());
+            }
+        } else {
             tourToUpdate.setDepartureDate(activeTour.getDepartureDate());
-        else
-            tourToUpdate.setDepartureDate(datePickerDepartureDate.getValue());
-
-        if (datePickerArrivalDate.getValue() == null)
             tourToUpdate.setArrivalDate(activeTour.getArrivalDate());
-        else
-            tourToUpdate.setArrivalDate(datePickerArrivalDate.getValue());
+        }
 
         tourToUpdate.setImgName(activeTour.getImgName());
 
@@ -457,6 +484,14 @@ public class EditTourController {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    private boolean secondDateIsLaterThanFirstOne() {
+        var depDate = datePickerDepartureDate.getValue();
+        var arrDate = datePickerArrivalDate.getValue();
+
+        return depDate.isBefore(arrDate) && !depDate.equals(arrDate);
+
     }
 
     private void closeWindow() {
