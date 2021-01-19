@@ -85,6 +85,8 @@ public class ManageToursController {
                     allTours = response.body();
 
                     if(allTours != null) {
+                        allTours =  allTours.stream().filter(tour -> tour.getDepartureDate().isAfter(LocalDate.now()) ).collect(Collectors.toList());
+
                         observableTours.clear();
                         observableTours.addAll(transformToDataFormat(allTours));
                         Platform.runLater(() -> {
