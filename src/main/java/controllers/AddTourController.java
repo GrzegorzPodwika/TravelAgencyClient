@@ -17,6 +17,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -94,6 +95,24 @@ public class AddTourController {
             } else {
                 List<Hotel> filteredHotels = allHotels.stream().filter(hot -> hot.getCountry().equals(newValue)).collect(Collectors.toList());
                 comboBoxHotel.getItems().setAll(filteredHotels);
+            }
+        });
+
+        datePickerDepartureDate.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+
+                setDisable(empty || date.compareTo(today) < 0 );
+            }
+        });
+
+        datePickerArrivalDate.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+
+                setDisable(empty || date.compareTo(today) < 0 );
             }
         });
     }
