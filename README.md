@@ -19,3 +19,13 @@ Add libraries:
 * org.controlsfx.controlsfx 
 
 to SceneBuilder program via SceneBuilder -> Gear Icon -> Jar/FXML Manager -> Search repositories
+
+## Screenshots
+<p align="left">
+  <img src="./img/img01.png" width="350">
+  <img src="./img/img02.png" width="350">
+  <img src="./img/img03.png" width="350">
+  <img src="./img/img04.png" width="350">
+  <img src="./img/img05.png" width="350">
+  <img src="./img/img06.png" width="350">
+</p>
